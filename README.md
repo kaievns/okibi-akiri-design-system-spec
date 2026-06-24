@@ -1,26 +1,29 @@
-# Okibi / Akari · 燠火 / 灯り
+# Okibi 燠火 — Design Specification
 
-> Coal glow and ash — a color & syntax system built on a neutral charcoal base
-> warmed by a single ember, with eight semantic hues. One discipline, two
-> grounds: **Okibi** (dark) by night, **Akari** (light) by day.
+> おきび — *banked embers*, the coal that holds the fire.
 
-The marketing/spec website for the theme, served as a static **GitHub Pages**
-site.
+The canonical design specification for **Okibi**, a colour system for code and
+the interfaces around it. One principle — *attention is the only budget worth
+spending* — dressed in charcoal, ash, and a single ember, across two grounds:
+**Okibi** (dark) and **Akari 灯り** (light).
+
+Served as a single-page static **GitHub Pages** site.
 
 ## The site
 
-[`index.html`](index.html) is fully self-contained — no build tooling,
-framework, or JavaScript dependency at runtime. It includes:
+[`index.html`](index.html) is a fully self-contained page — no framework, no
+build dependency at runtime, no images. Everything is CSS and system/Google
+fonts. It includes:
 
-- Okibi ⇄ Akari theme toggle (persisted in `localStorage`, respects the
-  visitor's `prefers-color-scheme` on first visit)
-- click-to-copy on every swatch and the token block (keyboard accessible)
-- the ember-glow and blinking-caret accents
-- responsive layout down to phone width
+- the full spec: philosophy, principles, two grounds, the neutral spine,
+  accent & states, the syntax model, scope mapping, diagnostics, and building
+  guidance
+- an Okibi ⇄ Akari theme toggle (persisted in `localStorage`)
+- a sticky table of contents with smooth-scroll
+- OKLCH-authored colour tokens for both grounds
 
-Assets: [`screenshots/`](screenshots/) (surface previews) and
-[`favicon.svg`](favicon.svg). [`.nojekyll`](.nojekyll) tells Pages to serve
-every path verbatim.
+`favicon.svg` and `og-image.png` are the only assets; [`.nojekyll`](.nojekyll)
+tells Pages to serve every path verbatim.
 
 ## Enable GitHub Pages
 
@@ -41,9 +44,9 @@ python3 -m http.server 8000
 | Path | Purpose |
 | --- | --- |
 | `index.html` | the published static site |
-| `favicon.svg`, `.nojekyll` | site assets / Pages config |
-| `screenshots/` | surface preview images used on the page |
+| `og-image.png`, `favicon.svg` | social card / icon |
+| `.nojekyll` | Pages config |
 
 ---
 
-OKIBI / AKARI · v1.1 · coal glow & ash · niri rice
+OKIBI · 燠火 · 一つの背骨、一つの燠、注意こそ予算 · CC BY-NC 4.0 · © 2026 Kai Evans

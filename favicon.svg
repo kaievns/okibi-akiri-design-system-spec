@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Okibi ember">
   <defs>
-    <radialGradient id="ember" cx="50%" cy="58%" r="58%">
-      <stop offset="0%" stop-color="#ecb079"/>
-      <stop offset="52%" stop-color="#d27d3d"/>
-      <stop offset="100%" stop-color="#a85f28"/>
+    <radialGradient id="ember" cx="50%" cy="56%" r="60%">
+      <stop offset="0%" stop-color="#ffb088"/>
+      <stop offset="52%" stop-color="#ff794d"/>
+      <stop offset="100%" stop-color="#c2451a"/>
     </radialGradient>
   </defs>
-  <rect width="32" height="32" rx="7" fill="#17191a"/>
-  <circle cx="16" cy="16.5" r="9.5" fill="#d27d3d" opacity="0.16"/>
+  <rect width="32" height="32" rx="7" fill="#07080a"/>
+  <circle cx="16" cy="16.5" r="9.5" fill="#ff794d" opacity="0.16"/>
   <circle cx="16" cy="16.5" r="6.3" fill="url(#ember)"/>
 </svg>
