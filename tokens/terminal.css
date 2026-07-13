@@ -1,0 +1,55 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   OKIBI 燠火 — terminal / ANSI-16 mapping
+   The same attention policy in a 16-slot palette. Meaning hues map to the
+   pigments; brights are one step up in L, never neon. fg/bg follow the
+   spine; the cursor is the ember — the only warm note at rest.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root,
+:root[data-theme="dark"] {
+  --term-bg:     var(--n0);          /* or n2 when the terminal is a pane */
+  --term-fg:     var(--n10);
+  --term-cursor: var(--ember);
+  --term-sel:    var(--ember-soft);
+
+  --ansi-0:  var(--n1);              /* black */
+  --ansi-1:  var(--err);             /* red — ake */
+  --ansi-2:  var(--str);             /* green — wakaba */
+  --ansi-3:  var(--warn);            /* yellow — yamabuki */
+  --ansi-4:  var(--call);            /* blue — sora */
+  --ansi-5:  var(--kw);              /* magenta — kikyō */
+  --ansi-6:  var(--prop);            /* cyan — asagi */
+  --ansi-7:  var(--n10);             /* white */
+  --ansi-8:  var(--n7);              /* bright black — gutter grey */
+  --ansi-9:  oklch(0.72 0.21 24);    /* bright red */
+  --ansi-10: oklch(0.84 0.11 148);   /* bright green */
+  --ansi-11: oklch(0.84 0.15 84);    /* bright yellow */
+  --ansi-12: oklch(0.79 0.13 252);   /* bright blue */
+  --ansi-13: oklch(0.72 0.075 300);  /* bright magenta */
+  --ansi-14: oklch(0.85 0.07 212);   /* bright cyan */
+  --ansi-15: var(--n11);             /* bright white */
+}
+
+:root[data-theme="light"] {
+  --term-bg:     var(--n2);
+  --term-fg:     var(--n10);
+  --term-cursor: var(--ember);
+  --term-sel:    var(--ember-soft);
+
+  --ansi-0:  var(--n11);             /* "black" is ink on paper */
+  --ansi-1:  var(--err);
+  --ansi-2:  var(--str);
+  --ansi-3:  var(--warn);
+  --ansi-4:  var(--call);
+  --ansi-5:  var(--kw);
+  --ansi-6:  var(--prop);
+  --ansi-7:  var(--n8);
+  --ansi-8:  var(--n7);
+  --ansi-9:  oklch(0.47 0.20 24);
+  --ansi-10: oklch(0.43 0.12 148);
+  --ansi-11: oklch(0.51 0.15 84);
+  --ansi-12: oklch(0.42 0.15 252);
+  --ansi-13: oklch(0.46 0.09 300);
+  --ansi-14: oklch(0.48 0.08 212);
+  --ansi-15: var(--n11);
+}

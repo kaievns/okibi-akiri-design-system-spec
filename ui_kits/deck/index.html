@@ -1,0 +1,154 @@
+<!-- @dsCard group="Deck" viewport="1240x780" name="Slide deck" subtitle="The Okibi slide grammar: cover, divider, content, code, close" -->
+<!-- @startingPoint section="Decks" subtitle="Okibi 1920×1080 slide template" viewport="1240x780" -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi 燠火 — Deck template</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body{padding:26px;display:flex;flex-direction:column;gap:26px;align-items:center;background-color:var(--n0);background-image:var(--glow-ember);background-attachment:fixed;}
+  .frame{position:relative;overflow:hidden;width:100%;max-width:1240px;border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow-pane);flex:0 0 auto;}
+  .slide{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:0 0;background:var(--n0);
+    display:flex;flex-direction:column;font-family:var(--gothic);color:var(--n11);}
+  .slide-label{align-self:flex-start;max-width:1240px;width:100%;margin:0 auto -18px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+
+  .kick{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  .lbl{font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+  .foot{position:absolute;left:90px;right:90px;bottom:52px;display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:22px;color:var(--n7);}
+  .foot .fk{font-family:var(--mincho);}
+
+  /* cover */
+  .cover{justify-content:center;padding:0 150px;background-image:radial-gradient(90% 70% at 82% -12%, color-mix(in srgb,var(--ember) 5%,transparent), transparent 58%);}
+  .cover-grid{display:grid;grid-template-columns:auto 1fr;gap:120px;align-items:center;}
+  .cover-kanji{font-family:var(--mincho);font-weight:800;font-size:300px;line-height:.84;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.04em;height:660px;
+    text-shadow:0 0 120px color-mix(in srgb,var(--ember) 24%,transparent);}
+  .cover-seal{width:120px;height:120px;border-radius:12px;background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;
+    font-family:var(--mincho);font-weight:700;font-size:64px;transform:rotate(-3deg);box-shadow:0 24px 70px -24px var(--ember-line);margin-top:18px;}
+  .cover-title{font-family:var(--mincho);font-weight:700;font-size:124px;line-height:1.02;margin:34px 0 0;}
+  .cover-read{font-family:var(--mincho);font-size:40px;color:var(--n9);margin-top:30px;letter-spacing:.06em;}
+  .cover-read b{color:var(--ember);font-weight:600;}
+  .cover-meta{display:flex;gap:18px;margin-top:56px;}
+  .pill{font-family:var(--mono);font-size:24px;color:var(--n9);border:1px solid var(--line);border-radius:999px;padding:16px 28px;background:var(--n2);white-space:nowrap;line-height:1;display:inline-block;}
+  .pill b{color:var(--n11);}
+
+  /* divider */
+  .divider{justify-content:center;padding:0 170px;}
+  .divider::after{content:"";position:absolute;left:170px;right:170px;bottom:170px;height:2px;background:linear-gradient(90deg,var(--ember) 0,var(--ember) 128px,var(--line) 128px,var(--line) 100%);}
+  .div-kanji{position:relative;font-family:var(--mincho);font-weight:800;font-size:230px;line-height:1;padding-left:64px;}
+  .div-kanji::before{content:"";position:absolute;left:0;top:24px;bottom:24px;width:12px;border-radius:3px;background:var(--ember);}
+  .div-no{font-family:var(--mono);font-size:28px;font-weight:600;letter-spacing:.3em;color:var(--ember);text-transform:uppercase;margin-bottom:40px;}
+  .div-title{font-family:var(--mincho);font-weight:700;font-size:96px;margin:44px 0 0;}
+  .div-yomi{font-family:var(--mincho);font-size:36px;color:var(--n8);letter-spacing:.18em;margin-top:26px;}
+
+  /* content */
+  .content{padding:120px 150px 0;}
+  .c-title{font-family:var(--mincho);font-weight:700;font-size:76px;margin:22px 0 0;}
+  .c-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:78px;}
+  .c-lede{font-size:36px;line-height:1.56;color:var(--n10);max-width:760px;}
+  .c-lede b{color:var(--n11);}
+  .c-cards{display:flex;flex-direction:column;gap:26px;}
+  .cc{border:1px solid var(--line);border-radius:11px;background:var(--n2);padding:36px 42px;display:flex;gap:34px;align-items:flex-start;}
+  .cc .k{font-family:var(--mincho);font-size:52px;color:var(--ember);line-height:1;flex:0 0 auto;}
+  .cc h4{font-family:var(--mincho);font-size:34px;font-weight:700;margin:0 0 8px;}
+  .cc p{font-size:27px;line-height:1.45;color:var(--n9);}
+
+  /* code slide */
+  .codeslide{padding:120px 150px 0;}
+  .pane{margin-top:70px;background:var(--n2);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .pane-head{display:flex;align-items:center;gap:20px;padding:24px 38px;background:var(--n1);border-bottom:1px solid var(--line);}
+  .pane-head .dt{width:18px;height:18px;border-radius:3px;background:var(--syn-call);}
+  .pane-head .fn{font-family:var(--mono);font-size:26px;color:var(--n10);}
+  .pane-head .lng{margin-left:auto;font-family:var(--mono);font-size:21px;letter-spacing:.16em;text-transform:uppercase;color:var(--n8);}
+  .codebox{padding:34px 46px;font-family:var(--mono);font-size:29px;line-height:1.85;white-space:pre;color:var(--syn-fg);}
+  .k2{color:var(--syn-keyword)}.c2{color:var(--syn-call)}.t2{color:var(--syn-type)}.s2{color:var(--syn-string)}
+  .n2{color:var(--syn-number)}.b2{color:var(--syn-builtin)}.m2{color:var(--syn-member)}.p2{color:var(--syn-punct)}.x2{color:var(--syn-comment);font-style:italic}
+  .fl2{font-weight:700;color:var(--flow-fg)}.def2{font-weight:700}
+
+  /* close */
+  .close{align-items:center;justify-content:center;text-align:center;}
+  .close-jp{font-family:var(--mincho);font-weight:700;font-size:88px;margin-top:64px;}
+  .close-sub{font-family:var(--mincho);font-size:36px;color:var(--n9);margin-top:26px;letter-spacing:.08em;}
+</style>
+</head>
+<body>
+
+<div class="slide-label">deck grammar · 1920×1080 · dark ground only · one ember note per slide</div>
+
+<div class="frame"><div class="slide cover" data-screen-label="01 Cover">
+  <div class="cover-grid">
+    <div style="display:flex;gap:44px;align-items:flex-start">
+      <span class="cover-kanji">燠火</span>
+      <span class="cover-seal">燠</span>
+    </div>
+    <div>
+      <div class="kick">Design language · v1</div>
+      <h1 class="cover-title">One spine,<br>one ember</h1>
+      <div class="cover-read">燠火 — okibi · <b>banked embers</b>, the coal that keeps the fire</div>
+      <div class="cover-meta"><span class="pill">Status · <b>reference</b></span><span class="pill">Ground · <b>Okibi</b></span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="fk">燠火</span><span>OKIBI · 2026</span></div>
+</div></div>
+
+<div class="frame"><div class="slide divider" data-screen-label="02 Divider">
+  <div class="div-no">01 · sumi</div>
+  <div style="display:flex;align-items:center;gap:90px">
+    <div class="div-kanji">墨</div>
+    <div>
+      <h2 class="div-title" style="margin:0">The neutral spine</h2>
+      <div class="div-yomi">すみ · charcoal &amp; ash</div>
+    </div>
+  </div>
+  <div class="foot"><span class="fk">燠火</span><span>02 / 12</span></div>
+</div></div>
+
+<div class="frame"><div class="slide content" data-screen-label="03 Content">
+  <div class="kick">The attention budget</div>
+  <h2 class="c-title">Salience is spent, not sprinkled</h2>
+  <div class="c-grid">
+    <p class="c-lede">Every element lit dims every other. Default everything to the ground; under <b>15% of any view</b> carries colour at rest — so the one warm note still means something.</p>
+    <div class="c-cards">
+      <div class="cc"><span class="k">明</span><div><h4>Luminance leads</h4><p>Hierarchy rides lightness and weight; hue is rationed.</p></div></div>
+      <div class="cc"><span class="k">燠</span><div><h4>One ember</h4><p>Focus and primary action only — never decoration.</p></div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="fk">燠火</span><span>03 / 12</span></div>
+</div></div>
+
+<div class="frame"><div class="slide codeslide" data-screen-label="04 Code">
+  <div class="kick">The resting register</div>
+  <h2 class="c-title" style="font-size:68px">Keywords recede, calls carry</h2>
+  <div class="pane">
+    <div class="pane-head"><span class="dt"></span><span class="fn">theme.ts</span><span class="lng">typescript</span></div>
+    <div class="codebox"><span class="x2">// variables foreground · one strong hue · numbers as quiet clay</span>
+<span class="k2">export async function</span> <span class="c2 def2">resolve</span><span class="p2">(</span>name<span class="p2">:</span> <span class="t2">string</span><span class="p2">,</span> scale <span class="p2">=</span> <span class="n2">1</span><span class="p2">)</span> <span class="p2">{</span>
+  <span class="k2">const</span> theme <span class="p2">=</span> registry<span class="p2">.</span><span class="c2">get</span><span class="p2">(</span>name<span class="p2">);</span>
+  <span class="k2">if</span> <span class="p2">(</span>theme<span class="p2">.</span><span class="m2">dirty</span> <span class="p2">===</span> <span class="b2">true</span><span class="p2">)</span> <span class="fl2">throw</span> <span class="k2">new</span> <span class="t2">Error</span><span class="p2">(</span><span class="s2">"stale"</span><span class="p2">);</span>
+  <span class="fl2">return</span> theme<span class="p2">;</span>
+<span class="p2">}</span></div>
+  </div>
+  <div class="foot"><span class="fk">燠火</span><span>04 / 12</span></div>
+</div></div>
+
+<div class="frame"><div class="slide close" data-screen-label="05 Close">
+  <span class="cover-seal" style="margin:0">燠</span>
+  <div class="close-jp">一つの背骨、一つの燠</div>
+  <div class="close-sub">one spine · one ember — thank you</div>
+  <div class="foot"><span class="fk">燠火</span><span>OKIBI · 2026</span></div>
+</div></div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.frame').forEach(function(f){
+    var s=f.clientWidth/1920;
+    f.style.height=(1080*s)+'px';
+    f.firstElementChild.style.transform='scale('+s+')';
+  });
+}
+window.addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

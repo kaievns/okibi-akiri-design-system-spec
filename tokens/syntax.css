@@ -1,0 +1,102 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   OKIBI 燠火 — code highlighting tokens · THE DYNAMIC SYSTEM (canon)
+   Okibi does not do static rainbow highlighting. Colouring is three bands
+   whose salience follows intent (see the Thesis):
+     band 1 · --syn-*  — the RESTING register. The only colouring that is
+                          always on, and the register for code anywhere it
+                          is merely shown (documents, decks, review).
+     band 2 · --id-*   — identity tints. Focus phase only; summoned when a
+                          scope is engaged, bounded to that block.
+     band 3 · --risk-* — risk & flow. Edit phase only, focused scope only.
+   Status: band 1 values settled; band 2–3 behaviours still being refined
+   against the Mock v3 prototype (values stable, mechanics evolving).
+
+   DEPRECATED: the static six-pigment token mapping from "Theme JP clear
+   v2" (keywords kikyō, types kuchiba …). Do not build code surfaces with
+   it; the pigments remain canon for UI meaning only (see colors.css).
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root,
+:root[data-theme="dark"] {
+  /* ── band 1 · the resting register ──
+        variables are foreground — the data is the text; calls carry the
+        ONE strong hue; members/types quieter steps of the same blue;
+        keywords & punctuation recede into the spine; literal numbers are
+        quiet clay; true/false/null + named constants kurenai; strings
+        wakaba. At rest a file is charcoal + one blue + a whisper of green. */
+  --syn-fg:       var(--n11);
+  --syn-call:     oklch(0.74 0.125 252);
+  --syn-string:   oklch(0.79 0.105 146);
+  --syn-number:   oklch(0.80 0.014 250);   /* literal numbers REST receded (§2 of spec/) */
+  --syn-number-engaged: oklch(0.74 0.055 48); /* clay — focused scope, engaged phases only */
+  --syn-builtin:  oklch(0.70 0.16 24);
+  --syn-member:   oklch(0.79 0.052 250);
+  --syn-type:     oklch(0.77 0.032 250);
+  --syn-keyword:  oklch(0.62 0.024 250);
+  --syn-operator: oklch(0.72 0.012 250);
+  --syn-punct:    oklch(0.44 0.010 250);
+  --syn-comment:  oklch(0.52 0.012 250);   /* + italic (mono only) */
+  --flow-fg:      oklch(0.84 0.012 250);   /* return/throw/break/await — bold, no hue */
+  /* definitions render bold in --syn-call / --syn-type; no extra token */
+
+  /* ── band 2 · identity tints — six ORDERED slots (amber → periwinkle →
+        green → rose → chartreuse → violet); gold RESERVED for this/self.
+        Locals = normal weight (--id); out-of-function = bold (--idg),
+        traced file-wide. ── */
+  --id-1: oklch(0.78 0.132 50);  --idg-1: oklch(0.80 0.165 50);   /* kohaku 琥珀 amber */
+  --id-2: oklch(0.81 0.095 88);  --idg-2: oklch(0.83 0.135 88);   /* yamabuki 山吹 gold — RESERVED this/self */
+  --id-3: oklch(0.75 0.128 285); --idg-3: oklch(0.77 0.160 285);  /* fuji 藤 periwinkle */
+  --id-4: oklch(0.79 0.125 128); --idg-4: oklch(0.81 0.155 128);  /* moegi 萌葱 green */
+  --id-5: oklch(0.76 0.135 354); --idg-5: oklch(0.78 0.170 354);  /* akabeni 赤紅 rose */
+  --id-6: oklch(0.80 0.132 102); --idg-6: oklch(0.82 0.165 102);  /* wakaba 若葉 chartreuse (≠ string-green 146) */
+  --id-7: oklch(0.75 0.135 312); --idg-7: oklch(0.77 0.165 312);  /* ayame 菖蒲 violet */
+  --id-self:  var(--idg-2);
+  --id-outer: oklch(0.79 0.13 38);
+
+  /* ── band 3 · risk & flow ── */
+  --risk-async:  oklch(0.77 0.11 205);
+  --risk-mut:    oklch(0.81 0.135 80);
+  --risk-escape: oklch(0.72 0.155 35);
+  --risk-danger: oklch(0.70 0.17 28);
+}
+
+:root[data-theme="light"] {
+  --syn-fg:       var(--n11);
+  --syn-call:     oklch(0.48 0.145 252);
+  --syn-string:   oklch(0.49 0.125 146);
+  --syn-number:   oklch(0.66 0.018 80);
+  --syn-number-engaged: oklch(0.60 0.060 48);
+  --syn-builtin:  oklch(0.52 0.190 24);
+  --syn-member:   oklch(0.53 0.060 250);
+  --syn-type:     oklch(0.50 0.040 250);
+  --syn-keyword:  oklch(0.56 0.022 250);
+  --syn-operator: oklch(0.48 0.014 250);
+  --syn-punct:    oklch(0.68 0.012 80);
+  --syn-comment:  oklch(0.62 0.014 80);
+  --flow-fg:      oklch(0.30 0.022 250);
+
+  --id-1: oklch(0.60 0.135 50);  --idg-1: oklch(0.52 0.165 50);
+  --id-2: oklch(0.58 0.140 88);  --idg-2: oklch(0.55 0.160 88);
+  --id-3: oklch(0.55 0.150 285); --idg-3: oklch(0.48 0.180 285);
+  --id-4: oklch(0.56 0.135 128); --idg-4: oklch(0.49 0.165 128);
+  --id-5: oklch(0.55 0.150 354); --idg-5: oklch(0.50 0.185 354);
+  --id-6: oklch(0.59 0.140 102); --idg-6: oklch(0.52 0.170 102);
+  --id-7: oklch(0.54 0.150 312); --idg-7: oklch(0.47 0.180 312);
+  --id-self:  var(--idg-2);
+  --id-outer: oklch(0.55 0.16 38);
+
+  --risk-async:  oklch(0.50 0.110 205);
+  --risk-mut:    oklch(0.58 0.150 80);
+  --risk-escape: oklch(0.54 0.175 35);
+  --risk-danger: oklch(0.52 0.190 28);
+}
+
+/* ── diagnostic underline grammar — the STYLE carries the failure mode;
+      colour only reinforces. Maps 1:1 to undercurl/underdotted/underdashed. ── */
+.u-error   { text-decoration: underline wavy var(--err);          text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-skip-ink: none; }
+.u-warning { text-decoration: underline dotted var(--warn);       text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-skip-ink: none; }
+.u-info    { text-decoration: underline wavy var(--info);         text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-skip-ink: none; }
+.u-hint    { text-decoration: underline dotted var(--n8);         text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-skip-ink: none; }
+.u-spell   { text-decoration: underline dotted var(--spell);      text-decoration-thickness: 2px;   text-underline-offset: 3px; text-decoration-skip-ink: none; }
+.u-escape  { text-decoration: underline dashed var(--risk-escape);text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-skip-ink: none; }
+.u-mut     { text-decoration: underline dashed var(--risk-mut);   text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-skip-ink: none; }

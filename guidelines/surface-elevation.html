@@ -1,0 +1,24 @@
+<!-- @dsCard group="Surface" viewport="700x190" name="Elevation" subtitle="Cards rest on hairlines; shadows are for floating things" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+body{background:var(--n0);}
+.row{display:flex;gap:16px;align-items:center;padding-top:6px;}
+.e{width:150px;height:110px;border-radius:7px;display:flex;align-items:flex-end;padding:10px 12px;}
+.e .lbl{font-size:8.5px;}
+</style>
+</head>
+<body>
+<div class="row">
+<div class="e" style="background:var(--n2);border:1px solid var(--line)"><span class="lbl">card at rest<br>line only</span></div>
+<div class="e" style="background:var(--n3);border:1px solid var(--line);box-shadow:var(--shadow-float)"><span class="lbl">floating pill<br>--shadow-float</span></div>
+<div class="e" style="background:var(--n2);border:1px solid var(--line);box-shadow:var(--shadow-pane)"><span class="lbl">pane · popover<br>--shadow-pane</span></div>
+<div class="e" style="background:var(--n2);border:1px solid var(--line);box-shadow:var(--shadow-window)"><span class="lbl">window<br>--shadow-window</span></div>
+</div>
+</body>
+</html>

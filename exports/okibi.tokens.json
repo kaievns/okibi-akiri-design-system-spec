@@ -1,0 +1,713 @@
+{
+  "$meta": {
+    "name": "Okibi 燠火",
+    "version": "1.8",
+    "note": "v1.8: radius scale sharpened ~45% (see CHANGELOG); colour tokens unchanged. v1.7: static fallback artifacts added (vscode/, web/, obsidian/) — locked baseline. v1.6: Akari --warn darkened to L0.53 for AA text; contrast pairing rules in spec/contrast-matrix.md. Resolved from tokens/*.css. hex are sRGB approximations of the oklch sources; 8-digit hex carry alpha. v1.5: ember aligned to the context-doc value (0.74 0.178 38 dark); identity tints named (kohaku/yamabuki/fuji/moegi/akabeni/wakaba/ayame); assignment is ordering, not hashing — see spec/dynamic-highlighting.md. Code highlighting canon is the dynamic three-band system; pigments_ui are UI meaning hues only. The CSS custom properties remain the source of truth.",
+    "tintNames": {
+      "id-1": "kohaku amber 50",
+      "id-2": "yamabuki gold 88 — reserved this/self",
+      "id-3": "fuji periwinkle 285",
+      "id-4": "moegi green 128",
+      "id-5": "akabeni rose 354",
+      "id-6": "wakaba chartreuse 102",
+      "id-7": "ayame violet 312"
+    },
+    "fonts": {
+      "display": "Shippori Mincho B1",
+      "body": "Zen Kaku Gothic New",
+      "mono": "JetBrains Mono (web) / IoskeleyMonoTerm Nerd Font (native)"
+    }
+  },
+  "dark": {
+    "spine": {
+      "n0": {
+        "value": "oklch(0.175 0.006 250)",
+        "hex": "#0f1113"
+      },
+      "n1": {
+        "value": "oklch(0.205 0.006 250)",
+        "hex": "#15171a"
+      },
+      "n2": {
+        "value": "oklch(0.232 0.006 250)",
+        "hex": "#1b1e20"
+      },
+      "n3": {
+        "value": "oklch(0.262 0.006 250)",
+        "hex": "#222527"
+      },
+      "n4": {
+        "value": "oklch(0.30 0.006 250)",
+        "hex": "#2c2e31"
+      },
+      "n5": {
+        "value": "oklch(0.35 0.007 250)",
+        "hex": "#383b3e"
+      },
+      "n6": {
+        "value": "oklch(0.41 0.008 250)",
+        "hex": "#474b4f"
+      },
+      "n7": {
+        "value": "oklch(0.47 0.007 250)",
+        "hex": "#585b5f"
+      },
+      "n8": {
+        "value": "oklch(0.555 0.006 250)",
+        "hex": "#707376"
+      },
+      "n9": {
+        "value": "oklch(0.66 0.006 250)",
+        "hex": "#8f9296"
+      },
+      "n10": {
+        "value": "oklch(0.80 0.005 250)",
+        "hex": "#bbbec1"
+      },
+      "n11": {
+        "value": "oklch(0.915 0.004 250)",
+        "hex": "#e1e3e5"
+      },
+      "line": {
+        "value": "oklch(0.315 0.006 250)",
+        "hex": "#2f3235"
+      }
+    },
+    "ember": {
+      "ember": {
+        "value": "oklch(0.74 0.178 38)",
+        "hex": "#ff7c50"
+      },
+      "ember-fg": {
+        "value": "oklch(0.20 0.04 60)",
+        "hex": "#231103"
+      },
+      "ember-soft": {
+        "value": "color-mix(in srgb, var(--ember) 16%, var(--n2))",
+        "hex": "#3f2d28"
+      },
+      "ember-line": {
+        "value": "color-mix(in srgb, var(--ember) 50%, transparent)",
+        "hex": "#ff7c5080"
+      }
+    },
+    "states": {
+      "ok": {
+        "value": "oklch(0.79 0.115 146)",
+        "hex": "#89cf8e"
+      },
+      "warn": {
+        "value": "oklch(0.785 0.15 84)",
+        "hex": "#e6af2b"
+      },
+      "err": {
+        "value": "oklch(0.665 0.205 24)",
+        "hex": "#f85052"
+      },
+      "info": {
+        "value": "oklch(0.74 0.125 252)",
+        "hex": "#6daff7"
+      },
+      "spell": {
+        "value": "oklch(0.70 0.07 200)",
+        "hex": "#67acb0"
+      }
+    },
+    "pigments_ui": {
+      "call": {
+        "value": "oklch(0.74 0.125 252)",
+        "hex": "#6daff7"
+      },
+      "str": {
+        "value": "oklch(0.785 0.097 148)",
+        "hex": "#8eca96"
+      },
+      "type": {
+        "value": "oklch(0.785 0.068 84)",
+        "hex": "#ceb687"
+      },
+      "num": {
+        "value": "oklch(0.72 0.13 27)",
+        "hex": "#eb8278"
+      },
+      "prop": {
+        "value": "oklch(0.80 0.06 212)",
+        "hex": "#91c9d4"
+      },
+      "kw": {
+        "value": "oklch(0.665 0.058 300)",
+        "hex": "#998cb3"
+      },
+      "punc": {
+        "value": "oklch(0.555 0.006 250)",
+        "hex": "#707376"
+      }
+    },
+    "band1_resting": {
+      "syn-fg": {
+        "value": "var(--n11)",
+        "hex": "#e1e3e5"
+      },
+      "syn-call": {
+        "value": "oklch(0.74 0.125 252)",
+        "hex": "#6daff7"
+      },
+      "syn-string": {
+        "value": "oklch(0.79 0.105 146)",
+        "hex": "#8ecd92"
+      },
+      "syn-number": {
+        "value": "oklch(0.80 0.014 250)",
+        "hex": "#b7bfc7"
+      },
+      "syn-number-engaged": {
+        "value": "oklch(0.74 0.055 48)",
+        "hex": "#c9a18d"
+      },
+      "syn-builtin": {
+        "value": "oklch(0.70 0.16 24)",
+        "hex": "#f2716c"
+      },
+      "syn-member": {
+        "value": "oklch(0.79 0.052 250)",
+        "hex": "#a2bedb"
+      },
+      "syn-type": {
+        "value": "oklch(0.77 0.032 250)",
+        "hex": "#a5b6c8"
+      },
+      "syn-keyword": {
+        "value": "oklch(0.62 0.024 250)",
+        "hex": "#7c8894"
+      },
+      "syn-operator": {
+        "value": "oklch(0.72 0.012 250)",
+        "hex": "#9fa5ac"
+      },
+      "syn-punct": {
+        "value": "oklch(0.44 0.010 250)",
+        "hex": "#4e5358"
+      },
+      "syn-comment": {
+        "value": "oklch(0.52 0.012 250)",
+        "hex": "#646a70"
+      },
+      "flow-fg": {
+        "value": "oklch(0.84 0.012 250)",
+        "hex": "#c5cbd2"
+      }
+    },
+    "band2_identity": {
+      "id-1": {
+        "value": "oklch(0.78 0.132 50)",
+        "hex": "#fa9d67"
+      },
+      "id-2": {
+        "value": "oklch(0.81 0.095 88)",
+        "hex": "#dabe78"
+      },
+      "id-3": {
+        "value": "oklch(0.75 0.128 285)",
+        "hex": "#a6a2fc"
+      },
+      "id-4": {
+        "value": "oklch(0.79 0.125 128)",
+        "hex": "#a3ca70"
+      },
+      "id-5": {
+        "value": "oklch(0.76 0.135 354)",
+        "hex": "#f38bb7"
+      },
+      "id-6": {
+        "value": "oklch(0.80 0.132 102)",
+        "hex": "#cfc152"
+      },
+      "id-7": {
+        "value": "oklch(0.75 0.135 312)",
+        "hex": "#ca94ec"
+      },
+      "idg-1": {
+        "value": "oklch(0.80 0.165 50)",
+        "hex": "#ff9a52"
+      },
+      "idg-2": {
+        "value": "oklch(0.83 0.135 88)",
+        "hex": "#ecc254"
+      },
+      "idg-3": {
+        "value": "oklch(0.77 0.160 285)",
+        "hex": "#aba3ff"
+      },
+      "idg-4": {
+        "value": "oklch(0.81 0.155 128)",
+        "hex": "#a4d35f"
+      },
+      "idg-5": {
+        "value": "oklch(0.78 0.170 354)",
+        "hex": "#ff85bf"
+      },
+      "idg-6": {
+        "value": "oklch(0.82 0.165 102)",
+        "hex": "#dac721"
+      },
+      "idg-7": {
+        "value": "oklch(0.77 0.165 312)",
+        "hex": "#d793ff"
+      },
+      "id-self": {
+        "value": "var(--idg-2)",
+        "hex": "#ecc254"
+      },
+      "id-outer": {
+        "value": "oklch(0.79 0.13 38)",
+        "hex": "#ff9c7c"
+      }
+    },
+    "band3_risk": {
+      "risk-async": {
+        "value": "oklch(0.77 0.11 205)",
+        "hex": "#4bc8d5"
+      },
+      "risk-mut": {
+        "value": "oklch(0.81 0.135 80)",
+        "hex": "#eeb64f"
+      },
+      "risk-escape": {
+        "value": "oklch(0.72 0.155 35)",
+        "hex": "#f57c5f"
+      },
+      "risk-danger": {
+        "value": "oklch(0.70 0.17 28)",
+        "hex": "#f66e60"
+      }
+    },
+    "terminal": {
+      "term-bg": {
+        "value": "var(--n0)",
+        "hex": "#0f1113"
+      },
+      "term-fg": {
+        "value": "var(--n10)",
+        "hex": "#bbbec1"
+      },
+      "term-cursor": {
+        "value": "var(--ember)",
+        "hex": "#ff7c50"
+      },
+      "term-sel": {
+        "value": "var(--ember-soft)",
+        "hex": "#3f2d28"
+      },
+      "ansi-0": {
+        "value": "var(--n1)",
+        "hex": "#15171a"
+      },
+      "ansi-1": {
+        "value": "var(--err)",
+        "hex": "#f85052"
+      },
+      "ansi-2": {
+        "value": "var(--str)",
+        "hex": "#8eca96"
+      },
+      "ansi-3": {
+        "value": "var(--warn)",
+        "hex": "#e6af2b"
+      },
+      "ansi-4": {
+        "value": "var(--call)",
+        "hex": "#6daff7"
+      },
+      "ansi-5": {
+        "value": "var(--kw)",
+        "hex": "#998cb3"
+      },
+      "ansi-6": {
+        "value": "var(--prop)",
+        "hex": "#91c9d4"
+      },
+      "ansi-7": {
+        "value": "var(--n10)",
+        "hex": "#bbbec1"
+      },
+      "ansi-8": {
+        "value": "var(--n7)",
+        "hex": "#585b5f"
+      },
+      "ansi-9": {
+        "value": "oklch(0.72 0.21 24)",
+        "hex": "#ff6060"
+      },
+      "ansi-10": {
+        "value": "oklch(0.84 0.11 148)",
+        "hex": "#98dfa2"
+      },
+      "ansi-11": {
+        "value": "oklch(0.84 0.15 84)",
+        "hex": "#f8c143"
+      },
+      "ansi-12": {
+        "value": "oklch(0.79 0.13 252)",
+        "hex": "#7abfff"
+      },
+      "ansi-13": {
+        "value": "oklch(0.72 0.075 300)",
+        "hex": "#ab9acd"
+      },
+      "ansi-14": {
+        "value": "oklch(0.85 0.07 212)",
+        "hex": "#97dbe8"
+      },
+      "ansi-15": {
+        "value": "var(--n11)",
+        "hex": "#e1e3e5"
+      }
+    }
+  },
+  "light": {
+    "spine": {
+      "n0": {
+        "value": "oklch(0.90 0.008 80)",
+        "hex": "#e1ddd8"
+      },
+      "n1": {
+        "value": "oklch(0.945 0.007 80)",
+        "hex": "#efece8"
+      },
+      "n2": {
+        "value": "oklch(0.975 0.006 80)",
+        "hex": "#f9f6f2"
+      },
+      "n3": {
+        "value": "oklch(0.93 0.008 80)",
+        "hex": "#ebe7e2"
+      },
+      "n4": {
+        "value": "oklch(0.995 0.004 80)",
+        "hex": "#fffdfa"
+      },
+      "n5": {
+        "value": "oklch(0.90 0.009 80)",
+        "hex": "#e1ddd7"
+      },
+      "n6": {
+        "value": "oklch(0.86 0.010 80)",
+        "hex": "#d4d0ca"
+      },
+      "n7": {
+        "value": "oklch(0.76 0.011 80)",
+        "hex": "#b5b0a9"
+      },
+      "n8": {
+        "value": "oklch(0.63 0.011 80)",
+        "hex": "#8d8982"
+      },
+      "n9": {
+        "value": "oklch(0.52 0.010 80)",
+        "hex": "#6c6863"
+      },
+      "n10": {
+        "value": "oklch(0.36 0.009 80)",
+        "hex": "#403d38"
+      },
+      "n11": {
+        "value": "oklch(0.18 0.008 80)",
+        "hex": "#13110e"
+      },
+      "line": {
+        "value": "oklch(0.875 0.008 80)",
+        "hex": "#d9d5d0"
+      }
+    },
+    "ember": {
+      "ember": {
+        "value": "oklch(0.55 0.19 42)",
+        "hex": "#c63a00"
+      },
+      "ember-fg": {
+        "value": "oklch(0.99 0.02 80)",
+        "hex": "#fffbed"
+      },
+      "ember-soft": {
+        "value": "color-mix(in srgb, var(--ember) 14%, var(--n2))",
+        "hex": "#f2dcd0"
+      },
+      "ember-line": {
+        "value": "color-mix(in srgb, var(--ember) 55%, transparent)",
+        "hex": "#c63a008c"
+      }
+    },
+    "states": {
+      "ok": {
+        "value": "oklch(0.49 0.125 146)",
+        "hex": "#257231"
+      },
+      "warn": {
+        "value": "oklch(0.53 0.155 84)",
+        "hex": "#956000"
+      },
+      "err": {
+        "value": "oklch(0.53 0.205 24)",
+        "hex": "#c71529"
+      },
+      "info": {
+        "value": "oklch(0.47 0.14 252)",
+        "hex": "#015ba6"
+      },
+      "spell": {
+        "value": "oklch(0.50 0.08 200)",
+        "hex": "#147175"
+      }
+    },
+    "pigments_ui": {
+      "call": {
+        "value": "oklch(0.47 0.14 252)",
+        "hex": "#015ba6"
+      },
+      "str": {
+        "value": "oklch(0.49 0.108 148)",
+        "hex": "#2d713b"
+      },
+      "type": {
+        "value": "oklch(0.52 0.073 84)",
+        "hex": "#7d6535"
+      },
+      "num": {
+        "value": "oklch(0.51 0.165 27)",
+        "hex": "#b1322d"
+      },
+      "prop": {
+        "value": "oklch(0.55 0.075 212)",
+        "hex": "#347d8b"
+      },
+      "kw": {
+        "value": "oklch(0.52 0.082 300)",
+        "hex": "#705e91"
+      },
+      "punc": {
+        "value": "oklch(0.62 0.011 80)",
+        "hex": "#8a867f"
+      }
+    },
+    "band1_resting": {
+      "syn-fg": {
+        "value": "var(--n11)",
+        "hex": "#13110e"
+      },
+      "syn-call": {
+        "value": "oklch(0.48 0.145 252)",
+        "hex": "#005eac"
+      },
+      "syn-string": {
+        "value": "oklch(0.49 0.125 146)",
+        "hex": "#257231"
+      },
+      "syn-number": {
+        "value": "oklch(0.66 0.018 80)",
+        "hex": "#989186"
+      },
+      "syn-number-engaged": {
+        "value": "oklch(0.60 0.060 48)",
+        "hex": "#9f7661"
+      },
+      "syn-builtin": {
+        "value": "oklch(0.52 0.190 24)",
+        "hex": "#be222d"
+      },
+      "syn-member": {
+        "value": "oklch(0.53 0.060 250)",
+        "hex": "#516f8e"
+      },
+      "syn-type": {
+        "value": "oklch(0.50 0.040 250)",
+        "hex": "#52657a"
+      },
+      "syn-keyword": {
+        "value": "oklch(0.56 0.022 250)",
+        "hex": "#6b7681"
+      },
+      "syn-operator": {
+        "value": "oklch(0.48 0.014 250)",
+        "hex": "#585e65"
+      },
+      "syn-punct": {
+        "value": "oklch(0.68 0.012 80)",
+        "hex": "#9c9890"
+      },
+      "syn-comment": {
+        "value": "oklch(0.62 0.014 80)",
+        "hex": "#8b857d"
+      },
+      "flow-fg": {
+        "value": "oklch(0.30 0.022 250)",
+        "hex": "#262f39"
+      }
+    },
+    "band2_identity": {
+      "id-1": {
+        "value": "oklch(0.60 0.135 50)",
+        "hex": "#be642a"
+      },
+      "id-2": {
+        "value": "oklch(0.58 0.140 88)",
+        "hex": "#9d7300"
+      },
+      "id-3": {
+        "value": "oklch(0.55 0.150 285)",
+        "hex": "#6b61c4"
+      },
+      "id-4": {
+        "value": "oklch(0.56 0.135 128)",
+        "hex": "#5d821a"
+      },
+      "id-5": {
+        "value": "oklch(0.55 0.150 354)",
+        "hex": "#b14578"
+      },
+      "id-6": {
+        "value": "oklch(0.59 0.140 102)",
+        "hex": "#8f7f00"
+      },
+      "id-7": {
+        "value": "oklch(0.54 0.150 312)",
+        "hex": "#8b50ad"
+      },
+      "idg-1": {
+        "value": "oklch(0.52 0.165 50)",
+        "hex": "#af4200"
+      },
+      "idg-2": {
+        "value": "oklch(0.55 0.160 88)",
+        "hex": "#986800"
+      },
+      "idg-3": {
+        "value": "oklch(0.48 0.180 285)",
+        "hex": "#5844bc"
+      },
+      "idg-4": {
+        "value": "oklch(0.49 0.165 128)",
+        "hex": "#447000"
+      },
+      "idg-5": {
+        "value": "oklch(0.50 0.185 354)",
+        "hex": "#ac1f6a"
+      },
+      "idg-6": {
+        "value": "oklch(0.52 0.170 102)",
+        "hex": "#7e6900"
+      },
+      "idg-7": {
+        "value": "oklch(0.47 0.180 312)",
+        "hex": "#7c30a2"
+      },
+      "id-self": {
+        "value": "var(--idg-2)",
+        "hex": "#986800"
+      },
+      "id-outer": {
+        "value": "oklch(0.55 0.16 38)",
+        "hex": "#bb461e"
+      }
+    },
+    "band3_risk": {
+      "risk-async": {
+        "value": "oklch(0.50 0.110 205)",
+        "hex": "#007481"
+      },
+      "risk-mut": {
+        "value": "oklch(0.58 0.150 80)",
+        "hex": "#a86d00"
+      },
+      "risk-escape": {
+        "value": "oklch(0.54 0.175 35)",
+        "hex": "#be3a16"
+      },
+      "risk-danger": {
+        "value": "oklch(0.52 0.190 28)",
+        "hex": "#be241f"
+      }
+    },
+    "terminal": {
+      "term-bg": {
+        "value": "var(--n2)",
+        "hex": "#f9f6f2"
+      },
+      "term-fg": {
+        "value": "var(--n10)",
+        "hex": "#403d38"
+      },
+      "term-cursor": {
+        "value": "var(--ember)",
+        "hex": "#c63a00"
+      },
+      "term-sel": {
+        "value": "var(--ember-soft)",
+        "hex": "#f2dcd0"
+      },
+      "ansi-0": {
+        "value": "var(--n11)",
+        "hex": "#13110e"
+      },
+      "ansi-1": {
+        "value": "var(--err)",
+        "hex": "#c71529"
+      },
+      "ansi-2": {
+        "value": "var(--str)",
+        "hex": "#2d713b"
+      },
+      "ansi-3": {
+        "value": "var(--warn)",
+        "hex": "#a36d00"
+      },
+      "ansi-4": {
+        "value": "var(--call)",
+        "hex": "#015ba6"
+      },
+      "ansi-5": {
+        "value": "var(--kw)",
+        "hex": "#705e91"
+      },
+      "ansi-6": {
+        "value": "var(--prop)",
+        "hex": "#347d8b"
+      },
+      "ansi-7": {
+        "value": "var(--n8)",
+        "hex": "#8d8982"
+      },
+      "ansi-8": {
+        "value": "var(--n7)",
+        "hex": "#b5b0a9"
+      },
+      "ansi-9": {
+        "value": "oklch(0.47 0.20 24)",
+        "hex": "#b00018"
+      },
+      "ansi-10": {
+        "value": "oklch(0.43 0.12 148)",
+        "hex": "#096125"
+      },
+      "ansi-11": {
+        "value": "oklch(0.51 0.15 84)",
+        "hex": "#8e5b00"
+      },
+      "ansi-12": {
+        "value": "oklch(0.42 0.15 252)",
+        "hex": "#004c9b"
+      },
+      "ansi-13": {
+        "value": "oklch(0.46 0.09 300)",
+        "hex": "#604b83"
+      },
+      "ansi-14": {
+        "value": "oklch(0.48 0.08 212)",
+        "hex": "#0e6978"
+      },
+      "ansi-15": {
+        "value": "var(--n11)",
+        "hex": "#13110e"
+      }
+    }
+  }
+}

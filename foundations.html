@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi 燠火 — Foundations</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{font-size:15.5px;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 32px;}
+  .topnav{display:flex;align-items:center;gap:4px;padding:20px 0;flex-wrap:wrap;}
+  a.home{display:flex;align-items:center;gap:10px;margin-right:auto;}
+  a.home:hover{text-decoration:none;}
+  .topnav .seal{width:32px;height:32px;border-radius:4px;background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-weight:700;font-size:17px;transform:rotate(-3deg);}
+  .topnav .nm{font-family:var(--mincho);font-weight:700;font-size:15px;color:var(--n11);}
+  .topnav a.lnk{font-family:var(--mono);font-size:11.5px;color:var(--n9);padding:8px 11px;border-radius:4px;line-height:1;}
+  .topnav a.lnk:hover{color:var(--n11);background:var(--n3);text-decoration:none;}
+  .topnav a.lnk.on{color:var(--n11);background:var(--ember-soft);box-shadow:inset 0 -2px 0 var(--ember);border-radius:0;}
+  main{padding:0 0 100px;}
+  header.top{padding:64px 0 34px;position:relative;}
+  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule-signature);}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  h1{font-family:var(--mincho);font-weight:700;font-size:38px;line-height:1.08;margin:12px 0 0;color:var(--n11);max-width:680px;}
+  .sub{margin-top:14px;font-size:15px;max-width:660px;color:var(--n10);}
+  .sub b{color:var(--n11);}
+  section{padding:48px 0 0;}
+  .s-no{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;color:var(--ember);text-transform:uppercase;}
+  h2{font-family:var(--mincho);font-weight:700;font-size:24px;margin:8px 0 10px;color:var(--n11);}
+  .lede{font-size:14.5px;color:var(--n9);max-width:660px;margin:0 0 20px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px;}
+  .spec{margin:0;border:1px solid var(--line);border-radius:7px;background:var(--n1);overflow:hidden;}
+  .spec iframe{display:block;width:100%;border:0;background:var(--n0);}
+  .spec figcaption{display:flex;align-items:baseline;gap:10px;padding:9px 15px;border-top:1px solid var(--line);}
+  .spec figcaption b{font-size:12.5px;color:var(--n11);font-weight:600;white-space:nowrap;}
+  .spec figcaption span{font-size:11.5px;color:var(--n8);flex:1;min-width:0;}
+  .wide{grid-column:1/-1;}
+  .laws{max-width:760px;display:flex;flex-direction:column;gap:10px;}
+  .law{border:1px solid var(--line);border-radius:6px;background:var(--n2);padding:12px 16px;font-size:13.5px;color:var(--n10);line-height:1.55;}
+  .law b{color:var(--n11);}
+  footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer .fl{font-family:var(--mincho);font-size:14px;color:var(--n9);}
+  footer .fr{font-family:var(--mono);font-size:10.5px;color:var(--n8);letter-spacing:.1em;}
+  .themeswitch{display:flex;margin-left:14px;background:color-mix(in srgb,var(--n4) 90%,transparent);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;backdrop-filter:blur(8px);box-shadow:var(--shadow-float);}
+  .themeswitch button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--n8);background:transparent;border:0;cursor:pointer;padding:8px 13px;border-radius:999px;display:flex;align-items:center;gap:6px;transition:.2s;line-height:1;}
+  .themeswitch button[aria-pressed="true"]{color:var(--ember-fg);background:var(--ember);}
+
+</style>
+</head>
+<body class="okibi-ground">
+<div class="wrap">
+  <nav class="topnav" data-screen-label="Top nav">
+    <a class="home" href="index.html"><span class="seal">燠</span><span class="nm">Okibi</span></a>
+    <a class="lnk" href="doctrine.html">Doctrine</a>
+    <a class="lnk on" href="foundations.html">Foundations</a>
+    <a class="lnk" href="code.html">Code</a>
+    <a class="lnk" href="markdown.html">Markdown</a>
+    <a class="lnk" href="tools.html">Tools</a>
+    <a class="lnk" href="for-llms.html">For LLMs</a>
+    <div class="themeswitch" role="group" aria-label="Color mode">
+      <button type="button" data-set="dark" aria-pressed="true"><span>◐</span>Okibi</button>
+      <button type="button" data-set="light" aria-pressed="false"><span>◑</span>Akari</button>
+    </div>
+  </nav>
+  <main>
+    <header class="top">
+      <div class="kicker">基 · foundations</div>
+      <h1>The spine, the ember, and everything they permit</h1>
+      <p class="sub">Every surface, border and text tone is a step on one twelve-step charcoal ramp. One warm accent. Six quiet UI pigments. Three typefaces with three jobs. All values are oklch; copy them from the <a href="tools.html">token browser</a>.</p>
+    </header>
+<section><div class="s-no">01 · iro</div><h2>Colour</h2><p class="lede">The spine carries structure; the ember carries focus; pigments carry UI meaning (never code roles); identity tints belong to the focus phase of the editor.</p><div class="grid"><figure class="spec"><iframe src="guidelines/color-spine-dark.html" style="height:176px" loading="lazy" title="Spine · Okibi"></iframe><figcaption><b>Spine · Okibi</b><span>12 charcoal steps, hue 250</span></figcaption></figure><figure class="spec"><iframe src="guidelines/color-spine-light.html" style="height:176px" loading="lazy" title="Spine · Akari"></iframe><figcaption><b>Spine · Akari</b><span>warm paper, role-mapped</span></figcaption></figure><figure class="spec"><iframe src="guidelines/color-ember.html" style="height:186px" loading="lazy" title="The ember"></iframe><figcaption><b>The ember</b><span>focus &amp; action — 1–2 per screen</span></figcaption></figure><figure class="spec"><iframe src="guidelines/color-states.html" style="height:166px" loading="lazy" title="States"></iframe><figcaption><b>States</b><span>always paired with a glyph</span></figcaption></figure><figure class="spec"><iframe src="guidelines/color-pigments.html" style="height:216px" loading="lazy" title="Pigments"></iframe><figcaption><b>Pigments</b><span>UI meaning hues</span></figcaption></figure><figure class="spec"><iframe src="guidelines/color-identity.html" style="height:216px" loading="lazy" title="Identity tints"></iframe><figcaption><b>Identity tints</b><span>band 2 — focus phase</span></figcaption></figure></div></section><section><div class="s-no">02 · ji</div><h2>Type</h2><p class="lede">Mincho for display, gothic for prose and UI, mono for code and data. Hierarchy rides luminance and weight.</p><div class="grid"><figure class="spec"><iframe src="guidelines/type-display.html" style="height:196px" loading="lazy" title="Shippori Mincho B1"></iframe><figcaption><b>Shippori Mincho B1</b><span>hero kanji, titles, seals</span></figcaption></figure><figure class="spec"><iframe src="guidelines/type-body.html" style="height:176px" loading="lazy" title="Zen Kaku Gothic New"></iframe><figcaption><b>Zen Kaku Gothic New</b><span>prose &amp; UI</span></figcaption></figure><figure class="spec"><iframe src="guidelines/type-mono.html" style="height:206px" loading="lazy" title="JetBrains Mono"></iframe><figcaption><b>JetBrains Mono</b><span>code, kickers, labels</span></figcaption></figure><figure class="spec"><iframe src="guidelines/type-scale.html" style="height:276px" loading="lazy" title="Scale"></iframe><figcaption><b>Scale</b><span>optical steps</span></figcaption></figure></div></section><section><div class="s-no">03 · shirushi</div><h2>Brand &amp; surface</h2><p class="lede">The signature moves — and the quiet physics of surfaces, hairlines and elevation.</p><div class="grid"><figure class="spec"><iframe src="guidelines/brand-rule.html" style="height:156px" loading="lazy" title="Signature rule"></iframe><figcaption><b>Signature rule</b><span>ember for 64px, then hairline</span></figcaption></figure><figure class="spec"><iframe src="guidelines/brand-seal.html" style="height:206px" loading="lazy" title="Seal &amp; title-card"></iframe><figcaption><b>Seal &amp; title-card</b><span>判 hanko · kanji sections</span></figcaption></figure><figure class="spec"><iframe src="guidelines/brand-glyphs.html" style="height:176px" loading="lazy" title="Glyphs"></iframe><figcaption><b>Glyphs</b><span>unicode in mono is the iconography</span></figcaption></figure><figure class="spec"><iframe src="guidelines/brand-texture.html" style="height:186px" loading="lazy" title="Ground glow"></iframe><figcaption><b>Ground glow</b><span>one breath of warmth, no patterns</span></figcaption></figure><figure class="spec"><iframe src="guidelines/surface-radii.html" style="height:186px" loading="lazy" title="Radii &amp; borders"></iframe><figcaption><b>Radii &amp; borders</b><span>hairlines, radius by role</span></figcaption></figure><figure class="spec"><iframe src="guidelines/surface-elevation.html" style="height:206px" loading="lazy" title="Elevation"></iframe><figcaption><b>Elevation</b><span>shadows only float</span></figcaption></figure><figure class="spec"><iframe src="guidelines/surface-focus.html" style="height:206px" loading="lazy" title="Interactive states"></iframe><figcaption><b>Interactive states</b><span>ring · selection · hover · active</span></figcaption></figure></div></section><section><div class="s-no">04 · gu</div><h2>Components</h2><p class="lede">The UI primitives — React sources in <code>components/</code>, each with types and usage notes.</p><div class="grid"><figure class="spec"><iframe src="components/forms/forms.card.html" style="height:316px" loading="lazy" title="Forms"></iframe><figcaption><b>Forms</b><span>Button · Field · Segmented · Toggle · Checkbox · Radio · Slider</span></figcaption></figure><figure class="spec"><iframe src="components/feedback/feedback.card.html" style="height:296px" loading="lazy" title="Feedback"></iframe><figcaption><b>Feedback</b><span>Chip · Badge · Notice · Progress</span></figcaption></figure><figure class="spec"><iframe src="components/structure/structure.card.html" style="height:316px" loading="lazy" title="Structure"></iframe><figcaption><b>Structure</b><span>Kicker · SectionHead · Callout · Seal · MetaPill · ThemeSwitch</span></figcaption></figure><figure class="spec"><iframe src="components/code/code.card.html" style="height:266px" loading="lazy" title="Code"></iframe><figcaption><b>Code</b><span>CodePane — chromed code block</span></figcaption></figure></div></section><section><div class="s-no">05 · hō</div><h2>The laws</h2><p class="lede">The short list that settles arguments. Full text in the <a href="llm-context.md">machine context</a>.</p><div class="laws"><div class="law"><b>Elevation:</b> chrome sits below the content; the working surface is the brightest plane.</div><div class="law"><b>Never hue alone:</b> every status indicator carries a glyph or shape; colour only reinforces.</div><div class="law"><b>Two temperaments:</b> Okibi is cool ash, Akari is warm paper — never harmonize them.</div><div class="law"><b>Control text centers by construction:</b> line-height 1 + symmetric padding in a flex-centered box.</div><div class="law"><b>Contrast:</b> n9+ for readable text; n8/n7 are furniture. Measured pairings in <a href="spec/contrast-matrix.md">the matrix</a>.</div><div class="law"><b>Hue no-go zones:</b> teal 180–230 and magenta 325–345 stay empty (exceptions: async 205, spell 200). Also never: italics (except comments), vanilla purple, pumpkin orange, muddy low-contrast colours, brown-tinted dark grounds, bright or void borders, decorative textures, emoji.</div><div class="law"><b>The aesthetic brief:</b> modern Japanese — action anime, not sakura/pastel. Colours are a glow in the dark: sparse, meaningful, and legible as colour — restrained ≠ washed out. Loved anchors: viridian green, periwinkle, the ember, yamabuki gold as <code>this</code>/<code>self</code>, scarlet-derived reds, bold-for-globals.</div></div></section>
+    <footer>
+      <span class="fl">燠火 · 一つの背骨、一つの燠</span>
+      <span class="fr">OKIBI · V1.8 · SOURCE OF TRUTH</span>
+    </footer>
+  </main>
+</div>
+<script>
+(function(){var root=document.documentElement;var btns=document.querySelectorAll('.themeswitch button');
+  function frTheme(fr,m){if(fr.src.indexOf('color-spine-light')>-1)return 'light';if(fr.src.indexOf('color-spine-dark')>-1)return 'dark';return m;}
+  function apply(m){root.setAttribute('data-theme',m);btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===m?'true':'false');});
+    document.querySelectorAll('iframe').forEach(function(fr){try{if(fr.contentDocument)fr.contentDocument.documentElement.setAttribute('data-theme',frTheme(fr,m));}catch(e){}});
+    try{localStorage.setItem('okibi-theme',m);}catch(e){}}
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.set);});});
+  document.querySelectorAll('iframe').forEach(function(fr){fr.addEventListener('load',function(){var m=root.getAttribute('data-theme')||'dark';try{if(fr.contentDocument)fr.contentDocument.documentElement.setAttribute('data-theme',frTheme(fr,m));}catch(e){}});});
+  var s;try{s=localStorage.getItem('okibi-theme');}catch(e){}apply(s==='light'?'light':'dark');
+})();
+</script>
+</body>
+</html>

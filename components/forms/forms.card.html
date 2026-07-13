@@ -1,0 +1,61 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Forms" subtitle="Button · Field · Segmented · Toggle · Checkbox · Radio · Slider" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+body{margin:0;padding:16px 18px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--n8);margin:0 0 9px;}
+.crow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+.crow+.lbl{margin-top:14px;}
+
+.ui-btn{font-family:var(--gothic);font-size:13px;font-weight:600;border:0;border-radius:5px;padding:11px 16px;cursor:pointer;line-height:1;display:inline-flex;align-items:center;justify-content:center;}
+.ui-btn.solid{background:var(--ember);color:var(--ember-fg);}
+.ui-btn.soft{background:var(--ember-soft);color:var(--ember);border:1px solid var(--ember-line);}
+.ui-btn.outline{background:var(--n1);color:var(--n11);border:1px solid var(--n6);}
+.ui-btn.ghost{background:transparent;color:var(--n10);}
+.ui-btn.danger{background:transparent;color:var(--err);border:1px solid color-mix(in srgb,var(--err) 40%,transparent);}
+.ui-btn[disabled]{opacity:.4;cursor:not-allowed;}
+.field{display:flex;flex-direction:column;gap:6px;width:190px;}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--n8);}
+.input{background:var(--n1);border:1px solid var(--line);border-radius:4px;padding:9px 12px;color:var(--n11);font-size:13px;font-family:var(--gothic);}
+.input.focus{border-color:var(--ember);box-shadow:var(--ring);}
+.seg{display:inline-flex;background:var(--n1);border:1px solid var(--line);border-radius:5px;padding:3px;gap:2px;}
+.seg button{font-family:var(--gothic);font-size:12.5px;font-weight:500;color:var(--n9);background:transparent;border:0;border-radius:3px;padding:8px 13px;cursor:pointer;line-height:1;}
+.seg button.on{background:var(--n4);color:var(--n11);box-shadow:0 1px 2px rgba(0,0,0,.25);}
+.tog{position:relative;width:38px;height:22px;border-radius:999px;background:var(--n5);flex:0 0 auto;display:inline-block;}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--n9);}
+.tog.on{background:var(--ember);}.tog.on::after{background:var(--ember-fg);transform:translateX(16px);}
+.ck{width:18px;height:18px;border-radius:3px;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;}
+.ck.on{background:var(--ember);border-color:var(--ember);color:var(--ember-fg);font-size:12px;font-weight:700;}
+.rd{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;}
+.rd.on{border-color:var(--ember);}.rd.on::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--ember);}
+.cklabel{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--n10);}
+.slider{position:relative;height:7px;border-radius:999px;background:var(--n4);width:170px;display:inline-block;}
+.slider i{position:absolute;left:0;top:0;height:100%;width:45%;border-radius:999px;background:var(--ember);}
+.slider .knob{position:absolute;top:50%;left:45%;width:16px;height:16px;border-radius:50%;background:var(--n11);border:3px solid var(--ember);transform:translate(-50%,-50%);box-shadow:0 1px 4px rgba(0,0,0,.4);}
+
+</style>
+</head>
+<body>
+<div class="lbl">Button</div>
+<div class="crow">
+<button class="ui-btn solid">Apply theme</button><button class="ui-btn soft">Preview</button><button class="ui-btn outline">Cancel</button><button class="ui-btn ghost">Reset</button><button class="ui-btn danger">Delete</button><button class="ui-btn solid" disabled>Disabled</button>
+</div>
+<div class="lbl">Field · Segmented</div>
+<div class="crow">
+<div class="field"><label>Theme name</label><input class="input" value="okibi"></div>
+<div class="field"><label>Focused</label><input class="input focus" value="ember + ring"></div>
+<div class="seg"><button class="on">Okibi</button><button>Akari</button><button>Auto</button></div>
+</div>
+<div class="lbl">Toggle · Checkbox · Radio · Slider</div>
+<div class="crow" style="gap:20px">
+<span class="cklabel"><span class="tog on"></span>Ligatures</span>
+<span class="cklabel"><span class="tog"></span>Italics</span>
+<span class="cklabel"><span class="ck on">✓</span>Semantic</span>
+<span class="cklabel"><span class="rd on"></span>Dim inactive</span>
+<span class="slider"><i></i><span class="knob"></span></span>
+</div>
+</body>
+</html>

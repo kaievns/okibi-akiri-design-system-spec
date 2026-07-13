@@ -1,0 +1,45 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   OKIBI 燠火 — geometry, elevation & motif tokens
+   Optical, not grid-snapped. Radius scale sharpened ~45% at v1.8 (taste constant: corners stay crisp).
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* radii */
+  --radius-tag:     6px;    /* inline selections, tiny tags */
+  --radius-input:   8px;    /* inputs, chips-square */
+  --radius-control: 9px;    /* buttons, segmented shells */
+  --radius-notice:  10px;   /* notices, callout wells */
+  --radius-card:    13px;   /* cards, blocks, panes */
+  --radius-pill:    999px;  /* chips, badges, switches */
+
+  /* borders — always 1px hairlines in var(--line); a control's checked
+     border may thicken to 1.5px. No 2px+ decorative borders. */
+  --border: 1px solid var(--line);
+
+  /* spacing rhythm (recurring literals; use the nearest, don't snap content) */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 22px;  --sp-6: 28px;  --sp-7: 34px;  --sp-8: 48px;
+  --sp-section: 84px;          /* vertical gap between document sections */
+  --pad-card: 18px 20px;       /* block/card padding (16–22) */
+  --measure: 820px;            /* max prose width; ledes 780–820 */
+  --page-max: 1180px;          /* document wrap (1040 for dense prose) */
+
+  /* elevation — shadows are deep, soft, and rare: floating panes and
+     windows only. Cards at rest carry a hairline, not a shadow. */
+  --shadow-pane:   var(--shadow);         /* 0 18px 50px -22px … */
+  --shadow-float:  0 6px 22px -10px rgba(0, 0, 0, 0.5);  /* pinned pills, switches */
+  /* --shadow-window lives in colors.css (theme-dependent) */
+
+  /* focus ring — ember border + soft halo; visible, never blue-default */
+  --ring: 0 0 0 3px var(--ember-soft);
+
+  /* ── motifs ── */
+  /* the ember glow — one radial breath of warmth on the page ground */
+  --glow-ember: radial-gradient(110% 50% at 84% -10%, color-mix(in srgb, var(--ember) 2.5%, transparent), transparent 56%);
+  /* 印 shirushi — the signature rule: ember for the first 64px, then hairline */
+  --rule-signature: linear-gradient(90deg, var(--ember) 0, var(--ember) 64px, var(--line) 64px, var(--line) 100%);
+
+  /* motion — cuts, not fades. Colour may ease ≤ .2s; nothing moves. */
+  --t-fast: 0.16s;
+  --t-color: 0.2s;
+}

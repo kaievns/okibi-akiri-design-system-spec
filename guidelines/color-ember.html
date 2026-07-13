@@ -1,0 +1,29 @@
+<!-- @dsCard group="Colors" viewport="700x170" name="The ember" subtitle="One warm accent — focus & primary action, 1–2 per screen" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+.row{display:flex;align-items:center;gap:14px;}
+.chip{width:64px;height:64px;border-radius:7px;background:var(--ember);box-shadow:0 10px 30px -10px var(--ember-line);}
+.u{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.btn{font-size:13px;font-weight:600;border:0;border-radius:5px;padding:11px 15px;background:var(--ember);color:var(--ember-fg);font-family:var(--gothic);line-height:1;display:inline-flex;align-items:center;}
+.badge{font-family:var(--mono);font-size:11px;font-weight:600;background:var(--ember);color:var(--ember-fg);border-radius:999px;padding:5px 9px;line-height:1;display:inline-flex;align-items:center;}
+.sel{background:var(--ember-soft);border:1px solid var(--ember-line);border-radius:3px;padding:6px 9px;font-family:var(--mono);font-size:12px;line-height:1;display:inline-flex;align-items:center;}
+.bar{width:34px;height:2px;background:var(--ember);border-radius:2px;}
+.vals{font-family:var(--mono);font-size:10px;color:var(--n8);line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="chip"></div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div class="u"><button class="btn">Apply theme</button><span class="badge">3 ahead</span><span class="sel">resolve(scope)</span><span class="bar"></span><span class="lbl">button · badge · selection · active bar</span></div>
+    <div class="vals">--ember · oklch(0.74 0.178 38) dark · oklch(0.55 0.19 42) light — never a token, never a link</div>
+  </div>
+</div>
+</body>
+</html>

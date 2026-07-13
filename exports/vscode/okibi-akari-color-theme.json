@@ -1,0 +1,242 @@
+{
+  "name": "Okibi Akari 灯り (static fallback)",
+  "type": "light",
+  "semanticHighlighting": false,
+  "colors": {
+    "editor.background": "#f9f6f2",
+    "editor.foreground": "#13110e",
+    "sideBar.background": "#efece8",
+    "activityBar.background": "#efece8",
+    "statusBar.background": "#efece8",
+    "titleBar.activeBackground": "#efece8",
+    "panel.background": "#efece8",
+    "tab.activeBackground": "#f9f6f2",
+    "tab.inactiveBackground": "#efece8",
+    "editorGroupHeader.tabsBackground": "#efece8",
+    "editor.lineHighlightBackground": "#13110e0b",
+    "editor.selectionBackground": "#c63a0038",
+    "editorCursor.foreground": "#c63a00",
+    "editorLineNumber.foreground": "#b5b0a9",
+    "editorLineNumber.activeForeground": "#c63a00",
+    "editorIndentGuide.background1": "#d9d5d0",
+    "editorWhitespace.foreground": "#e1ddd7",
+    "focusBorder": "#c63a00",
+    "statusBar.foreground": "#8d8982",
+    "sideBar.foreground": "#6c6863",
+    "list.activeSelectionBackground": "#c63a0029",
+    "editorError.foreground": "#c71529",
+    "editorWarning.foreground": "#956000",
+    "editorInfo.foreground": "#015ba6"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "source",
+        "variable",
+        "variable.parameter",
+        "meta.embedded"
+      ],
+      "settings": {
+        "foreground": "#13110e"
+      }
+    },
+    {
+      "scope": "comment",
+      "settings": {
+        "foreground": "#8b857d",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "string",
+        "string.regexp"
+      ],
+      "settings": {
+        "foreground": "#257231"
+      }
+    },
+    {
+      "scope": "constant.numeric",
+      "settings": {
+        "foreground": "#989186"
+      }
+    },
+    {
+      "scope": [
+        "source.json constant.numeric",
+        "source.yaml constant.numeric",
+        "source.toml constant.numeric"
+      ],
+      "settings": {
+        "foreground": "#9f7661"
+      }
+    },
+    {
+      "scope": [
+        "constant.language",
+        "constant.other"
+      ],
+      "settings": {
+        "foreground": "#be222d"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "storage",
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#6b7681",
+        "fontStyle": ""
+      }
+    },
+    {
+      "scope": [
+        "keyword.control.flow",
+        "keyword.control.return",
+        "keyword.control.trycatch"
+      ],
+      "settings": {
+        "foreground": "#262f39",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": "keyword.operator",
+      "settings": {
+        "foreground": "#585e65"
+      }
+    },
+    {
+      "scope": "punctuation",
+      "settings": {
+        "foreground": "#9c9890"
+      }
+    },
+    {
+      "scope": "entity.name.function",
+      "settings": {
+        "foreground": "#005eac",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": [
+        "support.function",
+        "meta.function-call entity.name.function",
+        "variable.function"
+      ],
+      "settings": {
+        "foreground": "#005eac",
+        "fontStyle": ""
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "entity.name.class",
+        "support.type",
+        "support.class",
+        "entity.other.inherited-class"
+      ],
+      "settings": {
+        "foreground": "#52657a"
+      }
+    },
+    {
+      "scope": [
+        "variable.other.property",
+        "variable.other.member",
+        "variable.other.object.property",
+        "support.variable.property"
+      ],
+      "settings": {
+        "foreground": "#516f8e"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#005eac"
+      }
+    },
+    {
+      "scope": [
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "#516f8e"
+      }
+    },
+    {
+      "scope": [
+        "punctuation.definition.heading",
+        "punctuation.definition.bold",
+        "punctuation.definition.italic",
+        "punctuation.definition.list",
+        "punctuation.definition.quote",
+        "punctuation.definition.raw",
+        "markup.fenced_code punctuation",
+        "meta.separator.markdown"
+      ],
+      "settings": {
+        "foreground": "#b5b0a9"
+      }
+    },
+    {
+      "scope": "markup.heading",
+      "settings": {
+        "foreground": "#13110e",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": "markup.bold",
+      "settings": {
+        "foreground": "#13110e",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": "markup.italic",
+      "settings": {
+        "foreground": "#13110e",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "markup.underline.link",
+        "string.other.link",
+        "constant.other.reference.link"
+      ],
+      "settings": {
+        "foreground": "#015ba6"
+      }
+    },
+    {
+      "scope": "markup.quote",
+      "settings": {
+        "foreground": "#6c6863"
+      }
+    },
+    {
+      "scope": [
+        "markup.inline.raw",
+        "markup.raw.inline"
+      ],
+      "settings": {
+        "foreground": "#516f8e"
+      }
+    },
+    {
+      "scope": "markup.list punctuation.definition.list.begin",
+      "settings": {
+        "foreground": "#8d8982"
+      }
+    }
+  ]
+}

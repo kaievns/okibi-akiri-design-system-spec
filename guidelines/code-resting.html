@@ -1,0 +1,25 @@
+<!-- @dsCard group="Code" viewport="700x210" name="Resting register · band 1" subtitle="The canon register for all code — one blue band, receded keywords" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+.code{font-family:var(--mono);font-size:12.5px;line-height:1.9;white-space:pre;background:var(--n2);border:1px solid var(--line);border-radius:6px;padding:12px 16px;color:var(--syn-fg);}
+.k{color:var(--syn-keyword)}.c{color:var(--syn-call)}.t{color:var(--syn-type)}.s{color:var(--syn-string)}
+.n{color:var(--syn-number)}.b{color:var(--syn-builtin)}.m{color:var(--syn-member)}.o{color:var(--syn-operator)}.p{color:var(--syn-punct)}.x{color:var(--syn-comment);font-style:italic}
+.d{font-weight:700}.f{font-weight:700;color:var(--flow-fg)}
+</style>
+</head>
+<body>
+<div class="code"><span class="x">// variables foreground · calls the one strong hue · keywords recede</span>
+<span class="k">export async function</span> <span class="c d">resolve</span><span class="p">(</span>name<span class="p">:</span> <span class="t">string</span><span class="p">,</span> scale <span class="o">=</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> theme <span class="o">=</span> registry<span class="p">.</span><span class="c">get</span><span class="p">(</span>name<span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span>theme <span class="o">||</span> theme<span class="p">.</span><span class="m">dirty</span> <span class="o">===</span> <span class="b">true</span><span class="p">)</span> <span class="f">throw</span> <span class="k">new</span> <span class="t">Error</span><span class="p">(</span><span class="s">"unknown theme: "</span> <span class="o">+</span> name<span class="p">);</span>
+  <span class="f">return</span> theme<span class="p">;</span>
+<span class="p">}</span></div>
+<div class="lbl" style="margin-top:8px">definitions bold · escape keywords bold, no hue · literal numbers recede at rest (clay only in an engaged scope)</div>
+</body>
+</html>

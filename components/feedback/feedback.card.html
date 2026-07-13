@@ -1,0 +1,54 @@
+<!-- @dsCard group="Components" viewport="700x280" name="Feedback" subtitle="Chip · Badge · Notice · Progress" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+body{margin:0;padding:16px 18px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--n8);margin:0 0 9px;}
+.crow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+.crow+.lbl{margin-top:14px;}
+
+.chip2{font-family:var(--mono);font-size:11px;font-weight:500;border-radius:999px;padding:6px 11px;display:inline-flex;align-items:center;gap:6px;line-height:1;}
+.chip2.n{background:var(--n4);color:var(--n10);}
+.chip2.em{background:var(--ember-soft);color:var(--ember);border:1px solid var(--ember-line);}
+.chip2.ok{background:color-mix(in srgb,var(--ok) 16%,var(--n2));color:var(--ok);}
+.chip2.warn{background:color-mix(in srgb,var(--warn) 16%,var(--n2));color:var(--warn);}
+.chip2.err{background:color-mix(in srgb,var(--err) 16%,var(--n2));color:var(--err);}
+.chip2 .dotc{width:7px;height:7px;border-radius:50%;background:currentColor;}
+.badge{font-family:var(--mono);font-size:11px;font-weight:600;background:var(--ember);color:var(--ember-fg);border-radius:999px;padding:5px 9px;line-height:1;display:inline-flex;align-items:center;}
+.badge.n{background:var(--n5);color:var(--n10);}
+.notice{display:flex;gap:11px;align-items:flex-start;border-radius:6px;padding:11px 13px;font-size:12.5px;line-height:1.5;border:1px solid;color:var(--n10);}
+.notice b{display:block;margin-bottom:1px;color:var(--n11);font-weight:600;}
+.notice .ni{font-family:var(--mono);font-weight:700;flex:0 0 auto;}
+.notice.ok{background:color-mix(in srgb,var(--ok) 9%,var(--n2));border-color:color-mix(in srgb,var(--ok) 32%,transparent);}
+.notice.ok .ni{color:var(--ok);}
+.notice.err{background:color-mix(in srgb,var(--err) 9%,var(--n2));border-color:color-mix(in srgb,var(--err) 32%,transparent);}
+.notice.err .ni{color:var(--err);}
+.ngrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.bar{height:7px;border-radius:999px;background:var(--n4);overflow:hidden;width:180px;display:inline-block;vertical-align:middle;}
+.bar i{display:block;height:100%;width:68%;border-radius:999px;background:var(--ember);}
+
+</style>
+</head>
+<body>
+<div class="lbl">Chip · Badge</div>
+<div class="crow">
+<span class="chip2 em"><span class="dotc"></span>active</span>
+<span class="chip2 ok">passing</span>
+<span class="chip2 warn">untracked</span>
+<span class="chip2 err">3 errors</span>
+<span class="chip2 n">v0.4.0</span>
+<span class="badge">3 ahead</span>
+<span class="badge n">main</span>
+</div>
+<div class="lbl">Notice</div>
+<div class="ngrid">
+<div class="notice ok"><span class="ni">✓</span><span><b>All scopes resolved.</b> 214 token scopes mapped, no gaps.</span></div>
+<div class="notice err"><span class="ni">✕</span><span><b>Invalid hue.</b> <code>#zzz</code> is not a valid hex colour.</span></div>
+</div>
+<div class="lbl">Progress</div>
+<div class="crow"><span class="lbl" style="margin:0">build</span><span class="bar"><i></i></span><span class="chip2 n">68%</span></div>
+</body>
+</html>

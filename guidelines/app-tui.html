@@ -1,0 +1,28 @@
+<!-- @dsCard group="Code" viewport="700x330" name="TUI applications" subtitle="Chrome from the spine, box-drawing hairlines, ember only on the live element" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+.tui{background:var(--term-bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-family:var(--mono);font-size:12px;line-height:1.62;white-space:pre;color:var(--term-fg);}
+.bd{color:var(--n5);} .bd-live{color:var(--ember);}
+.ti{color:var(--n8);} .hd{color:var(--n10);font-weight:600;}
+.ok2{color:var(--ansi-2);} .er2{color:var(--ansi-1);} .wn2{color:var(--ansi-3);} .bl2{color:var(--ansi-4);} .mg2{color:var(--ansi-5);}
+.sel{background:var(--term-sel);color:var(--n11);}
+.stat{color:var(--n8);} .stat b{color:var(--ember-fg);background:var(--ember);font-weight:600;padding:0 6px;border-radius:2px;}
+</style>
+</head>
+<body>
+<div class="tui"><span class="bd-live">╭─</span><span class="hd"> 2 · files </span><span class="bd-live">──────────────╮</span> <span class="bd">╭─</span><span class="ti"> 3 · diff </span><span class="bd">─────────────────────╮</span>
+<span class="bd-live">│</span> <span class="ok2">M</span> src/theme.rs            <span class="bd-live">│</span> <span class="bd">│</span> <span class="bl2">@@ -24,6 +24,7 @@</span>                <span class="bd">│</span>
+<span class="bd-live">│</span><span class="sel"> <span class="ok2">M</span> src/render.rs ▸         </span><span class="bd-live">│</span> <span class="bd">│</span> <span class="er2">-  let mix = base.scalee(k);</span>    <span class="bd">│</span>
+<span class="bd-live">│</span> <span class="wn2">?</span> src/palette.rs          <span class="bd-live">│</span> <span class="bd">│</span> <span class="ok2">+  let mix = base.scale(k);</span>     <span class="bd">│</span>
+<span class="bd-live">│</span> <span class="ti">  docs/spec.md</span>            <span class="bd-live">│</span> <span class="bd">│</span> <span class="ok2">+  cache.insert(name, mix);</span>     <span class="bd">│</span>
+<span class="bd-live">╰────────────────────────────╯</span> <span class="bd">╰──────────────────────────────────╯</span>
+<span class="stat"> <b>NORMAL</b>  <span class="mg2">⑂ main</span> · 2 staged · <span class="er2">✕ 1</span> <span class="wn2">▲ 1</span>                    render.rs 3/4 </span></div>
+<div class="lbl" style="margin-top:9px">inactive borders n5 · active pane border + selection = the ember pair · statusline mode chip is the one solid ember</div>
+</body>
+</html>

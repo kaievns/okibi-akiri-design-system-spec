@@ -1,0 +1,29 @@
+<!-- @dsCard group="Colors" viewport="700x200" name="The six pigments" subtitle="UI meaning hues: links, states, marks — deprecated for code highlighting" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;}
+.pig{display:flex;align-items:center;gap:11px;padding:7px 0;border-bottom:1px solid color-mix(in srgb,var(--n6) 55%,transparent);}
+.pig:nth-last-child(-n+2){border-bottom:0;}
+.pig i{width:38px;height:26px;border-radius:4px;flex:0 0 auto;}
+.pig .nm{font-weight:600;font-size:12.5px;color:var(--n11);}
+.pig .use{display:block;font-weight:400;font-size:10.5px;color:var(--n9);}
+.pig .tok{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--n8);}
+</style>
+</head>
+<body>
+<div class="grid">
+<div class="pig"><i style="background:var(--call)"></i><div><span class="nm">Sora 空</span><span class="use">links · info · the blue of record</span></div><span class="tok">--call</span></div>
+<div class="pig"><i style="background:var(--str)"></i><div><span class="nm">Wakaba 若葉</span><span class="use">success · added · growth</span></div><span class="tok">--str</span></div>
+<div class="pig"><i style="background:var(--type)"></i><div><span class="nm">Kuchiba 朽葉</span><span class="use">dimmed gold · secondary marks</span></div><span class="tok">--type</span></div>
+<div class="pig"><i style="background:var(--num)"></i><div><span class="nm">Kurenai 紅</span><span class="use">builtins · emphatic data</span></div><span class="tok">--num</span></div>
+<div class="pig"><i style="background:var(--prop)"></i><div><span class="nm">Asagi 浅葱</span><span class="use">cyan marks · ANSI cyan</span></div><span class="tok">--prop</span></div>
+<div class="pig"><i style="background:var(--kw)"></i><div><span class="nm">Kikyō 桔梗</span><span class="use">violet marks · ANSI magenta</span></div><span class="tok">--kw</span></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════════════
+   Okibi 燠火 — Obsidian snippet (band-1 static fallback + markdown register)
+   Generated from exports/okibi.tokens.json v1.7 — regenerate, don't hand-edit.
+   Install: Settings → Appearance → CSS snippets folder → enable.
+   Scope: editor + code colours only (not a full workspace theme).
+   ═══════════════════════════════════════════════════════════════ */
+body.theme-dark{
+  --ok-fg:#e1e3e5;--ok-call:#6daff7;--ok-str:#8ecd92;--ok-num:#b7bfc7;
+  --ok-nume:#c9a18d;--ok-blt:#f2716c;--ok-mem:#a2bedb;--ok-typ:#a5b6c8;
+  --ok-kw:#7c8894;--ok-op:#9fa5ac;--ok-pn:#4e5358;--ok-cm:#646a70;
+  --ok-flow:#c5cbd2;--ok-ghost:#585b5f;--ok-faint:#707376;--ok-muted:#8f9296;
+  --ok-hi:#e1e3e5;--ok-link:#6daff7;--ok-tag:#998cb3;--ok-okc:#89cf8e;
+  --ok-warnwash:#e6af2b29;--ok-line:#2f3235;--ok-chip:#e1e3e517;
+}
+body.theme-light{
+  --ok-fg:#13110e;--ok-call:#005eac;--ok-str:#257231;--ok-num:#989186;
+  --ok-nume:#9f7661;--ok-blt:#be222d;--ok-mem:#516f8e;--ok-typ:#52657a;
+  --ok-kw:#6b7681;--ok-op:#585e65;--ok-pn:#9c9890;--ok-cm:#8b857d;
+  --ok-flow:#262f39;--ok-ghost:#b5b0a9;--ok-faint:#8d8982;--ok-muted:#6c6863;
+  --ok-hi:#13110e;--ok-link:#015ba6;--ok-tag:#705e91;--ok-okc:#257231;
+  --ok-warnwash:#95600029;--ok-line:#d9d5d0;--ok-chip:#13110e17;
+}
+
+/* ── markdown register: prose is content, sigils are furniture ── */
+.cm-s-obsidian .cm-formatting,
+.cm-s-obsidian .cm-formatting-header,
+.cm-s-obsidian .cm-formatting-quote,
+.cm-s-obsidian .cm-formatting-list,
+.cm-s-obsidian .cm-formatting-task,
+.cm-s-obsidian .cm-formatting-code,
+.cm-s-obsidian .cm-formatting-link,
+.cm-s-obsidian .cm-formatting-strong,
+.cm-s-obsidian .cm-formatting-em,
+.cm-s-obsidian .cm-formatting-highlight,
+.cm-s-obsidian .cm-hr{ color:var(--ok-ghost) !important; }
+
+.cm-s-obsidian .cm-header{ color:var(--ok-hi); }
+.cm-s-obsidian .cm-strong{ color:var(--ok-hi); font-weight:700; }
+.cm-s-obsidian .cm-em{ color:var(--ok-hi); }
+.cm-s-obsidian .cm-quote{ color:var(--ok-muted); }
+.cm-s-obsidian .cm-link,.cm-s-obsidian .cm-hmd-internal-link{ color:var(--ok-link); }
+.cm-s-obsidian .cm-url,.cm-s-obsidian .cm-string.cm-url{ color:var(--ok-ghost); }
+.cm-s-obsidian .cm-inline-code{ color:var(--ok-mem); background:var(--ok-chip); border-radius:2px; }
+.cm-s-obsidian .cm-hashtag,.cm-s-obsidian .cm-hashtag-begin,.cm-s-obsidian .cm-hashtag-end{ color:var(--ok-tag); }
+.cm-s-obsidian .cm-highlight,.markdown-rendered mark{ background:var(--ok-warnwash); color:var(--ok-hi); }
+.cm-s-obsidian .cm-strikethrough{ color:var(--ok-faint); }
+.markdown-source-view.mod-cm6 .task-list-item-checkbox:checked{ accent-color:var(--ok-okc); }
+.markdown-rendered .task-list-item-checkbox:checked{ accent-color:var(--ok-okc); }
+.markdown-rendered blockquote{ border-left:2px solid var(--ok-line); color:var(--ok-muted); }
+.markdown-rendered a,.markdown-rendered a.internal-link{ color:var(--ok-link); }
+.markdown-rendered code:not(pre code){ color:var(--ok-mem); background:var(--ok-chip); }
+.markdown-rendered .tag{ color:var(--ok-tag); background:transparent; border:1px solid var(--ok-line); }
+
+/* frontmatter = data format */
+.cm-s-obsidian .cm-hmd-frontmatter{ color:var(--ok-faint); }
+.cm-s-obsidian .cm-hmd-frontmatter.cm-atom{ color:var(--ok-blt); }
+.cm-s-obsidian .cm-hmd-frontmatter.cm-number{ color:var(--ok-nume); }
+.cm-s-obsidian .cm-hmd-frontmatter.cm-string{ color:var(--ok-str); }
+.cm-s-obsidian .cm-hmd-frontmatter.cm-attribute,
+.cm-s-obsidian .cm-hmd-frontmatter.cm-meta{ color:var(--ok-mem); }
+
+/* ── code: CM6 source/live-preview ── */
+.cm-s-obsidian .cm-comment,.cm-s-obsidian span.cm-comment{ color:var(--ok-cm); font-style:italic; }
+.cm-s-obsidian span.cm-string,.cm-s-obsidian span.cm-string-2{ color:var(--ok-str); }
+.cm-s-obsidian span.cm-number{ color:var(--ok-num); }
+.cm-s-obsidian span.cm-atom{ color:var(--ok-blt); }
+.cm-s-obsidian span.cm-keyword{ color:var(--ok-kw); font-weight:400; }
+.cm-s-obsidian span.cm-def{ color:var(--ok-call); font-weight:700; }
+.cm-s-obsidian span.cm-variable{ color:var(--ok-fg); }
+.cm-s-obsidian span.cm-variable-2,.cm-s-obsidian span.cm-variable-3{ color:var(--ok-fg); }
+.cm-s-obsidian span.cm-property{ color:var(--ok-mem); }
+.cm-s-obsidian span.cm-attribute{ color:var(--ok-mem); }
+.cm-s-obsidian span.cm-type{ color:var(--ok-typ); }
+.cm-s-obsidian span.cm-builtin{ color:var(--ok-blt); }
+.cm-s-obsidian span.cm-tag{ color:var(--ok-call); }
+.cm-s-obsidian span.cm-operator{ color:var(--ok-op); }
+.cm-s-obsidian span.cm-punctuation,.cm-s-obsidian span.cm-bracket{ color:var(--ok-pn); }
+.cm-s-obsidian span.cm-meta{ color:var(--ok-faint); }
+.cm-s-obsidian .cm-hmd-codeblock{ color:var(--ok-fg); }
+
+/* ── code: reading view (Prism) ── */
+.markdown-rendered pre{ background:transparent; border:1px solid var(--ok-line); border-radius:6px; }
+.markdown-rendered .token{ color:inherit; background:transparent; font-style:normal; }
+.markdown-rendered .token.comment{ color:var(--ok-cm); font-style:italic; }
+.markdown-rendered .token.string,.markdown-rendered .token.char,.markdown-rendered .token.regex,.markdown-rendered .token.attr-value{ color:var(--ok-str); }
+.markdown-rendered .token.number{ color:var(--ok-num); }
+.markdown-rendered .language-json .token.number,.markdown-rendered .language-yaml .token.number,.markdown-rendered .language-toml .token.number{ color:var(--ok-nume); }
+.markdown-rendered .token.boolean,.markdown-rendered .token.constant,.markdown-rendered .token.null{ color:var(--ok-blt); }
+.markdown-rendered .token.keyword,.markdown-rendered .token.atrule{ color:var(--ok-kw); }
+.markdown-rendered .token.function{ color:var(--ok-call); }
+.markdown-rendered .token.class-name{ color:var(--ok-typ); }
+.markdown-rendered .token.property,.markdown-rendered .token.attr-name{ color:var(--ok-mem); }
+.markdown-rendered .token.operator{ color:var(--ok-op); }
+.markdown-rendered .token.punctuation{ color:var(--ok-pn); }
+.markdown-rendered .token.tag,.markdown-rendered .token.selector{ color:var(--ok-call); }

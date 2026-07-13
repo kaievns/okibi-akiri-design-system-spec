@@ -1,0 +1,209 @@
+<!-- @dsCard group="Editor" viewport="1240x820" name="Workbench" subtitle="The dynamic system live: Survey → Focus → Edit over one file" -->
+<!-- @startingPoint section="Applications" subtitle="Okibi editor workbench" viewport="1240x820" -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi 燠火 — Workbench</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:26px;
+    background-color:var(--n0);background-image:var(--glow-ember);background-attachment:fixed;}
+
+  .vs{width:100%;max-width:1200px;height:min(88vh,780px);display:flex;flex-direction:column;
+    border:1px solid var(--line);border-radius:7px;overflow:hidden;background:var(--n2);box-shadow:var(--shadow-window);}
+  .vs-title{position:relative;height:40px;flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:0 13px;
+    background:var(--n1);border-bottom:1px solid var(--line);}
+  .tl{display:flex;gap:8px;} .tl i{width:12px;height:12px;border-radius:50%;}
+  .tl .r{background:#ec6a5e;} .tl .y{background:#f4bf4f;} .tl .g{background:#61c554;}
+  .vs-title .ttl{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--n8);}
+  .vs-title .ttl b{color:var(--n10);font-weight:500;}
+  .seg{margin-left:auto;display:flex;gap:2px;background:var(--n2);border:1px solid var(--line);border-radius:4px;padding:2px;}
+  .seg button{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--n8);background:transparent;border:0;
+    cursor:pointer;padding:6px 11px;border-radius:3px;display:flex;align-items:center;gap:6px;transition:.14s;line-height:1;}
+  .seg button:hover{color:var(--n11);} .seg button .k{font-family:var(--mincho);}
+  .seg button[aria-pressed="true"]{background:var(--ember);color:var(--ember-fg);}
+
+  .vs-main{flex:1;display:flex;min-height:0;}
+  .vs-act{width:48px;flex:0 0 auto;background:var(--n1);border-right:1px solid var(--line);
+    display:flex;flex-direction:column;align-items:center;padding:9px 0;gap:3px;color:var(--n7);font-size:18px;}
+  .vs-act .ai{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:4px;position:relative;cursor:pointer;}
+  .vs-act .ai:hover{color:var(--n10);} .vs-act .ai.active{color:var(--n11);}
+  .vs-act .ai.active::before{content:"";position:absolute;left:-9px;top:8px;bottom:8px;width:2px;background:var(--ember);border-radius:2px;}
+  .vs-act .grow{flex:1;}
+
+  .vs-side{width:216px;flex:0 0 auto;background:var(--n1);border-right:1px solid var(--line);overflow-y:auto;padding-bottom:10px;}
+  .side-h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--n7);padding:13px 14px 4px;}
+  .proj{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--n10);padding:5px 12px;letter-spacing:.05em;}
+  .tree{font-family:var(--mono);font-size:12.5px;}
+  .trow{display:flex;align-items:center;gap:7px;padding:3px 12px 3px 14px;color:var(--n8);cursor:pointer;white-space:nowrap;}
+  .trow:hover{background:color-mix(in srgb,var(--n11) 5%,transparent);color:var(--n10);}
+  .trow.active{background:var(--ember-soft);color:var(--n11);box-shadow:inset 2px 0 0 var(--ember);}
+  .trow .ic{font-size:8.5px;font-weight:700;width:15px;text-align:center;flex:0 0 auto;}
+  .trow.fold{color:var(--n10);font-weight:500;padding-left:12px;}
+  .trow .gi{margin-left:auto;font-size:10px;font-weight:700;}
+  .trow .gi.m{color:var(--ok);} .trow .gi.u{color:var(--warn);}
+  .indent{padding-left:26px;}
+
+  .vs-ed{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--n2);}
+  .tabs{height:38px;flex:0 0 auto;display:flex;background:var(--n1);border-bottom:1px solid var(--line);}
+  .tab{display:flex;align-items:center;gap:8px;padding:0 14px;font-family:var(--mono);font-size:11.5px;color:var(--n7);
+    border-right:1px solid var(--line);cursor:pointer;white-space:nowrap;}
+  .tab:hover{color:var(--n10);} .tab.active{background:var(--n2);color:var(--n11);box-shadow:inset 0 2px 0 var(--ember);}
+  .tab .ic{font-size:8.5px;font-weight:700;} .tab .x{margin-left:4px;color:var(--n7);font-size:13px;}
+  .crumbs{height:28px;flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:0 16px;font-family:var(--mono);
+    font-size:11px;color:var(--n7);background:var(--n2);border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent);}
+  .crumbs b{color:var(--n8);font-weight:500;} .crumbs .sep{opacity:.5;} .crumbs .fn2{color:var(--syn-call);}
+
+  .ed-body{flex:1;min-height:0;display:flex;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.85;}
+  .gutter{flex:0 0 auto;padding:14px 0;text-align:right;color:var(--n7);user-select:none;}
+  .gutter .g{padding:0 12px 0 16px;} .gutter .g.cur{color:var(--ember);font-weight:600;}
+  .code{flex:1;padding:14px 0;min-width:0;}
+  .ln{display:block;padding:0 18px 0 14px;white-space:pre;position:relative;color:var(--syn-fg);}
+  .ln.cur{background:color-mix(in srgb,var(--n11) 4.5%,transparent);}
+  .caret{display:inline-block;width:2px;height:14px;background:var(--ember);vertical-align:text-bottom;margin:0 -1px;animation:blink 1.15s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .scope-flag{position:absolute;right:10px;top:2px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ember);background:var(--ember-soft);border:1px solid var(--ember-line);border-radius:3px;padding:3px 7px;line-height:1;display:none;}
+
+  /* band 1 — always on (scoped to the code body) */
+  .code .k{color:var(--syn-keyword);} .code .c{color:var(--syn-call);} .code .t{color:var(--syn-type);} .code .s{color:var(--syn-string);}
+  .code .n{color:var(--syn-number);} .code .b{color:var(--syn-builtin);} .code .m{color:var(--syn-member);} .code .o{color:var(--syn-operator);}
+  .code .p{color:var(--syn-punct);} .code .x{color:var(--syn-comment);font-style:italic;}
+  .code .def{font-weight:700;} .code .flow{font-weight:700;color:var(--flow-fg);}
+
+  .m-focus .fb .n,.m-edit .fb .n{color:var(--syn-number-engaged);}
+
+  /* band 2 — identity, engaged phases only */
+  .m-focus .id6,.m-edit .id6{color:var(--id-6);}
+  .m-focus .id7,.m-edit .id7{color:var(--id-7);}
+  .m-focus .idg1,.m-edit .idg1{color:var(--idg-1);font-weight:600;}
+  .m-focus .idg3,.m-edit .idg3{color:var(--idg-3);font-weight:600;}
+  .m-focus .idg4,.m-edit .idg4{color:var(--idg-4);font-weight:600;}
+  .m-focus .idg5,.m-edit .idg5{color:var(--idg-5);font-weight:600;}
+  .m-focus .ln.fb,.m-edit .ln.fb{background:color-mix(in srgb,var(--n11) 2%,transparent);box-shadow:inset 2px 0 0 var(--ember-line);}
+  .m-focus .scope-flag,.m-edit .scope-flag{display:inline-block;}
+
+  /* band 3 — risk, edit phase, focused scope only */
+  .m-edit .fb .d-ow{text-decoration:underline dashed var(--risk-escape);text-decoration-thickness:1.5px;text-underline-offset:3px;}
+  .m-edit .fb .d-err{text-decoration:underline wavy var(--err);text-decoration-thickness:1.5px;text-underline-offset:3px;}
+  .m-edit .fb .d-warn{text-decoration:underline dotted var(--warn);text-decoration-thickness:1.5px;text-underline-offset:3px;}
+  .m-edit .fb .d-async{color:var(--risk-async);}
+  .diagmsg{display:none;color:var(--err);} .diagmsg.w{color:var(--warn);}
+  .m-edit .fb .diagmsg{display:inline;}
+
+  .vs-status{height:24px;flex:0 0 auto;display:flex;align-items:center;background:var(--n1);border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:11px;color:var(--n8);}
+  .st{padding:0 10px;display:flex;align-items:center;gap:5px;height:100%;}
+  .st.ember{color:var(--ember);} .st.errc{color:var(--err);} .st.warnc{color:var(--warn);}
+  .vs-status .grow{flex:1;}
+  #mode-lab{text-transform:capitalize;}
+</style>
+</head>
+<body>
+<div class="vs m-focus" id="vs" data-screen-label="Workbench">
+  <div class="vs-title">
+    <div class="tl"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+    <div class="ttl">theme.ts — <b>forge</b></div>
+    <div class="seg" id="switch">
+      <button type="button" data-view="survey" aria-pressed="false"><span class="k">構</span>Survey</button>
+      <button type="button" data-view="focus" aria-pressed="true"><span class="k">流</span>Focus</button>
+      <button type="button" data-view="edit" aria-pressed="false"><span class="k">異</span>Edit</button>
+    </div>
+  </div>
+  <div class="vs-main">
+    <div class="vs-act">
+      <div class="ai active">▤</div><div class="ai">⌕</div><div class="ai">⑂</div><div class="ai">◈</div><div class="ai">⬡</div>
+      <div class="grow"></div><div class="ai" id="themetog" title="Toggle light / dark">◐</div><div class="ai">⚙</div>
+    </div>
+    <div class="vs-side" data-screen-label="Explorer">
+      <div class="side-h">Explorer</div>
+      <div class="proj">▾ FORGE</div>
+      <div class="tree">
+        <div class="trow fold">▾ src</div>
+        <div class="trow indent"><span class="ic" style="color:var(--syn-call)">TS</span>color.ts</div>
+        <div class="trow indent active"><span class="ic" style="color:var(--syn-call)">TS</span>theme.ts<span class="gi m">M</span></div>
+        <div class="trow indent"><span class="ic" style="color:var(--syn-call)">TS</span>types.ts</div>
+        <div class="trow indent"><span class="ic" style="color:var(--syn-call)">TS</span>render.ts<span class="gi m">M</span></div>
+        <div class="trow indent"><span class="ic" style="color:var(--n7)">TS</span>palette.ts<span class="gi u">U</span></div>
+        <div class="trow fold">▸ examples</div>
+        <div class="trow fold">▸ test</div>
+        <div class="trow"><span class="ic" style="color:var(--syn-number)">{}</span>tsconfig.json</div>
+        <div class="trow"><span class="ic" style="color:var(--syn-string)">MD</span>README.md</div>
+      </div>
+    </div>
+    <div class="vs-ed">
+      <div class="tabs">
+        <div class="tab active"><span class="ic" style="color:var(--syn-call)">TS</span>theme.ts<span class="x">×</span></div>
+        <div class="tab"><span class="ic" style="color:var(--syn-call)">TS</span>color.ts<span class="x">×</span></div>
+        <div class="tab"><span class="ic" style="color:var(--syn-call)">TS</span>types.ts<span class="x">×</span></div>
+      </div>
+      <div class="crumbs"><b>forge</b><span class="sep">›</span><b>src</b><span class="sep">›</span><span class="fn2">theme.ts</span><span class="sep">›</span><b>resolve</b></div>
+      <div class="ed-body" data-screen-label="Editor">
+        <div class="gutter"><div class="g">1</div><div class="g">2</div><div class="g">3</div><div class="g">4</div><div class="g">5</div><div class="g">6</div><div class="g">7</div><div class="g">8</div><div class="g">9</div><div class="g">10</div><div class="g">11</div><div class="g">12</div><div class="g">13</div><div class="g">14</div><div class="g">15</div><div class="g">16</div><div class="g">17</div><div class="g">18</div><div class="g">19</div><div class="g">20</div><div class="g">21</div><div class="g">22</div><div class="g">23</div><div class="g">24</div><div class="g cur">25</div><div class="g">26</div><div class="g">27</div><div class="g">28</div></div>
+        <div class="code">
+<span class="ln"><span class="x">// forge/theme — resolve, cache and blend palette colours.</span></span>
+<span class="ln"><span class="k">const</span> <span class="idg1">registry</span> <span class="o">=</span> <span class="k">new</span> <span class="t">Map</span><span class="o">&lt;</span><span class="t">string</span><span class="p">,</span> <span class="t">Theme</span><span class="o">&gt;</span><span class="p">();</span></span>
+<span class="ln"><span class="k">const</span> <span class="idg3">FALLBACK</span> <span class="o">=</span> <span class="s">"#ff7a45"</span><span class="p">;</span></span>
+<span class="ln"><span class="k">let</span> <span class="idg4">activeName</span> <span class="o">=</span> <span class="s">"okibi"</span><span class="p">;</span></span>
+<span class="ln"><span class="k">let</span> <span class="idg5">hits</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span></span>
+<span class="ln"> </span>
+<span class="ln"><span class="x">// ── the focused function: resolve a theme by name ──</span></span>
+<span class="ln fb"><span class="k">export async function</span> <span class="c def">resolve</span><span class="p">(</span><span class="id6">name</span><span class="p">:</span> <span class="t">string</span><span class="p">,</span> scale <span class="o">=</span> <span class="n">1</span><span class="p">):</span> <span class="t">Promise</span><span class="o">&lt;</span><span class="t">Theme</span><span class="o">&gt;</span> <span class="p">{</span><span class="scope-flag">focused scope</span></span>
+<span class="ln fb">  <span class="k">const</span> <span class="d-warn">legacy</span> <span class="o">=</span> <span class="idg1">registry</span><span class="p">.</span><span class="m">size</span><span class="p">;</span>  <span class="diagmsg w">▲ `legacy` is never read</span></span>
+<span class="ln fb">  <span class="k">let</span> <span class="id7">theme</span> <span class="o">=</span> <span class="idg1">registry</span><span class="p">.</span><span class="c">get</span><span class="p">(</span><span class="id6">name</span><span class="p">);</span></span>
+<span class="ln fb">  <span class="k">if</span> <span class="p">(</span><span class="id7">theme</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="ln fb">    <span class="idg5 d-ow">hits</span> <span class="o">+=</span> <span class="n">1</span><span class="p">;</span></span>
+<span class="ln fb">    <span class="flow">return</span> <span class="id7">theme</span><span class="p">;</span></span>
+<span class="ln fb">  <span class="p">}</span></span>
+<span class="ln fb">  <span class="k">const</span> spec <span class="o">=</span> <span class="flow d-async">await</span> <span class="c">load</span><span class="p">(</span><span class="id6">name</span><span class="p">);</span></span>
+<span class="ln fb">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span>spec<span class="p">)</span> <span class="p">{</span></span>
+<span class="ln fb">    <span class="idg4 d-ow">activeName</span> <span class="o">=</span> <span class="idg3">FALLBACK</span><span class="p">;</span></span>
+<span class="ln fb">    <span class="flow">throw</span> <span class="k">new</span> <span class="t">Error</span><span class="p">(</span><span class="s">"unknown theme: "</span> <span class="o">+</span> <span class="id6">name</span><span class="p">);</span></span>
+<span class="ln fb">  <span class="p">}</span></span>
+<span class="ln fb">  <span class="k">const</span> slots <span class="o">=</span> <span class="k">new</span> <span class="t">Map</span><span class="o">&lt;</span><span class="t">Hue</span><span class="p">,</span> <span class="t">Color</span><span class="o">&gt;</span><span class="p">();</span></span>
+<span class="ln fb">  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> key <span class="k">of</span> <span class="t">Object</span><span class="p">.</span><span class="c">keys</span><span class="p">(</span>spec<span class="p">.</span><span class="m">hues</span><span class="p">))</span> <span class="p">{</span></span>
+<span class="ln fb">    slots<span class="p">.</span><span class="c">set</span><span class="p">(</span>key <span class="k">as</span> <span class="t">Hue</span><span class="p">,</span> <span class="c">parse</span><span class="p">(</span>spec<span class="p">.</span><span class="m">hues</span><span class="p">[</span>key<span class="p">]).</span><span class="c d-err">scalee</span><span class="p">(</span>scale<span class="p">));</span>  <span class="diagmsg">✕ no method `scalee` — did you mean `scale`?</span></span>
+<span class="ln fb">  <span class="p">}</span></span>
+<span class="ln fb">  <span class="id7">theme</span> <span class="o">=</span> <span class="k">new</span> <span class="t">Theme</span><span class="p">(</span>spec<span class="p">.</span><span class="m">name</span><span class="p">,</span> slots<span class="p">);</span></span>
+<span class="ln fb cur">  <span class="idg1 d-ow">registry</span><span class="p">.</span><span class="c">set</span><span class="p">(</span><span class="id6">name</span><span class="p">,</span> <span class="id7">theme</span><span class="p">);</span><span class="caret"></span></span>
+<span class="ln fb">  <span class="idg4 d-ow">activeName</span> <span class="o">=</span> spec<span class="p">.</span><span class="m">name</span><span class="p">;</span></span>
+<span class="ln fb">  <span class="flow">return</span> <span class="id7">theme</span><span class="p">;</span></span>
+<span class="ln fb"><span class="p">}</span></span>
+        </div>
+      </div>
+      <div class="vs-status" data-screen-label="Status bar">
+        <span class="st ember">⑂ main</span>
+        <span class="st errc">✕ 1</span><span class="st warnc">▲ 1</span>
+        <span class="grow"></span>
+        <span class="st" id="mode-lab">流 focus</span>
+        <span class="st">Ln 25, Col 5</span><span class="st">UTF-8</span><span class="st">TypeScript</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var vs=document.getElementById('vs');
+  var btns=document.querySelectorAll('#switch button');
+  var labels={survey:'構 survey',focus:'流 focus',edit:'異 edit'};
+  function setView(v){
+    vs.className='vs m-'+v;
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===v?'true':'false');});
+    document.getElementById('mode-lab').textContent=labels[v];
+    try{localStorage.setItem('okibi-kit-view',v);}catch(e){}
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view);});});
+  var saved;try{saved=localStorage.getItem('okibi-kit-view');}catch(e){}
+  setView(labels[saved]?saved:'focus');
+
+  var tog=document.getElementById('themetog');
+  function applyTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('okibi-theme',t);}catch(e){}}
+  tog.addEventListener('click',function(){var cur=document.documentElement.getAttribute('data-theme');applyTheme(cur==='light'?'dark':'light');});
+  var st;try{st=localStorage.getItem('okibi-theme');}catch(e){}applyTheme(st==='light'?'light':'dark');
+})();
+</script>
+</body>
+</html>

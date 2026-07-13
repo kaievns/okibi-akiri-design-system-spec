@@ -1,0 +1,22 @@
+<!-- @dsCard group="Code" viewport="700x210" name="Diagnostic grammar" subtitle="Style carries severity; colour only reinforces" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+.code{font-family:var(--mono);font-size:12.5px;line-height:2.1;white-space:pre;background:var(--n2);border:1px solid var(--line);border-radius:6px;padding:10px 16px;color:var(--n11);}
+.msg{color:var(--n8);}
+.m-e{color:var(--err)}.m-w{color:var(--warn)}.m-i{color:var(--info)}.m-h{color:var(--n8)}.m-s{color:var(--spell)}
+</style>
+</head>
+<body>
+<div class="code"><span class="m-e">✕</span>  node.<span class="u-error">embre</span>;        <span class="msg m-e">unknown field — wavy</span>
+<span class="m-w">▲</span>  let <span class="u-warning">unused</span> = load();  <span class="msg m-w">warning — dotted</span>
+<span class="m-h">•</span>  mix += <span class="u-escape">PALETTE</span>;      <span class="msg" style="color:var(--risk-escape)">escaping write — dashed</span>
+<span class="m-s">a</span>  // the <span class="u-spell">vermillion</span>     <span class="msg m-s">spelling — dotted teal</span></div>
+<div class="lbl" style="margin-top:8px">maps 1:1 to terminal undercurl · underdashed · underdotted — works in black &amp; white</div>
+</body>
+</html>

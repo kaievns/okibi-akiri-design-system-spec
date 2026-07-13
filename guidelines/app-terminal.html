@@ -1,0 +1,32 @@
+<!-- @dsCard group="Code" viewport="700x300" name="Terminal · ANSI-16" subtitle="Same policy in 16 slots — cursor is the ember, brights never neon" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+.term{background:var(--term-bg);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-family:var(--mono);font-size:12.5px;line-height:1.8;white-space:pre;}
+.p1{color:var(--ansi-4)}.p2{color:var(--ansi-2)}.p3{color:var(--ansi-3)}.p4{color:var(--ansi-1)}.p5{color:var(--ansi-5)}.p6{color:var(--ansi-6)}
+.dim{color:var(--ansi-8)}.fg{color:var(--term-fg)}.hi{color:var(--ansi-15)}
+.cur{display:inline-block;width:7px;height:14px;background:var(--term-cursor);vertical-align:text-bottom;}
+.sw{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-top:10px;}
+.sw i{height:20px;border-radius:3px;border:1px solid color-mix(in srgb,var(--n11) 10%,transparent);position:relative;}
+.sw i::after{content:attr(data-n);position:absolute;left:5px;top:2px;font-family:var(--mono);font-size:8.5px;color:var(--n8);}
+</style>
+</head>
+<body>
+<div class="term"><span class="p1">forge</span> <span class="dim">on</span> <span class="p5">⑂ main</span> <span class="p3">[!?]</span> <span class="dim">via</span> <span class="p6">rust v1.79</span>
+<span class="p2">❯</span> <span class="fg">cargo test</span> <span class="dim">--quiet</span>
+<span class="dim">   Compiling forge v0.4.0</span>
+<span class="fg">running 12 tests</span> <span class="dim">…</span> <span class="p2">ok 11</span> <span class="dim">·</span> <span class="p4">FAILED 1</span> <span class="dim">·</span> <span class="p3">ignored 0</span>
+<span class="p4">error[E0599]</span><span class="fg">: no method 'scalee'</span> <span class="dim">→ src/theme.rs:25</span>
+<span class="p2">❯</span> <span class="cur"></span></div>
+<div class="sw">
+<i data-n="0" style="background:var(--ansi-0)"></i><i data-n="1" style="background:var(--ansi-1)"></i><i data-n="2" style="background:var(--ansi-2)"></i><i data-n="3" style="background:var(--ansi-3)"></i><i data-n="4" style="background:var(--ansi-4)"></i><i data-n="5" style="background:var(--ansi-5)"></i><i data-n="6" style="background:var(--ansi-6)"></i><i data-n="7" style="background:var(--ansi-7)"></i>
+<i data-n="8" style="background:var(--ansi-8)"></i><i data-n="9" style="background:var(--ansi-9)"></i><i data-n="10" style="background:var(--ansi-10)"></i><i data-n="11" style="background:var(--ansi-11)"></i><i data-n="12" style="background:var(--ansi-12)"></i><i data-n="13" style="background:var(--ansi-13)"></i><i data-n="14" style="background:var(--ansi-14)"></i><i data-n="15" style="background:var(--ansi-15)"></i>
+</div>
+<div class="lbl" style="margin-top:8px">tokens/terminal.css · red→ake · green→wakaba · yellow→yamabuki · blue→sora · magenta→kikyō · cyan→asagi</div>
+</body>
+</html>

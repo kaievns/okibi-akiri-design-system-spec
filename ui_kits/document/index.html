@@ -1,0 +1,160 @@
+<!-- @dsCard group="Document" viewport="1180x780" name="Spec document" subtitle="The Okibi document grammar: hero, title-cards, callouts, do/don't" -->
+<!-- @startingPoint section="Documents" subtitle="Okibi spec-document template" viewport="1180x780" -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi 燠火 — Document template</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body{font-size:15.5px;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 32px 120px;}
+
+  .themeswitch{position:fixed;top:18px;right:20px;z-index:80;display:flex;background:color-mix(in srgb,var(--n4) 90%,transparent);
+    border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;backdrop-filter:blur(8px);box-shadow:var(--shadow-float);}
+  .themeswitch button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--n8);background:transparent;border:0;cursor:pointer;padding:8px 13px;border-radius:999px;display:flex;align-items:center;gap:6px;transition:.2s;line-height:1;}
+  .themeswitch button[aria-pressed="true"]{color:var(--ember-fg);background:var(--ember);}
+
+  header.top{padding:104px 0 56px;position:relative;}
+  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule-signature);}
+  .hero{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;}
+  .hero-mark{display:flex;align-items:flex-start;gap:18px;}
+  .hero-kanji{font-family:var(--mincho);font-weight:800;font-size:124px;line-height:.82;color:var(--n11);
+    writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.04em;
+    text-shadow:0 0 60px color-mix(in srgb,var(--ember) 22%,transparent);}
+  .seal{align-self:flex-start;margin-top:8px;width:60px;height:60px;border-radius:6px;flex:0 0 auto;
+    background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;
+    font-family:var(--mincho);font-weight:700;font-size:32px;box-shadow:0 10px 30px -10px var(--ember-line);transform:rotate(-3deg);}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  .hero-romaji{font-family:var(--mincho);font-weight:700;font-size:50px;line-height:1.02;color:var(--n11);margin-top:14px;}
+  .hero-read{font-family:var(--mincho);font-size:18px;color:var(--n9);margin-top:12px;letter-spacing:.06em;}
+  .hero-read b{color:var(--ember);font-weight:600;}
+  .top .sub{margin-top:22px;font-size:16.5px;max-width:620px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--n9);border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:var(--n2);line-height:1;display:inline-block;}
+  .meta b{color:var(--n11);}
+
+  section{padding:78px 0 0;}
+  .s-head{display:flex;align-items:stretch;gap:22px;margin-bottom:28px;}
+  .s-kanji{position:relative;font-family:var(--mincho);font-weight:800;font-size:54px;line-height:1;color:var(--n11);padding-left:20px;display:flex;align-items:center;}
+  .s-kanji::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:2px;background:var(--ember);}
+  .s-titles{display:flex;flex-direction:column;justify-content:center;gap:5px;}
+  .s-no{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;color:var(--ember);text-transform:uppercase;}
+  .s-titles h2{font-family:var(--mincho);font-weight:700;font-size:28px;margin:0;color:var(--n11);}
+  .s-yomi{font-family:var(--mincho);font-size:13.5px;color:var(--n8);letter-spacing:.14em;}
+  .lede{font-size:17.5px;line-height:1.6;color:var(--n10);max-width:800px;margin-bottom:26px;}
+  .lede b{color:var(--n11);}
+  .body{max-width:820px;}
+  .body p+p{margin-top:14px;}
+  h3{font-family:var(--mincho);font-size:19px;font-weight:700;color:var(--n11);margin:34px 0 12px;}
+
+  .callout{border:1px solid var(--ember-line);background:var(--ember-soft);border-radius:7px;padding:18px 20px;margin-top:22px;display:flex;gap:14px;}
+  .callout .ci{font-family:var(--mincho);font-size:22px;color:var(--ember);line-height:1;flex:0 0 auto;}
+  .callout p{font-size:14px;line-height:1.55;}
+
+  .convs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
+  .cv{border:1px solid var(--line);border-radius:7px;padding:20px 22px;background:var(--n2);position:relative;}
+  .cv .cvn{position:absolute;top:16px;right:20px;font-family:var(--mono);font-size:11px;color:var(--n7);}
+  .cv .cvk{font-family:var(--mincho);font-size:26px;color:var(--ember);line-height:1;}
+  .cv h4{font-family:var(--mincho);font-size:17px;font-weight:700;color:var(--n11);margin:11px 0 7px;}
+  .cv p{font-size:13.5px;line-height:1.5;}
+
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
+  .rule{border:1px solid var(--line);border-radius:7px;padding:18px 20px;background:var(--n2);}
+  .rule h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+  .rule.do h4{color:var(--ok);} .rule.dont h4{color:var(--err);}
+  .rule ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .rule li{font-size:13.5px;color:var(--n10);padding-left:18px;position:relative;line-height:1.45;}
+  .rule.do li::before{content:"+";position:absolute;left:0;color:var(--ok);font-family:var(--mono);}
+  .rule.dont li::before{content:"\2013";position:absolute;left:0;color:var(--err);font-family:var(--mono);}
+
+  footer{margin-top:84px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer .fl{font-family:var(--mincho);font-size:15px;color:var(--n9);}
+  footer .fr{font-family:var(--mono);font-size:11px;color:var(--n8);}
+
+  @media (max-width:860px){ .convs,.rules{grid-template-columns:1fr;} .hero{grid-template-columns:1fr;gap:28px;} .hero-kanji{font-size:90px;} }
+</style>
+</head>
+<body class="okibi-ground">
+
+<div class="themeswitch" role="group" aria-label="Color mode">
+  <button type="button" data-set="dark" aria-pressed="true"><span>◐</span>Okibi</button>
+  <button type="button" data-set="light" aria-pressed="false"><span>◑</span>Akari</button>
+</div>
+
+<div class="wrap">
+
+  <header class="top" data-screen-label="Hero">
+    <div class="hero">
+      <div class="hero-mark">
+        <span class="hero-kanji">燠火</span>
+        <span class="seal" title="hanko">燠</span>
+      </div>
+      <div class="hero-meta">
+        <div class="kicker">The document grammar</div>
+        <div class="hero-romaji">One spine,<br>one ember</div>
+        <div class="hero-read">燠火 — okibi · <b>banked embers</b>, the coal that keeps the fire</div>
+        <p class="sub">This page is the template for every Okibi document: the vertical-kanji hero and seal, the signature rule, kanji title-cards, prose at measure, the callout that closes a section, and the do/don't pair. Swap the words; keep the bones.</p>
+        <div class="meta-row">
+          <span class="meta">Status · <b>template</b></span>
+          <span class="meta">Ground · <b>Okibi / Akari</b></span>
+          <span class="meta">Source · <b>Theme JP clear v2</b></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section data-screen-label="Section pattern">
+    <div class="s-head"><div class="s-kanji">型</div><div class="s-titles"><span class="s-no">01 · kata</span><h2>The section pattern</h2><span class="s-yomi">かた · the form</span></div></div>
+    <div class="body">
+      <p class="lede">Every section opens the same way: a <b>title-card</b> — kanji with the ember bar, a mono number-kicker, a mincho title, the reading — then a lede at 17.5px that says the one thing the section is for.</p>
+      <p>Body prose runs at 15.5/1.64 on the secondary tone, with <b>bold</b> reserved for the load-bearing phrase and <code>code</code> spans for identifiers. Keep paragraphs at measure (820px); let whitespace, not boxes, do the separating.</p>
+    </div>
+    <div class="callout"><span class="ci">型</span><p><b>The callout closes the section.</b> One kanji as the mark, ember-soft well, and the single claim the reader must leave with — never more than one callout per section.</p></div>
+  </section>
+
+  <section data-screen-label="Card grid">
+    <div class="s-head"><div class="s-kanji">信</div><div class="s-titles"><span class="s-no">02 · shin</span><h2>Conviction cards</h2><span class="s-yomi">しん · what we hold settled</span></div></div>
+    <p class="lede">Parallel claims sit in a two-column card grid: kanji keyword in ember, mincho heading, three lines of body. The corner number is a quiet index, not a rank.</p>
+    <div class="convs">
+      <div class="cv"><span class="cvn">01</span><div class="cvk">budget</div><h4>Conserve salience</h4><p>Total emphasis is fixed. Default everything to the ground; under ~15% of any view carries colour at rest.</p></div>
+      <div class="cv"><span class="cvn">02</span><div class="cvk">明</div><h4>Luminance leads</h4><p>Hierarchy rides lightness and weight. Hue is rationed to a few nominal categories, kept muted.</p></div>
+      <div class="cv"><span class="cvn">03</span><div class="cvk">燠</div><h4>One ember, kept sacred</h4><p>The single warm accent marks focus and action only — once or twice per screen, never decoration.</p></div>
+      <div class="cv"><span class="cvn">04</span><div class="cvk">静</div><h4>Calm over clever</h4><p>Near-monochrome, low saturation, muted ground. The floor cost of looking must stay low.</p></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Do/don't">
+    <div class="s-head"><div class="s-kanji">戒</div><div class="s-titles"><span class="s-no">03 · imashime</span><h2>The do / don't pair</h2><span class="s-yomi">いましめ · discipline</span></div></div>
+    <p class="lede">Policy sections end in a paired rule card — ok-green pluses against ake-red dashes, both carried by the glyph as much as the colour.</p>
+    <div class="rules">
+      <div class="rule do"><h4>◇ a document must</h4><ul>
+        <li>Open with the kicker, close the header with the <b>signature rule</b>.</li>
+        <li>Keep prose at measure; use middots for metadata: <b>01 · kata</b>.</li>
+        <li>Set names as kanji + romaji + meaning on first use.</li>
+      </ul></div>
+      <div class="rule dont"><h4>◇ it must not</h4><ul>
+        <li>Spend the ember on links, bullets, or decoration.</li>
+        <li>Use more than one callout per section, or two grounds per page.</li>
+        <li>Animate anything. Transitions are cuts.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="fl">燠火 · 一つの背骨、一つの燠</span>
+    <span class="fr">OKIBI DESIGN SYSTEM · DOCUMENT TEMPLATE</span>
+  </footer>
+</div>
+
+<script>
+(function(){var root=document.documentElement;var btns=document.querySelectorAll('.themeswitch button');
+  function apply(mode){root.setAttribute('data-theme',mode);btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===mode?'true':'false');});try{localStorage.setItem('okibi-theme',mode);}catch(e){}}
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.set);});});
+  var saved;try{saved=localStorage.getItem('okibi-theme');}catch(e){}apply(saved==='light'?'light':'dark');
+})();
+</script>
+</body>
+</html>

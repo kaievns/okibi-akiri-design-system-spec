@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi 燠火 — Code</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{font-size:15.5px;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 32px;}
+  .topnav{display:flex;align-items:center;gap:4px;padding:20px 0;flex-wrap:wrap;}
+  a.home{display:flex;align-items:center;gap:10px;margin-right:auto;}
+  a.home:hover{text-decoration:none;}
+  .topnav .seal{width:32px;height:32px;border-radius:4px;background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-weight:700;font-size:17px;transform:rotate(-3deg);}
+  .topnav .nm{font-family:var(--mincho);font-weight:700;font-size:15px;color:var(--n11);}
+  .topnav a.lnk{font-family:var(--mono);font-size:11.5px;color:var(--n9);padding:8px 11px;border-radius:4px;line-height:1;}
+  .topnav a.lnk:hover{color:var(--n11);background:var(--n3);text-decoration:none;}
+  .topnav a.lnk.on{color:var(--n11);background:var(--ember-soft);box-shadow:inset 0 -2px 0 var(--ember);border-radius:0;}
+  main{padding:0 0 100px;}
+  header.top{padding:64px 0 34px;position:relative;}
+  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule-signature);}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  h1{font-family:var(--mincho);font-weight:700;font-size:38px;line-height:1.08;margin:12px 0 0;color:var(--n11);max-width:680px;}
+  .sub{margin-top:14px;font-size:15px;max-width:660px;color:var(--n10);}
+  .sub b{color:var(--n11);}
+  section{padding:48px 0 0;}
+  .s-no{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;color:var(--ember);text-transform:uppercase;}
+  h2{font-family:var(--mincho);font-weight:700;font-size:24px;margin:8px 0 10px;color:var(--n11);}
+  .lede{font-size:14.5px;color:var(--n9);max-width:660px;margin:0 0 20px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px;}
+  .spec{margin:0;border:1px solid var(--line);border-radius:7px;background:var(--n1);overflow:hidden;}
+  .spec iframe{display:block;width:100%;border:0;background:var(--n0);}
+  .spec figcaption{display:flex;align-items:baseline;gap:10px;padding:9px 15px;border-top:1px solid var(--line);}
+  .spec figcaption b{font-size:12.5px;color:var(--n11);font-weight:600;white-space:nowrap;}
+  .spec figcaption span{font-size:11.5px;color:var(--n8);flex:1;min-width:0;}
+  .wide{grid-column:1/-1;}
+  .laws{max-width:760px;display:flex;flex-direction:column;gap:10px;}
+  .law{border:1px solid var(--line);border-radius:6px;background:var(--n2);padding:12px 16px;font-size:13.5px;color:var(--n10);line-height:1.55;}
+  .law b{color:var(--n11);}
+  footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer .fl{font-family:var(--mincho);font-size:14px;color:var(--n9);}
+  footer .fr{font-family:var(--mono);font-size:10.5px;color:var(--n8);letter-spacing:.1em;}
+  .themeswitch{display:flex;margin-left:14px;background:color-mix(in srgb,var(--n4) 90%,transparent);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;backdrop-filter:blur(8px);box-shadow:var(--shadow-float);}
+  .themeswitch button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--n8);background:transparent;border:0;cursor:pointer;padding:8px 13px;border-radius:999px;display:flex;align-items:center;gap:6px;transition:.2s;line-height:1;}
+  .themeswitch button[aria-pressed="true"]{color:var(--ember-fg);background:var(--ember);}
+
+</style>
+</head>
+<body class="okibi-ground">
+<div class="wrap">
+  <nav class="topnav" data-screen-label="Top nav">
+    <a class="home" href="index.html"><span class="seal">燠</span><span class="nm">Okibi</span></a>
+    <a class="lnk" href="doctrine.html">Doctrine</a>
+    <a class="lnk" href="foundations.html">Foundations</a>
+    <a class="lnk on" href="code.html">Code</a>
+    <a class="lnk" href="markdown.html">Markdown</a>
+    <a class="lnk" href="tools.html">Tools</a>
+    <a class="lnk" href="for-llms.html">For LLMs</a>
+    <div class="themeswitch" role="group" aria-label="Color mode">
+      <button type="button" data-set="dark" aria-pressed="true"><span>◐</span>Okibi</button>
+      <button type="button" data-set="light" aria-pressed="false"><span>◑</span>Akari</button>
+    </div>
+  </nav>
+  <main>
+    <header class="top">
+      <div class="kicker">符 · code</div>
+      <h1>Highlighting that follows intent, not grammar</h1>
+      <p class="sub">Okibi does not do static rainbow highlighting. Code colouring is <b>three cumulative bands</b>: a calm resting register that is always on, identity tints summoned only when you focus a block, and a risk layer only while you edit — each engages as you engage, and withdraws on the way out. Full algorithm: <a href="spec/dynamic-highlighting.md">spec/dynamic-highlighting.md</a>.</p>
+    </header>
+<section><div class="s-no">01 · obi</div><h2>The bands</h2><p class="lede">Band 1 is the register for code anywhere it is merely shown. Bands 2–3 need a live editor with real symbol resolution (LSP in production; the prototype uses a regex stand-in).</p><div class="grid"><figure class="spec"><iframe src="guidelines/code-resting.html" style="height:226px" loading="lazy" title="Band 1 · resting register"></iframe><figcaption><b>Band 1 · resting register</b><span>calls carry the one hue; keywords recede; numbers rest quiet</span></figcaption></figure><figure class="spec"><iframe src="guidelines/diagram-depth.html" style="height:286px" loading="lazy" title="The depth model"></iframe><figcaption><b>The depth model</b><span>how the bands engage with intent</span></figcaption></figure><figure class="spec"><iframe src="guidelines/code-diagnostics.html" style="height:226px" loading="lazy" title="Diagnostics"></iframe><figcaption><b>Diagnostics</b><span>the underline style carries severity</span></figcaption></figure><figure class="spec"><iframe src="guidelines/color-identity.html" style="height:216px" loading="lazy" title="Band 2 · identity"></iframe><figcaption><b>Band 2 · identity</b><span>six ordered tints; gold reserved for this/self</span></figcaption></figure></div><div class="laws" style="margin-top:16px"><div class="law"><b>Identity is relational:</b> a variable is tinted by how far you must look to find where it is bound; weight marks the in/out-of-function boundary.</div><div class="law"><b>Assignment is an ordering problem, not hashing:</b> pre-vetted pool, interleaved slots, salience ranking, first-appearance stability. Overflow → neutral, never recycle.</div><div class="law"><b>Only escaping mutation is marked.</b> Local bookkeeping is silent — marking all mutation lights the file like a christmas tree.</div><div class="law"><b>Seven alternatives were tried and rejected</b> (hash tints, HRW, tint-all, tint-only-globals, whole-function focus, dim-the-rest, smart hysteresis) — the ledger is in <a href="spec/dynamic-highlighting.md">the spec §10</a>; don’t re-tread them.</div></div></section><section><div class="s-no">02 · hashigo</div><h2>The capability ladder</h2><p class="lede">The fallback is not a second theme — tiers drop, colours never substitute. Ports: <a href="spec/static-fallback.md">spec/static-fallback.md</a>.</p><div class="laws"><div class="law"><b>1 · Truecolor + LSP</b> — the full dynamic system. Live demo: <a href="ui_kits/editor/index.html">the workbench</a> · <a href="experiments/transition-machine.html">the transition machine</a>.</div><div class="law"><b>2 · Grammar only</b> — band 1 via TextMate / tree-sitter / Prism / hljs / CodeMirror. Artifacts in <a href="tools.html">Tools</a>.</div><div class="law"><b>3 · Strict-16 ANSI</b> — the terminal mapping; bands 2–3 disabled.</div><div class="law"><b>4 · Monochrome</b> — weight + underline style only. Still works; that is what redundancy is for.</div></div><div class="grid" style="margin-top:16px"><figure class="spec"><iframe src="guidelines/app-terminal.html" style="height:316px" loading="lazy" title="Terminal · ANSI-16"></iframe><figcaption><b>Terminal · ANSI-16</b><span>cursor is the ember; brights never neon</span></figcaption></figure><figure class="spec"><iframe src="guidelines/app-tui.html" style="height:346px" loading="lazy" title="TUI applications"></iframe><figcaption><b>TUI applications</b><span>ember only on the live element</span></figcaption></figure></div></section>
+    <footer>
+      <span class="fl">燠火 · 一つの背骨、一つの燠</span>
+      <span class="fr">OKIBI · V1.8 · SOURCE OF TRUTH</span>
+    </footer>
+  </main>
+</div>
+<script>
+(function(){var root=document.documentElement;var btns=document.querySelectorAll('.themeswitch button');
+  function frTheme(fr,m){if(fr.src.indexOf('color-spine-light')>-1)return 'light';if(fr.src.indexOf('color-spine-dark')>-1)return 'dark';return m;}
+  function apply(m){root.setAttribute('data-theme',m);btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===m?'true':'false');});
+    document.querySelectorAll('iframe').forEach(function(fr){try{if(fr.contentDocument)fr.contentDocument.documentElement.setAttribute('data-theme',frTheme(fr,m));}catch(e){}});
+    try{localStorage.setItem('okibi-theme',m);}catch(e){}}
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.set);});});
+  document.querySelectorAll('iframe').forEach(function(fr){fr.addEventListener('load',function(){var m=root.getAttribute('data-theme')||'dark';try{if(fr.contentDocument)fr.contentDocument.documentElement.setAttribute('data-theme',frTheme(fr,m));}catch(e){}});});
+  var s;try{s=localStorage.getItem('okibi-theme');}catch(e){}apply(s==='light'?'light':'dark');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* Okibi 燠火 — web code highlighting (Prism + highlight.js), band-1 static fallback.
+   Generated from exports/okibi.tokens.json v1.7 — regenerate, don't hand-edit.
+   Dark by default; add data-theme="light" on <html> (or rely on prefers-color-scheme). */
+:root{
+  --ok-fg:#e1e3e5;--ok-call:#6daff7;--ok-str:#8ecd92;--ok-num:#b7bfc7;
+  --ok-nume:#c9a18d;--ok-blt:#f2716c;--ok-mem:#a2bedb;--ok-typ:#a5b6c8;
+  --ok-kw:#7c8894;--ok-op:#9fa5ac;--ok-pn:#4e5358;--ok-cm:#646a70;
+  --ok-flow:#c5cbd2;--ok-bg:#1b1e20;--ok-line:#2f3235;--ok-ghost:#585b5f;--ok-faint:#707376;
+  --ok-muted:#8f9296;--ok-hi:#e1e3e5;--ok-link:#6daff7;--ok-warn:#e6af2b;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){
+  --ok-fg:#13110e;--ok-call:#005eac;--ok-str:#257231;--ok-num:#989186;
+  --ok-nume:#9f7661;--ok-blt:#be222d;--ok-mem:#516f8e;--ok-typ:#52657a;
+  --ok-kw:#6b7681;--ok-op:#585e65;--ok-pn:#9c9890;--ok-cm:#8b857d;
+  --ok-flow:#262f39;--ok-bg:#f9f6f2;--ok-line:#d9d5d0;--ok-ghost:#b5b0a9;--ok-faint:#8d8982;
+  --ok-muted:#6c6863;--ok-hi:#13110e;--ok-link:#015ba6;--ok-warn:#956000;
+}}
+:root[data-theme="light"]{
+  --ok-fg:#13110e;--ok-call:#005eac;--ok-str:#257231;--ok-num:#989186;
+  --ok-nume:#9f7661;--ok-blt:#be222d;--ok-mem:#516f8e;--ok-typ:#52657a;
+  --ok-kw:#6b7681;--ok-op:#585e65;--ok-pn:#9c9890;--ok-cm:#8b857d;
+  --ok-flow:#262f39;--ok-bg:#f9f6f2;--ok-line:#d9d5d0;--ok-ghost:#b5b0a9;--ok-faint:#8d8982;
+  --ok-muted:#6c6863;--ok-hi:#13110e;--ok-link:#015ba6;--ok-warn:#956000;
+}
+
+/* shared shell */
+pre[class*="language-"], pre code.hljs, pre code[class*="hljs"]{
+  background:var(--ok-bg); color:var(--ok-fg); border:1px solid var(--ok-line); border-radius:6px;
+  font-size:13px; line-height:1.85; text-shadow:none;
+}
+code[class*="language-"]{ color:var(--ok-fg); text-shadow:none; }
+
+/* ── neutralize-first (allowlist law) ── */
+.token, [class*="hljs-"]{ color:inherit; background:transparent; font-style:normal; font-weight:inherit; }
+
+/* ── Prism ── */
+.token.comment,.token.prolog,.token.cdata{ color:var(--ok-cm); font-style:italic; }
+.token.string,.token.char,.token.regex,.token.attr-value{ color:var(--ok-str); }
+.token.number{ color:var(--ok-num); }
+code[class*="language-json"] .token.number, code[class*="language-yaml"] .token.number,
+code[class*="language-toml"] .token.number, .language-json .token.number,
+.language-yaml .token.number, .language-toml .token.number{ color:var(--ok-nume); }
+.token.boolean,.token.constant,.token.null{ color:var(--ok-blt); }
+.token.keyword,.token.atrule{ color:var(--ok-kw); }
+.token.function{ color:var(--ok-call); }
+.token.class-name,.token.builtin{ color:var(--ok-typ); }
+.token.property,.token.attr-name{ color:var(--ok-mem); }
+.token.operator{ color:var(--ok-op); }
+.token.punctuation{ color:var(--ok-pn); }
+.token.tag{ color:var(--ok-call); }
+.token.selector{ color:var(--ok-call); }
+.token.important{ color:var(--ok-flow); font-weight:700; }
+/* markdown via Prism */
+.token.title,.token.title .token.punctuation{ color:var(--ok-hi); font-weight:700; }
+.token.blockquote{ color:var(--ok-muted); }
+.token.url,.token.list.punctuation{ color:var(--ok-ghost); }
+.token.code-snippet,.token.code{ color:var(--ok-mem); }
+.token.bold{ color:var(--ok-hi); font-weight:700; }
+.token.italic{ color:var(--ok-hi); font-style:italic; }
+
+/* ── highlight.js ── */
+.hljs{ background:var(--ok-bg); color:var(--ok-fg); }
+.hljs-comment,.hljs-quote{ color:var(--ok-cm); font-style:italic; }
+.hljs-string,.hljs-regexp{ color:var(--ok-str); }
+.hljs-number{ color:var(--ok-num); }
+.language-json .hljs-number,.language-yaml .hljs-number,.language-toml .hljs-number{ color:var(--ok-nume); }
+.hljs-literal{ color:var(--ok-blt); }
+.hljs-keyword,.hljs-selector-tag{ color:var(--ok-kw); }
+.hljs-title.function_,.hljs-title.function_.invoke__{ color:var(--ok-call); }
+.hljs-title,.hljs-title.class_,.hljs-type{ color:var(--ok-typ); }
+.hljs-property,.hljs-attr,.hljs-attribute{ color:var(--ok-mem); }
+.hljs-operator{ color:var(--ok-op); }
+.hljs-punctuation{ color:var(--ok-pn); }
+.hljs-name,.hljs-tag{ color:var(--ok-call); }
+.hljs-built_in{ color:var(--ok-blt); }
+.hljs-meta{ color:var(--ok-faint); }
+/* markdown via hljs */
+.hljs-section{ color:var(--ok-hi); font-weight:700; }
+.hljs-bullet{ color:var(--ok-ghost); }
+.hljs-link{ color:var(--ok-link); }
+.hljs-emphasis{ color:var(--ok-hi); font-style:italic; }
+.hljs-strong{ color:var(--ok-hi); font-weight:700; }
+.hljs-code{ color:var(--ok-mem); }

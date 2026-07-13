@@ -1,0 +1,45 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   OKIBI 燠火 — typography tokens
+   Three families, three jobs. Hierarchy rides luminance and weight;
+   size steps are optical, taken verbatim from the shipped pages.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* families */
+  --mincho: "Shippori Mincho B1", "Yu Mincho", serif;               /* display · kanji · titles */
+  --gothic: "Zen Kaku Gothic New", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* body prose · UI */
+  --mono:   "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; /* code · labels · data */
+  --sans:   var(--gothic);
+  --font-display: var(--mincho);
+  --font-body:    var(--gothic);
+  --font-code:    var(--mono);
+
+  /* scale — display (mincho) */
+  --fs-kanji-hero: 124px;  /* vertical hero kanji (150px at full bleed) */
+  --fs-hero:    74px;   /* romaji wordmark · lh .9  · tracking -.02em */
+  --fs-display: 50px;   /* page title      · lh 1.02 */
+  --fs-kanji:   54px;   /* section kanji   · lh 1 (62px on wide pages) */
+  --fs-title:   28px;   /* h2 · mincho 700 (24–30 by page width) */
+  --fs-heading: 19px;   /* h3 · mincho 700 */
+
+  /* scale — body (gothic) */
+  --fs-lede:    17.5px; /* section lede · lh 1.6 */
+  --fs-body:    15.5px; /* prose · lh 1.64 */
+  --fs-body-sm: 13.5px; /* card prose · lh 1.5 */
+  --fs-caption: 12.5px;
+
+  /* scale — mono */
+  --fs-code:    13px;   /* code lines · lh 1.85 */
+  --fs-meta:    11.5px; /* filenames, values */
+  --fs-kicker:  11px;   /* KICKER · 600 · uppercase · tracking .26em */
+  --fs-label:   10px;   /* LABEL  · 600 · uppercase · tracking .14em (9.5–10.5) */
+
+  /* line heights & tracking */
+  --lh-display: 0.9;
+  --lh-title:   1.1;
+  --lh-body:    1.64;
+  --lh-code:    1.85;
+  --track-kicker: 0.26em;
+  --track-label:  0.14em;
+  --track-yomi:   0.18em;  /* kana readings, wide-set */
+}

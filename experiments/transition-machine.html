@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi — transition machine experiment</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{padding:22px 24px 60px;background-color:var(--n0);background-image:var(--glow-ember);background-attachment:fixed;}
+  .kick{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  h1{font-family:var(--mincho);font-weight:700;font-size:22px;margin:6px 0 4px;color:var(--n11);}
+  .note{font-size:13px;color:var(--n9);max-width:860px;}
+  .top{display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:14px;}
+  .top .lead{flex:1;min-width:320px;}
+
+  .hud{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .phase{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:600;
+    border:1px solid var(--ember-line);background:var(--ember-soft);color:var(--ember);border-radius:999px;padding:8px 14px;line-height:1;}
+  .phase .k{font-family:var(--mincho);font-size:14px;}
+  .stat{font-family:var(--mono);font-size:11px;color:var(--n9);border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:var(--n2);line-height:1;}
+  .stat b{color:var(--n11);font-variant-numeric:tabular-nums;}
+  .stat.hot b{color:var(--warn);}
+
+  .controls{display:flex;gap:22px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);border-radius:7px;background:var(--n2);padding:12px 16px;margin-bottom:14px;}
+  .sl{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;color:var(--n9);}
+  .sl input[type=range]{accent-color:var(--ember);width:130px;}
+  .sl b{color:var(--n11);min-width:52px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+  .mode{display:inline-flex;background:var(--n1);border:1px solid var(--line);border-radius:5px;padding:3px;gap:2px;}
+  .mode button{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--n8);background:transparent;border:0;cursor:pointer;padding:7px 12px;border-radius:3px;line-height:1;}
+  .mode button[aria-pressed="true"]{background:var(--n4);color:var(--n11);}
+  .mode button.ph[aria-pressed="true"]{background:var(--ember);color:var(--ember-fg);}
+
+  .ed{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:var(--n2);height:min(58vh,560px);}
+  .gut{flex:0 0 auto;width:52px;overflow:hidden;background:var(--n2);border-right:1px solid color-mix(in srgb,var(--line) 60%,transparent);}
+  .gut-inner{padding:14px 0;font-family:var(--mono);font-size:13px;line-height:1.85;text-align:right;color:var(--n7);}
+  .gut-inner div{padding-right:12px;}
+  .gut-inner div.cur{color:var(--ember);font-weight:600;}
+  .stage{position:relative;flex:1;min-width:0;}
+  .hl,.in{position:absolute;inset:0;font-family:var(--mono);font-size:13px;line-height:1.85;white-space:pre;}
+  .hl{overflow:hidden;pointer-events:none;}
+  .hl-inner{padding:14px 16px;}
+  .hl-inner .ln{display:block;min-height:24.05px;}
+  .in{background:transparent;color:transparent;caret-color:var(--ember);border:0;outline:none;resize:none;
+    overflow:auto;padding:14px 16px;margin:0;width:100%;height:100%;box-sizing:border-box;
+    font-family:var(--mono);font-size:13px;line-height:1.85;white-space:pre;tab-size:2;}
+  .in::selection{background:color-mix(in srgb,var(--ember) 22%,transparent);}
+
+  /* band 1 */
+  .t-v{color:var(--syn-fg)} .t-c{color:var(--syn-call)} .t-s{color:var(--syn-string)}
+  .t-n{color:var(--syn-number)} .t-ne{color:var(--syn-number-engaged)} .t-b{color:var(--syn-builtin)}
+  .t-m{color:var(--syn-member)} .t-t{color:var(--syn-type)} .t-k{color:var(--syn-keyword)}
+  .t-o{color:var(--syn-operator)} .t-p{color:var(--syn-punct)} .t-x{color:var(--syn-comment);font-style:italic}
+  .def{font-weight:700} .flow{font-weight:700;color:var(--flow-fg)}
+  /* band 2 */
+  .id-1{color:var(--id-1)}.id-3{color:var(--id-3)}.id-4{color:var(--id-4)}.id-5{color:var(--id-5)}.id-6{color:var(--id-6)}.id-7{color:var(--id-7)}
+  .idg-1{color:var(--idg-1);font-weight:600}.idg-3{color:var(--idg-3);font-weight:600}.idg-4{color:var(--idg-4);font-weight:600}
+  .idg-5{color:var(--idg-5);font-weight:600}.idg-6{color:var(--idg-6);font-weight:600}.idg-7{color:var(--idg-7);font-weight:600}
+  .idg-0{font-weight:600}
+  .id-self{color:var(--id-self);font-weight:600}
+  .ln.fb{background:color-mix(in srgb,var(--n11) 2%,transparent);box-shadow:inset 2px 0 0 var(--ember-line);}
+  /* band 3 */
+  .d-ow{text-decoration:underline dashed var(--risk-escape);text-decoration-thickness:1.5px;text-underline-offset:3px;}
+  .d-async{color:var(--risk-async);}
+  .d-danger{color:var(--risk-danger);font-weight:700;}
+
+  .log{margin-top:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--n8);}
+  .log .ev{border:1px solid var(--line);border-radius:3px;padding:4px 8px;background:var(--n2);line-height:1;}
+  .log .ev b{color:var(--n10);font-weight:600;}
+  .log .ev.new{border-color:var(--ember-line);color:var(--ember);}
+  .foot{margin-top:14px;font-family:var(--mono);font-size:10.5px;color:var(--n7);}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="lead">
+    <div class="kick">Experiment · not spec</div>
+    <h1>The transition machine</h1>
+    <p class="note">The declared next step: phases switch <b>automatically</b> from what you do. Type — Edit 異. Pause — it decays to Focus 流. Leave it alone — Survey 構. Click or arrow around to refocus. <b>Edit the code below for a minute</b>, watch the flips/min meter: if it exceeds a few per minute while you work steadily, the dwell values are wrong — tune, note the numbers, and we bake them into the spec (or conclude auto-switching is hostile and keep it manual).</p>
+  </div>
+  <div class="hud">
+    <span class="phase" id="phasePill"><span class="k" id="phaseK">流</span><span id="phaseName">focus</span></span>
+    <span class="stat">flips/min <b id="churn">0</b></span>
+    <span class="stat">retints <b id="retints">0</b></span>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="mode" id="modeSeg">
+    <button type="button" data-m="auto" aria-pressed="true">Auto</button>
+    <button type="button" data-m="manual" aria-pressed="false">Manual</button>
+  </div>
+  <div class="mode" id="manualSeg" style="display:none">
+    <button type="button" class="ph" data-p="survey">構 Survey</button>
+    <button type="button" class="ph" data-p="focus">流 Focus</button>
+    <button type="button" class="ph" data-p="edit">異 Edit</button>
+  </div>
+  <span class="sl" data-auto>edit→focus <input type="range" id="dwellE" min="200" max="5000" step="100" value="1400"> <b id="dwellEv">1.4s</b></span>
+  <span class="sl" data-auto>focus→survey <input type="range" id="dwellF" min="2000" max="31000" step="1000" value="12000"> <b id="dwellFv">12s</b></span>
+  <span class="sl" data-auto>min hold <input type="range" id="hold" min="0" max="1500" step="50" value="350"> <b id="holdv">350ms</b></span>
+</div>
+
+<div class="ed">
+  <div class="gut"><div class="gut-inner" id="gut"></div></div>
+  <div class="stage">
+    <div class="hl"><div class="hl-inner" id="hl"></div></div>
+    <textarea class="in" id="in" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+  </div>
+</div>
+
+<div class="log" id="log"><span style="color:var(--n7)">phase log —</span></div>
+<div class="foot">esc = survey now · scroll never changes phase or focus · deepest brace-block under the caret is the focus unit</div>
+
+<script>
+(function(){
+"use strict";
+var SRC = [
+"// forge/theme — resolve, cache and blend palette colours.",
+"const registry = new Map();",
+'const FALLBACK = "#ff7a45";',
+'let activeName = "okibi";',
+"let hits = 0;",
+"",
+"export async function resolve(name, scale = 1) {",
+"  let theme = registry.get(name);",
+"  if (theme) {",
+"    hits += 1;",
+"    return theme;",
+"  }",
+"  const spec = await load(name);",
+"  if (!spec) {",
+"    activeName = FALLBACK;",
+'    throw new Error("unknown theme: " + name);',
+"  }",
+"  const slots = new Map();",
+"  for (const key of Object.keys(spec.hues)) {",
+"    const raw = spec.hues[key] ?? FALLBACK;",
+"    slots.set(key, parse(raw).scale(scale));",
+"  }",
+"  theme = new Theme(spec.name, slots);",
+"  registry.set(name, theme);",
+"  activeName = spec.name;",
+"  return theme;",
+"}",
+"",
+"async function load(name) {",
+'  const res = await fetch("/themes/" + name + ".json");',
+"  if (!res.ok) {",
+"    return null;",
+"  }",
+"  return await res.json();",
+"}",
+"",
+"export function clearCache() {",
+"  registry.clear();",
+"  hits = 0;",
+'  activeName = "okibi";',
+"}",
+"",
+"function clamp(n, lo, hi) {",
+"  if (n < lo) {",
+"    return lo;",
+"  }",
+"  return n > hi ? hi : n;",
+"}"
+].join("\n");
+
+// ── band-1 lexer (portable stand-in; production = LSP) ──
+var KW={"const":1,"let":1,"var":1,"function":1,"return":1,"if":1,"else":1,"for":1,"while":1,"do":1,"switch":1,"case":1,"break":1,"continue":1,"new":1,"class":1,"extends":1,"interface":1,"type":1,"enum":1,"import":1,"export":1,"from":1,"as":1,"async":1,"await":1,"yield":1,"throw":1,"try":1,"catch":1,"finally":1,"this":1,"super":1,"of":1,"in":1,"typeof":1,"default":1};
+var LIT={"true":1,"false":1,"null":1,"undefined":1,"NaN":1,"Infinity":1};
+var ESC={"return":1,"throw":1,"break":1,"continue":1,"yield":1,"await":1};
+var MUT={"set":1,"push":1,"pop":1,"delete":1,"clear":1,"add":1,"sort":1,"splice":1,"shift":1,"unshift":1};
+function lex(line){
+  var toks=[],i=0,n=line.length;
+  while(i<n){
+    var ch=line[i];
+    if(ch===" "||ch==="\t"){var j=i;while(j<n&&(line[j]===" "||line[j]==="\t"))j++;toks.push({t:line.slice(i,j),k:"ws"});i=j;continue;}
+    if(ch==="/"&&line[i+1]==="/"){toks.push({t:line.slice(i),k:"comment"});break;}
+    if(ch==='"'||ch==="'"||ch==="`"){var q=ch,j2=i+1;while(j2<n){if(line[j2]==="\\"){j2+=2;continue;}if(line[j2]===q){j2++;break;}j2++;}toks.push({t:line.slice(i,j2),k:"string"});i=j2;continue;}
+    if(/[0-9]/.test(ch)){var j3=i;while(j3<n&&/[0-9a-fA-FxX._]/.test(line[j3]))j3++;toks.push({t:line.slice(i,j3),k:"number"});i=j3;continue;}
+    if(/[A-Za-z_$]/.test(ch)){var j4=i;while(j4<n&&/[\w$]/.test(line[j4]))j4++;toks.push({t:line.slice(i,j4),k:"ident"});i=j4;continue;}
+    toks.push({t:ch,k:"(){}[];,.".indexOf(ch)>=0?"punct":"op"});i++;
+  }
+  return toks;
+}
+function roleize(toks){
+  var prev=null;
+  for(var i=0;i<toks.length;i++){
+    var tk=toks[i];
+    if(tk.k==="ident"){
+      var nx=null;for(var j=i+1;j<toks.length;j++){if(toks[j].k!=="ws"){nx=toks[j];break;}}
+      if(LIT[tk.t])tk.r="builtin";
+      else if(KW[tk.t])tk.r="keyword";
+      else if(prev&&prev.t===".")tk.r=(nx&&nx.t==="(")?"call":"member";
+      else if(nx&&nx.t==="(")tk.r="call";
+      else if(/^[A-Z]/.test(tk.t))tk.r="type";
+      else tk.r="variable";
+      if(tk.r==="keyword"&&ESC[tk.t])tk.escape=true;
+      if((tk.r==="call")&&prev&&prev.r==="keyword"&&(prev.t==="function"||prev.t==="class"))tk.def=true;
+    }
+    else tk.r=tk.k==="comment"?"comment":tk.k==="string"?"string":tk.k==="number"?"number":tk.k==="punct"?"punct":tk.k==="op"?"operator":"ws";
+    if(tk.k!=="ws")prev=tk;
+  }
+  return toks;
+}
+
+// ── scopes, decls, classification (name-keyed — experiment grade) ──
+function analyze(lines){
+  var toks=lines.map(function(t){return roleize(lex(t));});
+  function isHeader(txt){return /\bfunction\s+\w+\s*\(/.test(txt)||/=>\s*\{\s*$/.test(txt);}
+  var scopes=[];
+  for(var i=0;i<lines.length;i++){
+    if(/\{\s*$/.test(lines[i])){
+      var d=0,started=false,end=lines.length-1;
+      for(var k=i;k<lines.length;k++){var s=lines[k];
+        for(var c=0;c<s.length;c++){if(s[c]==="{"){d++;started=true;}else if(s[c]==="}")d--;}
+        if(started&&d<=0){end=k;break;}}
+      if(end>i){
+        var fn=isHeader(lines[i])&&!/^\s*\}?\s*(?:if|for|while|switch|catch|do|else)\b/.test(lines[i]);
+        scopes.push({start:i,end:end,fn:fn});
+      }
+    }
+  }
+  var decls={};
+  function addD(n,i){(decls[n]=decls[n]||[]).push(i);}
+  lines.forEach(function(txt,i){var m;
+    var r1=/\b(?:let|const|var)\s+([\w$]+)/g;while((m=r1.exec(txt)))addD(m[1],i);
+    var r2=/\bfor\s*\(\s*(?:const|let|var)\s+([\w$]+)/g;while((m=r2.exec(txt)))addD(m[1],i);
+    var r3=/\bcatch\s*\(\s*([\w$]+)/g;while((m=r3.exec(txt)))addD(m[1],i);
+    if(isHeader(txt)){var pm=txt.match(/\(([^)]*)\)/);if(pm)pm[1].split(",").forEach(function(p){var nm=(p.match(/([\w$]+)/)||[])[1];if(nm)addD(nm,i);});}
+  });
+  function inFn(l){for(var s=0;s<scopes.length;s++){var sc=scopes[s];if(sc.fn&&l>=sc.start&&l<=sc.end)return true;}return false;}
+  var global={};
+  for(var dn in decls){var all=true;for(var di=0;di<decls[dn].length;di++)if(inFn(decls[dn][di])){all=false;break;}if(all)global[dn]=1;}
+  return {toks:toks,scopes:scopes,decls:decls,global:global};
+}
+
+var POOL=[1,3,4,5,6,7];
+function buildMarks(A,FS,FE,lines){
+  var marks={};
+  if(FS<0)return marks;
+  var cf=null;
+  for(var s=0;s<A.scopes.length;s++){var sc=A.scopes[s];
+    if(sc.fn&&sc.start<=FS&&sc.end>=FE){if(!cf||(sc.end-sc.start)<(cf.end-cf.start))cf=sc;}}
+  var CFS=cf?cf.start:FS,CFE=cf?cf.end:FE;
+  var used=[],seen={},cnt={};
+  for(var i=FS;i<=FE;i++){var tk=A.toks[i];for(var j=0;j<tk.length;j++){var t=tk[j];
+    if(t.r!=="variable")continue;if(!seen[t.t]){seen[t.t]=1;used.push(t.t);}cnt[t.t]=(cnt[t.t]||0)+1;}}
+  function cls(n){
+    if(A.global[n])return "out";
+    var d=A.decls[n];if(!d||!d.length)return "out";
+    for(var k=0;k<d.length;k++)if(d[k]>=FS&&d[k]<=FE)return "block";
+    for(var k2=0;k2<d.length;k2++)if(d[k2]>=CFS&&d[k2]<=CFE)return "fn";
+    return "out";
+  }
+  // stable global slots by first appearance in file
+  var gslot={},gi=0,gseen={};
+  for(var li=0;li<A.toks.length;li++){var tl=A.toks[li];for(var tj=0;tj<tl.length;tj++){var nm=tl[tj].t;
+    if(A.global[nm]&&!gseen[nm]){gseen[nm]=1;gslot[nm]=gi<POOL.length?POOL[gi]:0;gi++;}}}
+  var taken={};
+  used.forEach(function(n){if(cls(n)!=="out")return;
+    var slot=A.global[n]?gslot[n]:null;
+    if(slot===null||slot===undefined){for(var p=0;p<POOL.length;p++){if(!taken[POOL[p]]){slot=POOL[p];break;}}if(slot===undefined)slot=0;}
+    if(slot)taken[slot]=1;
+    marks[n]={slot:slot||0,bold:true,lo:A.global[n]?0:CFS,hi:A.global[n]?lines.length-1:CFE,wired:true};});
+  function free(){for(var p=0;p<POOL.length;p++)if(!taken[POOL[p]]){taken[POOL[p]]=1;return POOL[p];}return null;}
+  used.forEach(function(n){if(marks[n]||cls(n)!=="fn")return;var f=free();if(f!==null)marks[n]={slot:f,bold:false,lo:CFS,hi:CFE,wired:true};});
+  var blocals=used.filter(function(n){return !marks[n]&&cls(n)==="block"&&cnt[n]>=2;}).sort(function(a,b){return cnt[b]-cnt[a];});
+  blocals.forEach(function(n){var f=free();if(f!==null)marks[n]={slot:f,bold:false,lo:FS,hi:FE};});
+  return marks;
+}
+
+// ── editor state ──
+var ta=document.getElementById("in"),hl=document.getElementById("hl"),gut=document.getElementById("gut");
+ta.value=SRC;
+var A=null,FS=-1,FE=-1,CUR=0,MARKS={},prevSlots={},retints=0;
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function caretLine(){return ta.value.slice(0,ta.selectionStart).split("\n").length-1;}
+function refocus(){
+  var lines=ta.value.split("\n");
+  CUR=caretLine();
+  var best=null;
+  for(var s=0;s<A.scopes.length;s++){var sc=A.scopes[s];
+    if(CUR>=sc.start&&CUR<=sc.end){if(!best||(sc.end-sc.start)<(best.end-best.start))best=sc;}}
+  FS=best?best.start:-1;FE=best?best.end:-1;
+  var nm=buildMarks(A,FS,FE,lines);
+  var changed=0;for(var k in nm){if(prevSlots[k]!==undefined&&prevSlots[k]!==nm[k].slot)changed++;}
+  if(changed){retints+=changed;document.getElementById("retints").textContent=retints;}
+  prevSlots={};for(var k2 in nm)prevSlots[k2]=nm[k2].slot;
+  MARKS=nm;
+}
+function render(){
+  var lines=ta.value.split("\n");
+  var engaged=PH.phase!=="survey", editing=PH.phase==="edit";
+  var out="",g="";
+  for(var i=0;i<lines.length;i++){
+    var inF=FS>=0&&i>=FS&&i<=FE;
+    var toks=A.toks[i]||[];
+    var inner="";
+    for(var j=0;j<toks.length;j++){
+      var tk=toks[j],c=[];
+      if(tk.escape)c.push("flow");
+      else{
+        var base={variable:"t-v",call:"t-c",string:"t-s",builtin:"t-b",member:"t-m",type:"t-t",keyword:"t-k",operator:"t-o",punct:"t-p",comment:"t-x"}[tk.r]||"";
+        if(tk.r==="number")base=(engaged&&inF)?"t-ne":"t-n";
+        if(base)c.push(base);
+        if(tk.def)c.push("def");
+      }
+      if(engaged&&tk.r==="variable"){
+        var m=MARKS[tk.t];
+        if(m&&i>=m.lo&&i<=m.hi)c.push((m.bold?"idg-":"id-")+m.slot);
+      }
+      if(engaged&&tk.t==="this")c.push("id-self");
+      if(editing&&inF){
+        if(tk.r==="keyword"&&(tk.t==="await"||tk.t==="async"))c.push("d-async");
+        if(tk.t==="as"||tk.t==="any")c.push("d-danger");
+        if(tk.r==="variable"&&MARKS[tk.t]&&MARKS[tk.t].wired&&MARKS[tk.t].bold){
+          var nx2=null;for(var jj=j+1;jj<toks.length;jj++){if(toks[jj].k!=="ws"){nx2=toks[jj];break;}}
+          if(nx2&&/^(=|\+=|-=|\*=|\/=)$/.test(nx2.t))c.push("d-ow");
+        }
+        if((tk.r==="call"||tk.r==="member")&&MUT[tk.t]){
+          var recv=null;for(var jb=j-1;jb>=0;jb--){var pv=toks[jb];if(pv.k==="ws"||pv.t===".")continue;recv=pv.t;break;}
+          if(recv&&MARKS[recv]&&MARKS[recv].bold)c.push("d-ow");
+        }
+      }
+      inner+=c.length?'<span class="'+c.join(" ")+'">'+esc(tk.t)+"</span>":esc(tk.t);
+    }
+    out+='<div class="ln'+((inF&&engaged)?" fb":"")+'">'+(inner||"&nbsp;")+"</div>";
+    g+='<div'+(i===CUR?' class="cur"':"")+">"+(i+1)+"</div>";
+  }
+  hl.innerHTML=out;gut.innerHTML=g;
+  syncScroll();
+}
+function reanalyze(){A=analyze(ta.value.split("\n"));refocus();render();}
+function syncScroll(){
+  hl.parentNode.scrollTop=ta.scrollTop;hl.parentNode.scrollLeft=ta.scrollLeft;
+  hl.style.transform="translate("+(-ta.scrollLeft)+"px,"+(-ta.scrollTop)+"px)";
+  gut.firstElementChild&&(gut.firstElementChild.style.transform="translateY("+(-ta.scrollTop)+"px)");
+}
+// simpler: move inner containers
+function syncScroll2(){
+  document.getElementById("hl").style.transform="translateY("+(-ta.scrollTop)+"px) translateX("+(-ta.scrollLeft)+"px)";
+  document.querySelector(".gut-inner").style.transform="translateY("+(-ta.scrollTop)+"px)";
+}
+syncScroll=syncScroll2;
+
+// ── phase machine ──
+var PH={phase:"focus",since:Date.now(),pending:null,mode:"auto"};
+var flips=[],logEl=document.getElementById("log");
+var K={survey:"構",focus:"流",edit:"異"};
+function cfg(id){return parseInt(document.getElementById(id).value,10);}
+function applyPhase(p){
+  if(PH.phase===p)return;
+  PH.phase=p;PH.since=Date.now();PH.pending=null;
+  flips.push(Date.now());
+  var ev=document.createElement("span");ev.className="ev new";ev.innerHTML="→ <b>"+K[p]+" "+p+"</b>";
+  logEl.appendChild(ev);
+  var evs=logEl.querySelectorAll(".ev");
+  if(evs.length>9)evs[0].remove();
+  setTimeout(function(){ev.className="ev";},600);
+  document.getElementById("phaseK").textContent=K[p];
+  document.getElementById("phaseName").textContent=p;
+  document.querySelectorAll("#manualSeg .ph").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.p===p?"true":"false");});
+  render();
+}
+function requestPhase(p,force){
+  if(PH.phase===p){PH.pending=null;return;}
+  if(force||Date.now()-PH.since>=cfg("hold")){applyPhase(p);}
+  else PH.pending=p;
+}
+var lastKey=0,lastCaret=0;
+ta.addEventListener("input",function(){lastKey=Date.now();if(PH.mode==="auto")requestPhase("edit");reanalyze();});
+document.addEventListener("selectionchange",function(){
+  if(document.activeElement!==ta)return;
+  var now=Date.now();
+  if(now-lastKey<80){return;}         // typing moves the caret; not an intentional move
+  lastCaret=now;
+  var prevCur=CUR;refocus();
+  if(CUR!==prevCur)render();
+  if(PH.mode==="auto"&&PH.phase==="survey")requestPhase("focus");
+});
+ta.addEventListener("keydown",function(e){
+  if(e.key==="Escape"&&PH.mode==="auto"){requestPhase("survey",true);}
+  if(e.key==="Tab"){e.preventDefault();
+    var s=ta.selectionStart,epos=ta.selectionEnd;
+    ta.value=ta.value.slice(0,s)+"  "+ta.value.slice(epos);
+    ta.selectionStart=ta.selectionEnd=s+2;lastKey=Date.now();
+    if(PH.mode==="auto")requestPhase("edit");reanalyze();}
+});
+ta.addEventListener("scroll",syncScroll);
+setInterval(function(){
+  var now=Date.now();
+  if(PH.pending&&now-PH.since>=cfg("hold"))applyPhase(PH.pending);
+  if(PH.mode==="auto"){
+    if(PH.phase==="edit"&&now-lastKey>=cfg("dwellE"))requestPhase("focus");
+    if(PH.phase==="focus"){var df=cfg("dwellF");
+      if(df<31000&&now-Math.max(lastKey,lastCaret)>=df)requestPhase("survey");}
+  }
+  flips=flips.filter(function(t){return now-t<60000;});
+  var ch=document.getElementById("churn");ch.textContent=flips.length;
+  ch.parentNode.className="stat"+(flips.length>6?" hot":"");
+},120);
+
+// controls
+[["dwellE","dwellEv",function(v){return (v/1000).toFixed(1)+"s";}],
+ ["dwellF","dwellFv",function(v){return v>=31000?"never":(v/1000)+"s";}],
+ ["hold","holdv",function(v){return v+"ms";}]].forEach(function(c){
+  var el=document.getElementById(c[0]),lab=document.getElementById(c[1]);
+  function upd(){lab.textContent=c[2](parseInt(el.value,10));try{localStorage.setItem("okibi-tm-"+c[0],el.value);}catch(e){}}
+  var sv;try{sv=localStorage.getItem("okibi-tm-"+c[0]);}catch(e){}
+  if(sv)el.value=sv;
+  el.addEventListener("input",upd);upd();
+});
+document.querySelectorAll("#modeSeg button").forEach(function(b){
+  b.addEventListener("click",function(){
+    PH.mode=b.dataset.m;
+    document.querySelectorAll("#modeSeg button").forEach(function(x){x.setAttribute("aria-pressed",x.dataset.m===PH.mode?"true":"false");});
+    document.getElementById("manualSeg").style.display=PH.mode==="manual"?"":"none";
+    document.querySelectorAll(".sl[data-auto]").forEach(function(s){s.style.opacity=PH.mode==="auto"?"1":"0.35";});
+    try{localStorage.setItem("okibi-tm-mode",PH.mode);}catch(e){}
+  });
+});
+document.querySelectorAll("#manualSeg .ph").forEach(function(b){
+  b.addEventListener("click",function(){applyPhase(b.dataset.p);});
+});
+var svm;try{svm=localStorage.getItem("okibi-tm-mode");}catch(e){}
+if(svm==="manual")document.querySelector('#modeSeg button[data-m="manual"]').click();
+
+// boot: caret into resolve()
+reanalyze();
+var bootLine=ta.value.split("\n").findIndex(function(l){return /registry\.set\(/.test(l);});
+var pos=ta.value.split("\n").slice(0,bootLine+1).join("\n").length;
+ta.focus({preventScroll:true});ta.setSelectionRange(pos,pos);
+var lh=24.05;
+ta.scrollTop=Math.max(0,bootLine*lh-ta.clientHeight/2);
+window.scrollTo(0,0);
+lastCaret=Date.now();
+refocus();applyPhase("focus");render();
+syncScroll();
+document.getElementById("phaseK").textContent=K[PH.phase];
+document.getElementById("phaseName").textContent=PH.phase;
+})();
+</script>
+</body>
+</html>

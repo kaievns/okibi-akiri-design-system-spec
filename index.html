@@ -1,603 +1,342 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Okibi 燠火 — Design Specification</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Shippori+Mincho+B1:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi 燠火 — calm at rest, salient on demand</title>
+<meta name="description" content="Okibi is a design language built on one claim: a theme is an attention-allocation policy. One charcoal spine, one ember, and code highlighting that engages only when you do.">
+<link rel="stylesheet" href="styles.css">
 <style>
-  :root{
-    --sans:"Zen Kaku Gothic New",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    --mincho:"Shippori Mincho B1","Yu Mincho",serif;
-    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  /* ───────── Okibi · 燠火 — the clear cut, canonical ───────── */
-  html[data-theme="dark"]{
-    --n0:oklch(0.135 0.005 250); --n1:oklch(0.185 0.005 250); --n2:oklch(0.205 0.005 250);
-    --n3:oklch(0.225 0.005 250); --n4:oklch(0.255 0.005 250); --n5:oklch(0.305 0.006 250);
-    --n6:oklch(0.36 0.006 250);  --n7:oklch(0.44 0.006 250);  --n8:oklch(0.545 0.006 250);
-    --n9:oklch(0.66 0.006 250);  --n10:oklch(0.80 0.005 250); --n11:oklch(0.915 0.004 250);
-    --ember:oklch(0.735 0.18 38); --ember-fg:oklch(0.20 0.04 60);
-    --ember-soft:color-mix(in srgb, var(--ember) 16%, var(--n2));
-    --ember-line:color-mix(in srgb, var(--ember) 50%, transparent);
-    --warn:oklch(0.785 0.15 84); --err:oklch(0.665 0.205 24);
-    --str:oklch(0.79 0.115 146); --num:oklch(0.72 0.13 27); --type:oklch(0.775 0.026 250);
-    --prop:oklch(0.80 0.05 252); --call:oklch(0.74 0.125 252); --kw:oklch(0.60 0.02 250);
-    --ok:oklch(0.79 0.115 146); --info:oklch(0.74 0.125 252); --spell:oklch(0.70 0.07 200);
-    --shadow:0 18px 50px -22px rgba(0,0,0,.7);
-  }
-  html[data-theme="light"]{
-    --n0:oklch(0.90 0.008 80);  --n1:oklch(0.945 0.007 80); --n2:oklch(0.975 0.006 80);
-    --n3:oklch(0.93 0.008 80);  --n4:oklch(0.995 0.004 80); --n5:oklch(0.90 0.009 80);
-    --n6:oklch(0.86 0.010 80);  --n7:oklch(0.76 0.011 80);  --n8:oklch(0.63 0.011 80);
-    --n9:oklch(0.52 0.010 80);  --n10:oklch(0.36 0.009 80); --n11:oklch(0.18 0.008 80);
-    --ember:oklch(0.59 0.195 42); --ember-fg:oklch(0.99 0.02 80);
-    --ember-soft:color-mix(in srgb, var(--ember) 14%, var(--n2));
-    --ember-line:color-mix(in srgb, var(--ember) 55%, transparent);
-    --warn:oklch(0.575 0.155 84); --err:oklch(0.53 0.205 24);
-    --str:oklch(0.49 0.125 146); --num:oklch(0.51 0.165 27); --type:oklch(0.47 0.028 250);
-    --prop:oklch(0.54 0.062 252); --call:oklch(0.47 0.14 252); --kw:oklch(0.605 0.02 250);
-    --ok:oklch(0.49 0.125 146); --info:oklch(0.47 0.14 252); --spell:oklch(0.50 0.08 200);
-    --shadow:0 18px 50px -22px rgba(60,50,40,.28);
-  }
+  body{font-size:15.5px;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 32px;}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  .lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
 
-  *{box-sizing:border-box;}
-  html,body{margin:0;}
-  body{background-color:var(--n0);color:var(--n11);font-family:var(--sans);font-size:15.5px;line-height:1.62;
-    -webkit-font-smoothing:antialiased;
-    background-image:
-      radial-gradient(110% 50% at 84% -10%, color-mix(in srgb,var(--ember) 6%,transparent), transparent 56%);
-    background-attachment:fixed;transition:color .35s ease;}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 32px 130px;}
-  p{margin:0;color:var(--n10);text-wrap:pretty;}
-  b{color:var(--n11);font-weight:600;}
-  a{color:var(--call);text-decoration:none;}
-  code{font-family:var(--mono);font-size:.88em;color:var(--n11);
-    background:color-mix(in srgb,var(--n11) 7%,transparent);padding:1px 6px;border-radius:5px;}
-
-  /* theme switch */
-  .themeswitch{position:fixed;top:18px;right:20px;z-index:80;display:flex;
-    background:color-mix(in srgb,var(--n4) 90%,transparent);border:1px solid var(--n6);
-    border-radius:999px;padding:3px;gap:2px;backdrop-filter:blur(8px);box-shadow:0 6px 22px -10px rgba(0,0,0,.5);}
-  .themeswitch button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--n8);background:transparent;border:0;cursor:pointer;padding:6px 13px;border-radius:999px;display:flex;align-items:center;gap:6px;transition:.2s;}
-  .themeswitch button[aria-pressed="true"]{color:var(--ember-fg);background:var(--ember);}
-  .themeswitch button:not([aria-pressed="true"]):hover{color:var(--n11);}
+  /* top nav */
+  .topnav{display:flex;align-items:center;gap:4px;padding:20px 0;flex-wrap:wrap;}
+  .topnav .home{display:flex;align-items:center;gap:10px;margin-right:auto;}
+  .topnav .seal{width:32px;height:32px;border-radius:4px;background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-weight:700;font-size:17px;transform:rotate(-3deg);}
+  .topnav .nm{font-family:var(--mincho);font-weight:700;font-size:15px;color:var(--n11);}
+  .topnav a.lnk{font-family:var(--mono);font-size:11.5px;color:var(--n9);padding:8px 11px;border-radius:4px;line-height:1;}
+  .topnav a.lnk:hover{color:var(--n11);background:var(--n3);text-decoration:none;}
 
   /* hero */
-  header.top{padding:110px 0 60px;position:relative;}
-  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
-    background:linear-gradient(90deg,var(--ember) 0,var(--ember) 64px,var(--n6) 64px,var(--n6) 100%);}
-  .hero{display:grid;grid-template-columns:auto 1fr;gap:50px;align-items:center;}
-  .hero-mark{position:relative;display:flex;align-items:flex-start;gap:18px;}
-  .hero-kanji{font-family:var(--mincho);font-weight:800;font-size:150px;line-height:.82;color:var(--n11);
-    writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.04em;
-    text-shadow:0 0 60px color-mix(in srgb,var(--ember) 24%,transparent);}
-  .seal{align-self:flex-start;margin-top:8px;width:62px;height:62px;border-radius:11px;flex:0 0 auto;
-    background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;
-    font-family:var(--mincho);font-weight:700;font-size:34px;
-    box-shadow:0 10px 30px -10px color-mix(in srgb,var(--ember) 60%,transparent);transform:rotate(-3deg);}
-  .kicker{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
-  .hero-romaji{font-family:var(--mincho);font-weight:700;font-size:76px;line-height:.9;letter-spacing:-.02em;color:var(--n11);margin-top:16px;}
-  .hero-romaji .dot{color:var(--ember);}
-  .hero-read{font-family:var(--mincho);font-size:19px;color:var(--n9);margin-top:12px;letter-spacing:.1em;}
-  .hero-read b{color:var(--ember);font-weight:600;}
-  .top .sub{margin-top:24px;font-size:17px;line-height:1.55;max-width:600px;color:var(--n10);}
-  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;}
-  .meta{font-family:var(--mono);font-size:11px;color:var(--n9);border:1px solid var(--n6);border-radius:999px;padding:5px 12px;background:var(--n2);}
-  .meta b{color:var(--n11);}
+  .hero{padding:88px 0 72px;display:grid;grid-template-columns:auto 1fr;gap:64px;align-items:center;position:relative;}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule-signature);}
+  @media (max-width:820px){.hero{grid-template-columns:1fr;gap:36px;}}
+  .hero-kanji{font-family:var(--mincho);font-weight:800;font-size:150px;line-height:.84;writing-mode:vertical-rl;text-orientation:upright;height:330px;letter-spacing:.04em;color:var(--n11);
+    text-shadow:0 0 70px color-mix(in srgb,var(--ember) 24%,transparent);}
+  h1{font-family:var(--mincho);font-weight:700;font-size:54px;line-height:1.04;margin:14px 0 0;color:var(--n11);max-width:560px;}
+  .hero .sub{margin-top:20px;font-size:16.5px;line-height:1.62;max-width:540px;color:var(--n10);}
+  .hero .sub b{color:var(--n11);}
+  .cta-row{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap;}
+  .btn{font-family:var(--gothic);font-size:13.5px;font-weight:600;border-radius:5px;padding:12px 18px;line-height:1;display:inline-flex;align-items:center;gap:8px;cursor:pointer;}
+  .btn.solid{background:var(--ember);color:var(--ember-fg);border:1px solid transparent;}
+  .btn.solid:hover{background:color-mix(in srgb,var(--ember) 88%,#000);text-decoration:none;}
+  .btn.outline{background:var(--n1);color:var(--n11);border:1px solid var(--n6);}
+  .btn.outline:hover{border-color:var(--n8);background:var(--n3);text-decoration:none;}
+  .pill-row{display:flex;gap:8px;margin-top:26px;flex-wrap:wrap;}
+  .pill{font-family:var(--mono);font-size:11px;color:var(--n9);border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:var(--n2);line-height:1;white-space:nowrap;}
+  .pill b{color:var(--n11);}
 
-  /* table of contents */
-  .toc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:46px;}
-  .toc a{display:flex;gap:11px;align-items:baseline;padding:13px 15px;border:1px solid var(--n6);border-radius:11px;background:var(--n2);transition:.18s;}
-  .toc a:hover{border-color:var(--ember-line);background:var(--n3);}
-  .toc .tn{font-family:var(--mono);font-size:11px;color:var(--ember);font-weight:600;}
-  .toc .tt{color:var(--n11);font-size:13.5px;}
-  .toc .tk{font-family:var(--mincho);color:var(--n8);font-size:13px;margin-left:auto;}
-
-  /* sections */
-  section{padding:86px 0 0;}
-  .s-head{display:flex;align-items:stretch;gap:22px;margin-bottom:30px;}
-  .s-kanji{position:relative;font-family:var(--mincho);font-weight:800;font-size:58px;line-height:1;color:var(--n11);
-    padding-left:20px;display:flex;align-items:center;}
-  .s-kanji::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:2px;background:var(--ember);}
-  .s-titles{display:flex;flex-direction:column;justify-content:center;gap:5px;}
-  .s-no{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.28em;color:var(--ember);text-transform:uppercase;}
-  .s-titles h2{font-family:var(--mincho);font-weight:700;font-size:31px;letter-spacing:0;margin:0;color:var(--n11);}
-  .s-yomi{font-family:var(--mincho);font-size:14px;color:var(--n8);letter-spacing:.16em;}
-  .lede{font-size:18px;line-height:1.6;color:var(--n10);max-width:760px;margin-bottom:30px;}
+  section{padding:84px 0 0;}
+  .s-kick{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  h2{font-family:var(--mincho);font-weight:700;font-size:32px;margin:10px 0 12px;color:var(--n11);letter-spacing:0;}
+  .lede{font-size:15.5px;line-height:1.62;color:var(--n10);max-width:640px;margin:0 0 28px;}
   .lede b{color:var(--n11);}
 
-  h3{font-family:var(--mincho);font-size:20px;font-weight:700;color:var(--n11);margin:38px 0 12px;}
-  h3:first-child{margin-top:0;}
-  .body p + p{margin-top:14px;}
-  .body{max-width:760px;}
+  /* comparison */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:1080px){.duo{grid-template-columns:1fr;}}
+  .pane{background:var(--n2);border:1px solid var(--line);border-radius:7px;overflow:hidden;}
+  .pane-h{display:flex;align-items:center;gap:9px;padding:9px 14px;background:var(--n1);border-bottom:1px solid var(--line);}
+  .pane-h .tag{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+  .pane-h .note{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--n7);}
+  .code{font-family:var(--mono);font-size:12.5px;line-height:1.9;white-space:pre;padding:12px 16px;overflow-x:auto;color:var(--syn-fg);}
+  /* the loud strawman — a typical rainbow for WHICHEVER ground the site is on,
+     so the only variable in the comparison is the policy, not the ground */
+  .pane.loud{--l-kw:#ff79c6;--l-fn:#50fa7b;--l-str:#f1fa8c;--l-num:#bd93f9;--l-ty:#8be9fd;--l-op:#ffb86c;--l-cm:#6272a4;--l-pn:#f8f8f2;}
+  :root[data-theme="light"] .pane.loud{--l-kw:#af00db;--l-fn:#795e26;--l-str:#a31515;--l-num:#098658;--l-ty:#267f99;--l-op:#0000ff;--l-cm:#008000;--l-pn:#24292e;}
+  .loud .lk{color:var(--l-kw);font-weight:700;} .loud .lf{color:var(--l-fn);} .loud .ls{color:var(--l-str);}
+  .loud .ln2{color:var(--l-num);} .loud .lt{color:var(--l-ty);font-style:italic;} .loud .lo{color:var(--l-op);} .loud .lc{color:var(--l-cm);} .loud .lp{color:var(--l-pn);}
+  /* okibi band 1 */
+  .k{color:var(--syn-keyword);} .c{color:var(--syn-call);} .cD{color:var(--syn-call);font-weight:700;}
+  .s{color:var(--syn-string);} .n{color:var(--syn-number);} .bt{color:var(--syn-builtin);} .m{color:var(--syn-member);}
+  .t{color:var(--syn-type);} .o{color:var(--syn-operator);} .p{color:var(--syn-punct);} .x{color:var(--syn-comment);font-style:italic;}
+  .fl{color:var(--flow-fg);font-weight:700;}
+  .verdict{margin-top:14px;font-size:14px;color:var(--n9);max-width:640px;}
+  .verdict b{color:var(--n11);}
 
-  /* principle cards */
-  .principles{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  .pr{border:1px solid var(--n6);border-radius:13px;padding:22px 22px 24px;background:var(--n2);position:relative;overflow:hidden;}
-  .pr .pk{font-family:var(--mincho);font-size:30px;color:var(--ember);line-height:1;}
-  .pr h4{font-family:var(--mincho);font-size:18px;font-weight:700;color:var(--n11);margin:14px 0 8px;}
-  .pr p{font-size:14px;line-height:1.55;}
-  .pr .pn{position:absolute;top:18px;right:20px;font-family:var(--mono);font-size:11px;color:var(--n7);}
+  /* budget bar */
+  .bar{display:flex;height:44px;border-radius:6px;overflow:hidden;border:1px solid var(--line);max-width:860px;}
+  .bar i{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .legend{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;}
+  .li{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;color:var(--n9);}
+  .li i{width:10px;height:10px;border-radius:2px;}
+  .laws3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:26px;max-width:860px;}
+  .law{border:1px solid var(--line);border-radius:7px;background:var(--n2);padding:14px 17px;font-size:13px;line-height:1.5;color:var(--n9);}
+  .law b{display:block;color:var(--n11);font-family:var(--mincho);font-size:15px;margin-bottom:4px;font-weight:700;}
 
-  /* ground split */
-  .grounds{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  .gr{border:1px solid var(--n6);border-radius:13px;overflow:hidden;}
-  .gr .gtop{padding:26px 24px 22px;}
-  .gr.dark .gtop{background:oklch(0.185 0.005 250);color:oklch(0.915 0.004 250);}
-  .gr.light .gtop{background:oklch(0.945 0.007 80);color:oklch(0.18 0.008 80);}
-  .gr .gname{font-family:var(--mincho);font-size:24px;font-weight:700;display:flex;align-items:baseline;gap:10px;}
-  .gr .gname .k{font-size:20px;opacity:.6;}
-  .gr .gdesc{font-size:13.5px;line-height:1.5;margin-top:8px;opacity:.8;}
-  .gr .gswatch{display:flex;height:34px;}
-  .gr .gswatch i{flex:1;}
-  .gr .gfoot{padding:13px 16px;font-family:var(--mono);font-size:11px;color:var(--n9);background:var(--n2);border-top:1px solid var(--n6);}
+  /* phase demo */
+  .demo{max-width:860px;}
+  .seg{display:inline-flex;background:var(--n1);border:1px solid var(--line);border-radius:5px;padding:3px;gap:2px;margin-bottom:12px;}
+  .seg button{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--n8);background:transparent;border:0;cursor:pointer;padding:8px 14px;border-radius:3px;display:flex;align-items:center;gap:7px;line-height:1;transition:background .16s,color .16s;}
+  .seg button .kj{font-family:var(--mincho);}
+  .seg button:hover{color:var(--n11);}
+  .seg button[aria-pressed="true"]{background:var(--ember);color:var(--ember-fg);}
+  .dpane{background:var(--n2);border:1px solid var(--line);border-radius:7px;overflow:hidden;}
+  .dcode{font-family:var(--mono);font-size:12.5px;line-height:1.95;white-space:normal;padding:12px 0;overflow-x:auto;}
+  .dl2{white-space:pre;}
+  .dl2{display:block;padding:0 18px;position:relative;color:var(--syn-fg);}
+  .dcap{display:flex;gap:10px;align-items:baseline;padding:11px 16px;border-top:1px solid var(--line);background:var(--n1);}
+  .dcap .ph{font-family:var(--mincho);font-size:14px;color:var(--ember);flex:0 0 auto;}
+  .dcap p{font-size:12.5px;line-height:1.5;color:var(--n9);}
+  .dcap p b{color:var(--n11);}
+  .scope-flag{position:absolute;right:12px;top:3px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember);background:var(--ember-soft);border:1px solid var(--ember-line);border-radius:3px;padding:2px 7px;display:none;}
+  /* band gating */
+  .m-focus .id6,.m-edit .id6{color:var(--id-6);}
+  .m-focus .id7,.m-edit .id7{color:var(--id-7);}
+  .m-focus .idg1,.m-edit .idg1{color:var(--idg-1);font-weight:600;}
+  .m-focus .idg5,.m-edit .idg5{color:var(--idg-5);font-weight:600;}
+  .m-focus .dl2.fb,.m-edit .dl2.fb{background:color-mix(in srgb,var(--n11) 2%,transparent);box-shadow:inset 2px 0 0 var(--ember-line);}
+  .m-focus .scope-flag,.m-edit .scope-flag{display:inline-block;}
+  .m-focus .nE,.m-edit .nE{color:var(--syn-number-engaged);}
+  .m-edit .d-ow{text-decoration:underline dashed var(--risk-escape);text-decoration-thickness:1.5px;text-underline-offset:3px;}
+  .m-edit .d-async{color:var(--risk-async);}
 
-  /* token table */
-  .tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px;}
-  .tbl th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);
-    font-weight:600;padding:0 10px 10px;border-bottom:1px solid var(--n6);}
-  .tbl td{padding:8px 10px;border-bottom:1px solid color-mix(in srgb,var(--n6) 55%,transparent);vertical-align:middle;}
-  .tbl tr:last-child td{border-bottom:0;}
-  .tbl .sw{width:26px;}
-  .tbl .sw i{width:22px;height:22px;border-radius:6px;display:block;border:1px solid color-mix(in srgb,var(--n11) 14%,transparent);}
-  .tbl .tk{font-family:var(--mono);font-weight:600;color:var(--n11);white-space:nowrap;}
-  .tbl .hx{font-family:var(--mono);font-size:11.5px;color:var(--n9);white-space:nowrap;}
-  .tbl .ok{font-family:var(--mono);font-size:10.5px;color:var(--n8);white-space:nowrap;}
-  .tbl .ro{color:var(--n10);font-size:13px;}
-  .tbl .jp{font-family:var(--mincho);color:var(--n11);}
+  /* surfaces */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+  a.tile{border:1px solid var(--line);border-radius:7px;background:var(--n2);padding:16px 18px;display:flex;flex-direction:column;gap:12px;color:var(--n9);}
+  a.tile:hover{border-color:var(--n8);text-decoration:none;}
+  .tile .mini{height:86px;border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:4px;background:var(--n1);padding:10px 12px;overflow:hidden;position:relative;}
+  .tile h4{font-family:var(--mincho);font-size:15.5px;font-weight:700;color:var(--n11);margin:0;}
+  .tile p{font-size:12px;line-height:1.5;flex:1;}
+  .tile .go{font-family:var(--mono);font-size:10.5px;color:var(--call);}
+  .mini .mk{position:relative;font-family:var(--mincho);font-weight:800;font-size:24px;color:var(--n11);padding-left:9px;line-height:1.1;}
+  .mini .mk::before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:2.5px;border-radius:2px;background:var(--ember);}
+  .mini .tx{height:5px;border-radius:2px;background:var(--n5);margin-top:8px;width:82%;}
+  .mini .tx.s2{width:60%;}
+  .mini .tabs2{display:flex;gap:5px;margin-bottom:8px;}
+  .mini .tab2{height:9px;width:38px;border-radius:2px;background:var(--n3);}
+  .mini .tab2.on{background:var(--n4);box-shadow:inset 0 1.5px 0 var(--ember);}
+  .mini .cl{font-family:var(--mono);font-size:9.5px;line-height:1.8;white-space:pre;}
+  .mini .term{font-family:var(--mono);font-size:10px;line-height:1.75;white-space:pre;}
+  .mini .slide{position:absolute;inset:10px 12px;background:var(--n0);border:1px solid var(--line);border-radius:3px;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .mini .slide .sk{font-family:var(--mincho);font-weight:800;font-size:18px;color:var(--n11);}
+  .mini .slide .sl2{font-family:var(--mono);font-size:7.5px;letter-spacing:.2em;color:var(--ember);text-transform:uppercase;}
 
-  /* role / syntax demo */
-  .demo{border:1px solid var(--n6);border-radius:13px;overflow:hidden;background:var(--n1);margin-top:8px;}
-  .demo-head{display:flex;align-items:center;gap:9px;padding:10px 16px;background:var(--n2);border-bottom:1px solid var(--n6);}
-  .demo-head .dt{width:8px;height:8px;border-radius:2px;background:var(--call);}
-  .demo-head .fn{font-family:var(--mono);font-size:11.5px;color:var(--n9);}
-  .demo-head .lg{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
-  .demo-body{display:flex;}
-  .demo-gutter{flex:0 0 auto;padding:16px 0;text-align:right;color:var(--n7);font:500 12.5px/1.85 var(--mono);user-select:none;}
-  .demo-gutter .g{padding:0 12px 0 18px;}
-  .demo-code{flex:1;padding:16px 16px;font:400 12.5px/1.85 var(--mono);white-space:pre;overflow-x:auto;color:var(--n11);}
-  .t-var{color:var(--n11);} .t-call{color:var(--call);} .t-type{color:var(--type);} .t-prop{color:var(--prop);}
-  .t-str{color:var(--str);} .t-num{color:var(--num);} .t-kw{color:var(--kw);} .t-cm{color:var(--n8);font-style:italic;}
-  .t-op{color:var(--n10);} .t-pn{color:var(--n7);}
+  /* take */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;max-width:760px;}
+  a.chip{font-family:var(--mono);font-size:11.5px;color:var(--n10);border:1px solid var(--line);border-radius:999px;padding:9px 14px;background:var(--n2);line-height:1;display:inline-flex;gap:7px;align-items:center;}
+  a.chip:hover{border-color:var(--n8);color:var(--n11);text-decoration:none;}
+  a.chip .g2{color:var(--n7);}
+  .llmcard{margin-top:18px;border:1px solid var(--ember-line);background:var(--ember-soft);border-radius:7px;padding:16px 19px;display:flex;gap:13px;max-width:760px;}
+  .llmcard .ci{font-family:var(--mincho);font-size:20px;color:var(--ember);line-height:1;}
+  .llmcard p{font-size:13.5px;line-height:1.55;color:var(--n10);}
+  .llmcard b{color:var(--n11);}
 
-  /* attention ladder */
-  .ladder{display:flex;flex-direction:column;gap:0;border:1px solid var(--n6);border-radius:13px;overflow:hidden;background:var(--n2);}
-  .rung{display:flex;align-items:center;gap:16px;padding:14px 18px;border-bottom:1px solid color-mix(in srgb,var(--n6) 55%,transparent);}
-  .rung:last-child{border-bottom:0;}
-  .rung .lvl{font-family:var(--mono);font-size:11px;color:var(--n7);width:18px;flex:0 0 auto;text-align:right;}
-  .rung .bar{height:9px;border-radius:5px;flex:0 0 auto;}
-  .rung .rname{font-weight:600;color:var(--n11);font-size:14px;width:140px;flex:0 0 auto;}
-  .rung .rdesc{font-size:13px;color:var(--n9);}
-  @media (max-width:680px){ .rung .rdesc{display:none;} }
+  /* closer */
+  .closer{margin:96px 0 0;padding:56px 0 72px;border-top:1px solid var(--line);text-align:center;}
+  .closer .cseal{width:56px;height:56px;border-radius:6px;background:var(--ember);color:var(--ember-fg);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mincho);font-weight:700;font-size:29px;transform:rotate(-3deg);box-shadow:0 10px 30px -10px var(--ember-line);}
+  .closer .jp{font-family:var(--mincho);font-size:20px;color:var(--n10);margin-top:22px;}
+  .closer .en{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);margin-top:8px;}
+  .closer .cta-row{justify-content:center;}
 
-  /* scope mapping table — monospace dense */
-  .scopes{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px;}
-  .scopes th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--n8);font-weight:600;padding:0 12px 9px;border-bottom:1px solid var(--n6);}
-  .scopes td{padding:9px 12px;border-bottom:1px solid color-mix(in srgb,var(--n6) 50%,transparent);vertical-align:top;}
-  .scopes tr:last-child td{border-bottom:0;}
-  .scopes .role{font-family:var(--mono);font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:8px;}
-  .scopes .role i{width:11px;height:11px;border-radius:3px;flex:0 0 auto;}
-  .scopes .sc{font-family:var(--mono);font-size:11.5px;color:var(--n10);line-height:1.7;}
-  .scopes .sc em{color:var(--n8);font-style:normal;}
-  .scopes .note{color:var(--n9);font-size:12px;}
-
-  /* callout */
-  .callout{border:1px solid var(--ember-line);background:var(--ember-soft);border-radius:12px;padding:18px 20px;margin-top:22px;display:flex;gap:14px;}
-  .callout .ci{font-family:var(--mincho);font-size:22px;color:var(--ember);line-height:1;flex:0 0 auto;}
-  .callout p{color:var(--n10);font-size:14px;line-height:1.55;}
-  .callout b{color:var(--n11);}
-
-  /* do / don't */
-  .rules{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
-  .rule{border:1px solid var(--n6);border-radius:12px;padding:18px 20px;background:var(--n2);}
-  .rule h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
-  .rule.do h4{color:var(--ok);} .rule.dont h4{color:var(--err);}
-  .rule ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
-  .rule li{font-size:13.5px;color:var(--n10);padding-left:18px;position:relative;line-height:1.45;}
-  .rule li::before{position:absolute;left:0;top:0;font-family:var(--mono);}
-  .rule.do li::before{content:"+";color:var(--ok);} .rule.dont li::before{content:"–";color:var(--err);}
-
-  /* surface guidance */
-  .surfaces{display:flex;flex-direction:column;gap:14px;}
-  .surf{border:1px solid var(--n6);border-radius:13px;padding:0;overflow:hidden;background:var(--n2);}
-  .surf-head{display:flex;align-items:baseline;gap:14px;padding:18px 22px 14px;}
-  .surf-head .sk{font-family:var(--mincho);font-size:26px;color:var(--ember);line-height:1;}
-  .surf-head h4{font-size:17px;color:var(--n11);margin:0;font-weight:600;}
-  .surf-head .tag{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--n8);}
-  .surf-body{padding:0 22px 20px;font-size:14px;color:var(--n10);line-height:1.55;}
-  .surf-body p + p{margin-top:10px;}
-  .surf-body .map{font-family:var(--mono);font-size:12px;color:var(--n9);margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;}
-  .surf-body .map span{border:1px solid var(--n6);border-radius:6px;padding:3px 9px;background:var(--n3);}
-
-  /* ansi grid */
-  .ansi{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:14px;}
-  .ansi .c{border-radius:7px;overflow:hidden;border:1px solid color-mix(in srgb,var(--n11) 10%,transparent);}
-  .ansi .c .sw{height:30px;}
-  .ansi .c .lb{font-family:var(--mono);font-size:9px;color:var(--n9);padding:4px 6px;background:var(--n3);text-align:center;}
-  @media (max-width:680px){ .ansi{grid-template-columns:repeat(4,1fr);} }
-
-  footer{margin-top:90px;padding-top:24px;border-top:1px solid var(--n6);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-  footer .fl{font-family:var(--mincho);font-size:15px;color:var(--n9);}
-  footer .fr{font-family:var(--mono);font-size:11px;color:var(--n8);}
-
-  @media (max-width:880px){
-    .principles,.grounds,.rules,.toc{grid-template-columns:1fr;}
-    .hero{grid-template-columns:1fr;gap:30px;} .hero-kanji{font-size:104px;} .hero-romaji{font-size:54px;}
-  }
+  .themeswitch{display:flex;margin-left:14px;background:color-mix(in srgb,var(--n4) 90%,transparent);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;backdrop-filter:blur(8px);box-shadow:var(--shadow-float);}
+  .themeswitch button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--n8);background:transparent;border:0;cursor:pointer;padding:8px 13px;border-radius:999px;display:flex;align-items:center;gap:6px;transition:.2s;line-height:1;}
+  .themeswitch button[aria-pressed="true"]{color:var(--ember-fg);background:var(--ember);}
 </style>
-<meta name="description" content="The canonical design specification for Okibi — a colour system for code and the interfaces around it. A single ember, a twelve-step ash spine, and an attention-first syntax model, in two grounds: Okibi (dark) and Akari (light)." />
-<meta name="color-scheme" content="dark light" />
-<meta name="theme-color" content="#07080a" media="(prefers-color-scheme: dark)" />
-<meta name="theme-color" content="#e1ddd8" media="(prefers-color-scheme: light)" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Okibi 燠火 — Design Specification" />
-<meta property="og:description" content="The canonical design specification for Okibi — a colour system for code and the interfaces around it. A single ember, a twelve-step ash spine, and an attention-first syntax model, in two grounds: Okibi (dark) and Akari (light)." />
-<meta property="og:image" content="og-image.png" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Okibi 燠火 — Design Specification" />
-<meta name="twitter:description" content="The canonical design specification for Okibi — a colour system for code and the interfaces around it. A single ember, a twelve-step ash spine, and an attention-first syntax model, in two grounds: Okibi (dark) and Akari (light)." />
-<meta name="twitter:image" content="og-image.png" />
-<style>
-  /* published-site additions */
-  footer a{color:var(--n9);border-bottom:1px solid color-mix(in srgb,var(--n6) 80%,transparent);transition:color .15s ease,border-color .15s ease;}
-  footer a:hover{color:var(--ember);border-color:var(--ember);}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:8px;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *,*::before,*::after{transition-duration:.001ms!important;animation-duration:.001ms!important;}
-  }
-</style>
-<script>
-  /* no-flash theme bootstrap — mirrors the page's own theme script (default dark) */
-  (function(){try{if(localStorage.getItem('okibi-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();
-</script>
 </head>
-<body>
-
-<div class="themeswitch" role="group" aria-label="Color mode">
-  <button type="button" data-set="dark" aria-pressed="true"><span>◐</span>Okibi</button>
-  <button type="button" data-set="light" aria-pressed="false"><span>◑</span>Akari</button>
-</div>
+<body class="okibi-ground">
 
 <div class="wrap">
 
-  <header class="top">
-    <div class="hero">
-      <div class="hero-mark">
-        <span class="hero-kanji">燠火</span>
-        <span class="seal" title="hanko">燠</span>
+  <nav class="topnav" data-screen-label="Top nav">
+    <!-- theme switch moved into flow at the end of this nav -->
+    <span class="home"><span class="seal">燠</span><span class="nm">Okibi</span></span>
+    <a class="lnk" href="doctrine.html">Doctrine</a>
+    <a class="lnk" href="foundations.html">Foundations</a>
+    <a class="lnk" href="code.html">Code</a>
+    <a class="lnk" href="markdown.html">Markdown</a>
+    <a class="lnk" href="tools.html">Tools</a>
+    <a class="lnk" href="for-llms.html">For LLMs</a>
+    <div class="themeswitch" role="group" aria-label="Color mode">
+      <button type="button" data-set="dark" aria-pressed="true"><span>◐</span>Okibi</button>
+      <button type="button" data-set="light" aria-pressed="false"><span>◑</span>Akari</button>
+    </div>
+  </nav>
+
+  <header class="hero" data-screen-label="Hero">
+    <span class="hero-kanji">燠火</span>
+    <div>
+      <div class="kicker">okibi — banked embers · a design language</div>
+      <h1>Calm at rest.<br>Salient on demand.</h1>
+      <p class="sub">Okibi is built on one claim: <b>a theme is an attention-allocation policy.</b> Twelve steps of charcoal, one warm ember, a handful of quiet pigments — and code highlighting that engages only when you do. For screens you stare at for hours.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="doctrine.html">Read the doctrine →</a>
+        <a class="btn outline" href="tools.html">Steal the tokens</a>
       </div>
-      <div class="hero-meta">
-        <div class="kicker">Design Specification · v1.0</div>
-        <div class="hero-romaji">Okibi<span class="dot">.</span></div>
-        <div class="hero-read">おきび — <b>banked embers</b>, the coal that holds the fire</div>
-        <p class="sub">A colour system for code and the interfaces around it. Built on one principle — that attention is the only budget worth spending — and dressed in the restraint of charcoal, ash, and a single ember. This is the canonical reference: the philosophy, the palette, and enough of the syntax model to re-implement it anywhere.</p>
-        <div class="meta-row">
-          <span class="meta">Two grounds · <b>燠 Okibi</b> / <b>灯り Akari</b></span>
-          <span class="meta">Colour space · <b>OKLCH</b></span>
-          <span class="meta">Key · <b>晴 clear</b></span>
-        </div>
+      <div class="pill-row">
+        <span class="pill">Grounds · <b>Okibi dark / Akari light</b></span>
+        <span class="pill">Scope · <b>web · docs · apps · editors · terminals</b></span>
+        <span class="pill">v1.8 · <b>oklch</b></span>
       </div>
     </div>
-
   </header>
 
-  <!-- 00 PHILOSOPHY -->
-  <section id="philosophy">
-    <div class="s-head"><div class="s-kanji">理</div><div class="s-titles"><span class="s-no">00 · ri</span><h2>Philosophy</h2><span class="s-yomi">り · the reasoning</span></div></div>
-    <div class="body">
-      <p class="lede">Most syntax themes inherit their colours from language authors — people who spent years obsessing over keywords and type systems, and who naturally want those highlighted. Okibi steps back and asks a different question: <b>when you look at code, what do you actually need to see?</b></p>
-      <p>The answer is rarely the keywords. Every language is Turing-complete; the <code>if</code>, the <code>func</code>, the <code>const</code> are the most boring, most repeated, most predictable tokens on the screen. What you reach for is what the program <b>does</b> — its data and its transformations. The variables. The calls. The values flowing through. Okibi is built to put those first and let the scaffolding recede.</p>
-      <p>So colour here is not decoration and not a taxonomy of grammar. It is an <b>attention budget</b>. Every hue spent is attention drawn; spend it only where it earns focus. The result is a surface that reads almost like prose — calm, mostly monochrome — with colour arriving exactly where meaning lives.</p>
+  <section data-screen-label="Problem">
+    <div class="s-kick">the problem</div>
+    <h2>Most themes shout, all the time</h2>
+    <p class="lede">Traditional highlighting colours the <b>grammar</b> — every keyword, every type, every bracket, lit all day, whether you're reading or not. Every element lit dims every other. Salience spent everywhere is salience spent nowhere.</p>
+    <div class="duo">
+      <div class="pane loud">
+        <div class="pane-h"><span class="tag" style="color:var(--n9)">a typical theme</span><span class="note">every token lit</span></div>
+        <div class="code"><span class="lc">// six hues before you've read a word</span>
+<span class="lk">export</span> <span class="lk">async</span> <span class="lk">function</span> <span class="lf">resolve</span><span class="lp">(</span><span class="lo">name</span><span class="lp">:</span> <span class="lt">string</span><span class="lp">,</span> <span class="lo">scale</span> <span class="lp">=</span> <span class="ln2">1</span><span class="lp">)</span> <span class="lp">{</span>
+  <span class="lk">const</span> <span class="lo">theme</span> <span class="lp">=</span> <span class="lo">registry</span><span class="lp">.</span><span class="lf">get</span><span class="lp">(</span><span class="lo">name</span><span class="lp">);</span>
+  <span class="lk">if</span> <span class="lp">(</span><span class="lo">theme</span><span class="lp">.</span><span class="lo">dirty</span> <span class="lp">===</span> <span class="ln2">true</span><span class="lp">)</span> <span class="lk">throw</span> <span class="lk">new</span> <span class="lt">Error</span><span class="lp">(</span><span class="ls">"stale"</span><span class="lp">);</span>
+  <span class="lk">return</span> <span class="lo">theme</span><span class="lp">;</span>
+<span class="lp">}</span></div>
+      </div>
+      <div class="pane">
+        <div class="pane-h"><span class="tag" style="color:var(--ember)">okibi, at rest</span><span class="note">charcoal + one blue + a whisper of green</span></div>
+        <div class="code"><span class="x">// the data is the text; scaffolding recedes</span>
+<span class="k">export async function</span> <span class="cD">resolve</span><span class="p">(</span>name<span class="p">:</span> <span class="t">string</span><span class="p">,</span> scale <span class="o">=</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> theme <span class="o">=</span> registry<span class="p">.</span><span class="c">get</span><span class="p">(</span>name<span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span>theme<span class="p">.</span><span class="m">dirty</span> <span class="o">===</span> <span class="bt">true</span><span class="p">)</span> <span class="fl">throw</span> <span class="k">new</span> <span class="t">Error</span><span class="p">(</span><span class="s">"stale"</span><span class="p">);</span>
+  <span class="fl">return</span> theme<span class="p">;</span>
+<span class="p">}</span></div>
+      </div>
+    </div>
+    <p class="verdict">Same code. On the right, <b>calls carry the one strong hue</b>, keywords and brackets recede into the spine, and <code>true</code> keeps its red because a decision is worth more than a digit. Nothing shouts — so the little that speaks, means.</p>
+  </section>
 
-      <h3>Coal &amp; ash, one ember · 燠火</h3>
-      <p>The name is <i>okibi</i> — banked embers, the glowing coals that hold a fire through the night. The visual world follows: a deep charcoal ground, a long ash-grey ramp for everything structural, and a single warm <b>ember</b> that is the one point of heat in the whole system. The ember is sacred — it marks <b>focus and action only</b> (the cursor, the active element, the primary button) and never colours a token. Where there is fire, there is intent.</p>
-
-      <h3>Glow in the dark, not in your face</h3>
-      <p>The accent hues are drawn from traditional Japanese pigment — but read through an action-anime night rather than a tea ceremony. They should feel like light sources in the dark: fresh, a little electric, confident. <b>Tasteful, never loud.</b> Saturation is earned, not sprayed; a colour that appears everywhere stops meaning anything. Restraint is the whole point — when nearly everything is ash, the few colours that remain carry real weight.</p>
-
-      <h3>Two grounds, one discipline</h3>
-      <p>Okibi (charcoal) and <b>Akari 灯り</b> (paper light) are not two themes — they are one system seen by two lights. The same roles, the same relationships, the same restraint; only the ground inverts. Dark leans faintly cool (the blue of dusk on coal); light leans faintly warm (washi paper). A design that holds in one holds in the other.</p>
+  <section data-screen-label="Budget">
+    <div class="s-kick">the doctrine, in one picture</div>
+    <h2>Salience is a budget</h2>
+    <p class="lede">A healthy view spends almost nothing at rest. Structure rides <b>luminance and weight</b> — high-bandwidth, colour-blind-safe — and hue is rationed to a few meanings. The ember appears once or twice per screen: focus and action, never decoration.</p>
+    <div class="bar">
+      <i style="flex:85;background:var(--n2);color:var(--n8)">ground · ~85%</i>
+      <i style="flex:12;background:var(--n5);color:var(--n10)">structure</i>
+      <i style="flex:2.5;background:var(--call)"></i>
+      <i style="flex:0.8;background:var(--ember)"></i>
+    </div>
+    <div class="legend">
+      <span class="li"><i style="background:var(--n2);border:1px solid var(--line)"></i>ground — surfaces &amp; body text</span>
+      <span class="li"><i style="background:var(--n5)"></i>structure — borders, labels, gutters</span>
+      <span class="li"><i style="background:var(--call)"></i>meaning — the quiet pigments, ~3%</span>
+      <span class="li"><i style="background:var(--ember)"></i>the ember — &lt;1%</span>
+    </div>
+    <div class="laws3">
+      <div class="law"><b>One ember, kept sacred</b>Cursor, active tab, primary action. Never a token, never a link, never decoration.</div>
+      <div class="law"><b>Redundant where it counts</b>Anything that must be told apart carries shape or weight beside hue — it works in monochrome.</div>
+      <div class="law"><b>Transitions are cuts</b>Nothing fades, pulses, or slides. State changes on intentional boundaries, never on drift.</div>
     </div>
   </section>
 
-  <!-- 01 PRINCIPLES -->
-  <section id="principles">
-    <div class="s-head"><div class="s-kanji">則</div><div class="s-titles"><span class="s-no">01 · soku</span><h2>Principles</h2><span class="s-yomi">そく · the rules to build by</span></div></div>
-    <div class="principles">
-      <div class="pr"><span class="pn">01</span><div class="pk">焦</div><h4>Attention is the budget</h4><p>Colour draws the eye. Spend it only on what deserves focus — data and transformations first, scaffolding last. If everything is highlighted, nothing is.</p></div>
-      <div class="pr"><span class="pn">02</span><div class="pk">灰</div><h4>Default to ash</h4><p>~85% of any surface is the neutral ramp. Structure — panels, borders, keywords, types — recedes into grey. Neutral is the canvas, not a fallback.</p></div>
-      <div class="pr"><span class="pn">03</span><div class="pk">燠</div><h4>One ember, kept sacred</h4><p>A single warm accent marks focus and primary action. It never colours a syntax token and rarely appears more than once or twice per screen.</p></div>
-      <div class="pr"><span class="pn">04</span><div class="pk">少</div><h4>Few hues, far apart</h4><p>Three or four meaning-colours, each on a distinct part of the wheel and at one shared intensity. No crowding, no near-duplicates competing.</p></div>
-      <div class="pr"><span class="pn">05</span><div class="pk">意</div><h4>Colour carries meaning</h4><p>A hue always means the same thing across the whole system — chrome and code alike. Green is a string and a success; blue is a call and a link. One source of truth.</p></div>
-      <div class="pr"><span class="pn">06</span><div class="pk">静</div><h4>Calm over clever</h4><p>No italics-as-decoration, no bold keywords shouting, no rainbow brackets. The surface should feel quiet enough to read for hours.</p></div>
+  <section data-screen-label="Phases">
+    <div class="s-kick">the novel part</div>
+    <h2>Highlighting that follows intent</h2>
+    <p class="lede">Code colouring is <b>three cumulative bands</b> gated by what you're doing. Reading a file is not editing a line — so the theme doesn't pretend it is. Click through the phases:</p>
+    <div class="demo" id="demo">
+      <div class="seg" role="group" aria-label="Phase">
+        <button type="button" data-ph="survey"><span class="kj">構</span>Survey</button>
+        <button type="button" data-ph="focus" aria-pressed="true"><span class="kj">流</span>Focus</button>
+        <button type="button" data-ph="edit"><span class="kj">異</span>Edit</button>
+      </div>
+      <div class="dpane m-focus" id="dpane">
+        <div class="dcode"><span class="dl2"><span class="x">// module state, far above…</span></span>
+<span class="dl2"><span class="k">const</span> <span class="idg1">registry</span> <span class="o">=</span> <span class="k">new</span> <span class="t">Map</span><span class="p">();</span>  <span class="k">let</span> <span class="idg5">hits</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span></span>
+<span class="dl2"> </span>
+<span class="dl2 fb"><span class="k">export async function</span> <span class="cD">resolve</span><span class="p">(</span><span class="id6">name</span><span class="p">,</span> scale <span class="o">=</span> <span class="nE">1</span><span class="p">)</span> <span class="p">{</span><span class="scope-flag">focused scope</span></span>
+<span class="dl2 fb">  <span class="k">let</span> <span class="id7">theme</span> <span class="o">=</span> <span class="idg1">registry</span><span class="p">.</span><span class="c">get</span><span class="p">(</span><span class="id6">name</span><span class="p">);</span></span>
+<span class="dl2 fb">  <span class="k">if</span> <span class="p">(</span><span class="id7">theme</span><span class="p">)</span> <span class="p">{</span> <span class="idg5 d-ow">hits</span> <span class="o">+=</span> <span class="nE">1</span><span class="p">;</span> <span class="fl">return</span> <span class="id7">theme</span><span class="p">;</span> <span class="p">}</span></span>
+<span class="dl2 fb">  <span class="id7">theme</span> <span class="o">=</span> <span class="fl d-async">await</span> <span class="c">load</span><span class="p">(</span><span class="id6">name</span><span class="p">);</span></span>
+<span class="dl2 fb">  <span class="idg1 d-ow">registry</span><span class="p">.</span><span class="c">set</span><span class="p">(</span><span class="id6">name</span><span class="p">,</span> <span class="id7">theme</span><span class="p">);</span></span>
+<span class="dl2 fb">  <span class="fl">return</span> <span class="id7">theme</span><span class="p">;</span></span>
+<span class="dl2 fb"><span class="p">}</span></span></div>
+        <div class="dcap"><span class="ph" id="dph">流</span><p id="dcap"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Surfaces">
+    <div class="s-kick">one language</div>
+    <h2>Every surface, the same physics</h2>
+    <p class="lede">The same spine, ember and type discipline carries documents, applications, slides, terminals and prose. These are complete, working pages — not mockups of mockups.</p>
+    <div class="tiles">
+      <a class="tile" href="ui_kits/document/index.html">
+        <span class="mini"><span class="mk">墨</span><span class="tx"></span><span class="tx s2"></span></span>
+        <h4>Documents</h4><p>Kanji title-cards, the signature rule, prose at measure.</p><span class="go">open the template →</span>
+      </a>
+      <a class="tile" href="ui_kits/editor/index.html">
+        <span class="mini"><span class="tabs2"><span class="tab2 on"></span><span class="tab2"></span><span class="tab2"></span></span><span class="cl"><span class="k">const</span> theme <span class="o">=</span> <span class="c">get</span><span class="p">(</span>name<span class="p">);</span>
+<span class="fl">return</span> theme<span class="p">;</span></span></span>
+        <h4>Editor</h4><p>The workbench, with the three phases live behind a switch.</p><span class="go">open the workbench →</span>
+      </a>
+      <a class="tile" href="ui_kits/deck/index.html">
+        <span class="mini"><span class="slide"><span class="sk">燠</span><span class="sl2">01 · sumi</span></span></span>
+        <h4>Decks</h4><p>Five 1920×1080 layouts; one ember note per slide.</p><span class="go">open the deck →</span>
+      </a>
+      <a class="tile" href="markdown.html">
+        <span class="mini"><span class="term"><span style="color:var(--n7)">#</span> <span style="color:var(--n11);font-weight:700">Field notes</span>
+<span style="color:var(--n7)">-</span> sigils recede
+<span style="color:var(--n7)">- [</span><span style="color:var(--ok)">x</span><span style="color:var(--n7)">]</span> <span style="color:var(--n8);text-decoration:line-through">done</span></span></span>
+        <h4>Markdown</h4><p>Prose is content, sigils are furniture — Obsidian-ready.</p><span class="go">see the register →</span>
+      </a>
     </div>
   </section>
 
-  <!-- 02 GROUNDS -->
-  <section id="grounds">
-    <div class="s-head"><div class="s-kanji">地</div><div class="s-titles"><span class="s-no">02 · ji</span><h2>Two grounds</h2><span class="s-yomi">じ · the field beneath everything</span></div></div>
-    <p class="lede">One system, two lights. Pick the ground for the room; everything else follows the same rules.</p>
-    <div class="grounds">
-      <div class="gr dark">
-        <div class="gtop">
-          <div class="gname">Okibi <span class="k">燠火</span></div>
-          <div class="gdesc">Banked-ember charcoal. A faintly cool blue-black (hue 250) so the darks tie to the cool accents. For night, for focus, for long sessions.</div>
-        </div>
-        <div class="gswatch">
-          <i style="background:oklch(0.135 0.005 250)"></i><i style="background:oklch(0.205 0.005 250)"></i><i style="background:oklch(0.305 0.006 250)"></i><i style="background:oklch(0.545 0.006 250)"></i><i style="background:oklch(0.80 0.005 250)"></i><i style="background:oklch(0.915 0.004 250)"></i>
-        </div>
-        <div class="gfoot">ground #07080a · text #e1e3e5</div>
-      </div>
-      <div class="gr light">
-        <div class="gtop">
-          <div class="gname">Akari <span class="k">灯り</span></div>
-          <div class="gdesc">Washi paper light. A faintly warm off-white (hue 80) — never clinical white. The same discipline inverted, for daylight and print.</div>
-        </div>
-        <div class="gswatch">
-          <i style="background:oklch(0.90 0.008 80)"></i><i style="background:oklch(0.945 0.007 80)"></i><i style="background:oklch(0.86 0.010 80)"></i><i style="background:oklch(0.63 0.011 80)"></i><i style="background:oklch(0.36 0.009 80)"></i><i style="background:oklch(0.18 0.008 80)"></i>
-        </div>
-        <div class="gfoot">ground #e1ddd8 · text #13110e</div>
-      </div>
+  <section data-screen-label="Take">
+    <div class="s-kick">take it with you</div>
+    <h2>Built to be stolen from</h2>
+    <p class="lede">Everything is generated from one token source — oklch in CSS custom properties, resolved hex everywhere else. Grab an artifact, or point a tool at the whole system.</p>
+    <div class="chips">
+      <a class="chip" href="exports/vscode/okibi-dark-color-theme.json"><span class="g2">⬡</span>VS Code theme</a>
+      <a class="chip" href="exports/obsidian/okibi-snippet.css"><span class="g2">◈</span>Obsidian snippet</a>
+      <a class="chip" href="exports/web/okibi-highlight.css"><span class="g2">▤</span>Prism / hljs CSS</a>
+      <a class="chip" href="exports/terminal-scheme.md"><span class="g2">❯</span>Terminal scheme</a>
+      <a class="chip" href="exports/okibi.tokens.json"><span class="g2">{}</span>tokens.json</a>
+      <a class="chip" href="tools.html"><span class="g2">⌕</span>browse every value →</a>
     </div>
-    <div class="callout"><span class="ci">燠</span><p><b>The grounds are mirror images, not independent palettes.</b> Author once in OKLCH; derive the second ground by inverting lightness and nudging the neutral hue (cool→warm). Accent hues keep their hue and chroma, dropping lightness for the light ground so they hold contrast on paper.</p></div>
+    <div class="llmcard"><span class="ci">機</span><p><b>Written for machines too.</b> One URL — <a href="llm-context.md">llm-context.md</a> — hands an LLM the entire system as binding context: doctrine, taste constants, both specs, every resolved value. Tell it to build in Okibi, and it can.</p></div>
   </section>
 
-  <!-- 03 SPINE -->
-  <section id="spine">
-    <div class="s-head"><div class="s-kanji">墨</div><div class="s-titles"><span class="s-no">03 · sumi</span><h2>The neutral spine</h2><span class="s-yomi">すみ · charcoal &amp; ash</span></div></div>
-    <p class="lede">Twelve steps of one near-neutral charcoal carry <b>every</b> surface and every structural text weight. Nothing in the UI is a one-off grey — it is always a step on this ramp. Hex values shown for the Okibi (dark) ground.</p>
-    <table class="tbl">
-      <thead><tr><th class="sw"></th><th>Token</th><th>Hex · dark</th><th>OKLCH (dark)</th><th>Role</th></tr></thead>
-      <tbody>
-        <tr><td class="sw"><i style="background:var(--n0)"></i></td><td class="tk">n0</td><td class="hx">#07080a</td><td class="ok">0.135 .005 250</td><td class="ro">Void — behind the window, deepest wells</td></tr>
-        <tr><td class="sw"><i style="background:var(--n1)"></i></td><td class="tk">n1</td><td class="hx">#111315</td><td class="ok">0.185 .005 250</td><td class="ro">Activity bar, title bar, status bar</td></tr>
-        <tr><td class="sw"><i style="background:var(--n2)"></i></td><td class="tk">n2</td><td class="hx">#151719</td><td class="ok">0.205 .005 250</td><td class="ro">Editor / primary body surface</td></tr>
-        <tr><td class="sw"><i style="background:var(--n3)"></i></td><td class="tk">n3</td><td class="hx">#1a1c1e</td><td class="ok">0.225 .005 250</td><td class="ro">Sidebar, raised panels</td></tr>
-        <tr><td class="sw"><i style="background:var(--n4)"></i></td><td class="tk">n4</td><td class="hx">#212325</td><td class="ok">0.255 .005 250</td><td class="ro">Inputs, cards, popovers</td></tr>
-        <tr><td class="sw"><i style="background:var(--n5)"></i></td><td class="tk">n5</td><td class="hx">#2d2f32</td><td class="ok">0.305 .006 250</td><td class="ro">Hover fills, pressed states</td></tr>
-        <tr><td class="sw"><i style="background:var(--n6)"></i></td><td class="tk">n6</td><td class="hx">#3b3d40</td><td class="ok">0.36 .006 250</td><td class="ro">Borders, dividers, hairlines</td></tr>
-        <tr><td class="sw"><i style="background:var(--n7)"></i></td><td class="tk">n7</td><td class="hx">#505356</td><td class="ok">0.44 .006 250</td><td class="ro">Disabled text, punctuation, gutter</td></tr>
-        <tr><td class="sw"><i style="background:var(--n8)"></i></td><td class="tk">n8</td><td class="hx">#6d7074</td><td class="ok">0.545 .006 250</td><td class="ro">Comments, captions, faint labels</td></tr>
-        <tr><td class="sw"><i style="background:var(--n9)"></i></td><td class="tk">n9</td><td class="hx">#8f9296</td><td class="ok">0.66 .006 250</td><td class="ro">Muted / secondary text</td></tr>
-        <tr><td class="sw"><i style="background:var(--n10)"></i></td><td class="tk">n10</td><td class="hx">#bbbec1</td><td class="ok">0.80 .005 250</td><td class="ro">Operators, body secondary</td></tr>
-        <tr><td class="sw"><i style="background:var(--n11)"></i></td><td class="tk">n11</td><td class="hx">#e1e3e5</td><td class="ok">0.915 .004 250</td><td class="ro">Primary text · variables · data</td></tr>
-      </tbody>
-    </table>
-    <div class="callout"><span class="ci">墨</span><p><b>Variables are foreground, not a colour.</b> The thing you read most — plain identifiers, the data itself — is the brightest neutral (n11), never a hue. This is the quiet centre of the attention model: data is legible by default, and colour is reserved for what surrounds and acts on it.</p></div>
-  </section>
-
-  <!-- 04 ACCENT & STATES -->
-  <section id="accent">
-    <div class="s-head"><div class="s-kanji">燠</div><div class="s-titles"><span class="s-no">04 · okibi</span><h2>Accent &amp; states</h2><span class="s-yomi">おき · the ember &amp; the signals</span></div></div>
-    <p class="lede">One warm ember owns focus and action. A tight set of state colours — drawn from the same hues the code uses — carries success, warning, error, and information. Chrome and code share one source of colour.</p>
-    <table class="tbl">
-      <thead><tr><th class="sw"></th><th>Role</th><th>Pigment</th><th>Hex · dark</th><th>Hex · light</th><th>Meaning</th></tr></thead>
-      <tbody>
-        <tr><td class="sw"><i style="background:var(--ember)"></i></td><td class="tk">ember</td><td class="jp">朱 shu</td><td class="hx">#ff794d</td><td class="hx">#d64500</td><td class="ro">Focus, cursor, active element, primary action — <b>never a token</b></td></tr>
-        <tr><td class="sw"><i style="background:var(--ok)"></i></td><td class="tk">success</td><td class="jp">若葉 wakaba</td><td class="hx">#89cf8e</td><td class="hx">#257231</td><td class="ro">Added, valid, git-modified · = the string hue</td></tr>
-        <tr><td class="sw"><i style="background:var(--warn)"></i></td><td class="tk">warning</td><td class="jp">山吹 yamabuki</td><td class="hx">#e6af2b</td><td class="hx">#a36d00</td><td class="ro">Caution, untracked, deprecation</td></tr>
-        <tr><td class="sw"><i style="background:var(--err)"></i></td><td class="tk">error</td><td class="jp">緋 ake</td><td class="hx">#f85052</td><td class="hx">#c71529</td><td class="ro">Errors, deletions, failure, invalid</td></tr>
-        <tr><td class="sw"><i style="background:var(--info)"></i></td><td class="tk">info</td><td class="jp">空 sora</td><td class="hx">#6daff7</td><td class="hx">#015ba6</td><td class="ro">Information, hints, links · = the call hue</td></tr>
-      </tbody>
-    </table>
-    <div class="callout"><span class="ci">⚠</span><p><b>The ember is orange; the error is red. Keep them apart.</b> Because focus and alarm sit near each other on the warm side, the ember (hue 38, orange) and error (hue 24, true red) are deliberately spaced so a cursor never reads as a problem. Warning (yellow-gold, hue 84) sits clear of both.</p></div>
-  </section>
-
-  <!-- 05 SYNTAX MODEL -->
-  <section id="syntax">
-    <div class="s-head"><div class="s-kanji">構</div><div class="s-titles"><span class="s-no">05 · kō</span><h2>The syntax model</h2><span class="s-yomi">こう · how code is coloured</span></div></div>
-    <p class="lede">Syntax highlighting in Okibi is an <b>attention hierarchy</b>, not a grammar map. Tokens are ranked by how much they tell you about what the program does, and colour is assigned in that order. Read the ladder top-to-bottom: the eye should land on the same order.</p>
-
-    <div class="ladder">
-      <div class="rung"><span class="lvl">1</span><span class="bar" style="width:120px;background:var(--n11)"></span><span class="rname">Variables · data</span><span class="rdesc">Plain foreground (n11). The brightest thing on screen — what you read most.</span></div>
-      <div class="rung"><span class="lvl">2</span><span class="bar" style="width:104px;background:var(--call)"></span><span class="rname">Calls · functions</span><span class="rdesc">Sora blue. The verbs — where transformation happens. The strongest hue.</span></div>
-      <div class="rung"><span class="lvl">3</span><span class="bar" style="width:92px;background:var(--str)"></span><span class="rname">Strings</span><span class="rdesc">Wakaba green. Literal text — distinct, easy to scan, never confused with code.</span></div>
-      <div class="rung"><span class="lvl">4</span><span class="bar" style="width:92px;background:var(--num)"></span><span class="rname">Numbers · constants</span><span class="rdesc">Kurenai red. Fixed values, booleans, enum members — data that doesn't move.</span></div>
-      <div class="rung"><span class="lvl">5</span><span class="bar" style="width:72px;background:var(--prop)"></span><span class="rname">Members · properties</span><span class="rdesc">Pale sky. Data you reach into — a gentle tier, present but quieter than calls.</span></div>
-      <div class="rung"><span class="lvl">6</span><span class="bar" style="width:50px;background:var(--type)"></span><span class="rname">Types</span><span class="rdesc">Near-neutral ash. Structural nouns — barely tinted, they recede.</span></div>
-      <div class="rung"><span class="lvl">7</span><span class="bar" style="width:40px;background:var(--kw)"></span><span class="rname">Keywords · storage</span><span class="rdesc">Suzu grey. The scaffolding — present but the most recessive coloured role.</span></div>
-      <div class="rung"><span class="lvl">8</span><span class="bar" style="width:30px;background:var(--n8)"></span><span class="rname">Comments</span><span class="rdesc">Muted grey, italic. Read when sought, invisible when not.</span></div>
-      <div class="rung"><span class="lvl">9</span><span class="bar" style="width:22px;background:var(--n7)"></span><span class="rname">Punctuation</span><span class="rdesc">Dimmest. Brackets, commas, semicolons — the mortar between bricks.</span></div>
+  <footer class="closer" data-screen-label="Closer">
+    <span class="cseal">燠</span>
+    <div class="jp">一つの背骨、一つの燠</div>
+    <div class="en">one spine · one ember</div>
+    <div class="cta-row" style="margin-top:30px">
+      <a class="btn solid" href="doctrine.html">Read the doctrine →</a>
+      <a class="btn outline" href="foundations.html">Browse the foundations</a>
     </div>
-
-    <h3>The model in code</h3>
-    <p class="body">Every coloured role at its assigned weight — note how the calls and data carry the line, while <code>pub</code>, <code>fn</code>, <code>struct</code> and the type names sink into the grey.</p>
-    <div class="demo">
-      <div class="demo-head"><span class="dt"></span><span class="fn">theme.rs</span><span class="lg">Rust</span></div>
-      <div class="demo-body">
-        <div class="demo-gutter"><div class="g">1</div><div class="g">2</div><div class="g">3</div><div class="g">4</div><div class="g">5</div><div class="g">6</div><div class="g">7</div><div class="g">8</div></div>
-<div class="demo-code"><span class="t-cm">// resolve a scope to its colour</span>
-<span class="t-kw">use</span> std<span class="t-pn">::</span>collections<span class="t-pn">::</span><span class="t-type">HashMap</span><span class="t-pn">;</span>
-
-<span class="t-kw">pub fn</span> <span class="t-call">resolve</span><span class="t-pn">(</span>theme<span class="t-pn">:</span> <span class="t-op">&amp;</span><span class="t-type">Theme</span><span class="t-pn">,</span> scope<span class="t-pn">:</span> <span class="t-type">Scope</span><span class="t-pn">)</span> <span class="t-op">-&gt;</span> <span class="t-type">Color</span> <span class="t-pn">{</span>
-    <span class="t-kw">let</span> hit <span class="t-op">=</span> theme<span class="t-pn">.</span><span class="t-prop">slots</span><span class="t-pn">.</span><span class="t-call">get</span><span class="t-pn">(</span><span class="t-op">&amp;</span>scope<span class="t-pn">)</span><span class="t-pn">;</span>
-    hit<span class="t-pn">.</span><span class="t-call">copied</span><span class="t-pn">(</span><span class="t-pn">)</span><span class="t-pn">.</span><span class="t-call">unwrap_or</span><span class="t-pn">(</span><span class="t-type">Color</span><span class="t-pn">::</span><span class="t-num">DEFAULT</span><span class="t-pn">)</span>
-<span class="t-pn">}</span></div>
-      </div>
-    </div>
-    <div class="callout"><span class="ci">構</span><p><b>Types and keywords are deliberately the quietest coloured roles.</b> This is the sharpest break from convention — most themes make types vivid. Okibi treats them as structural nouns that you infer from shape and context, freeing the strong hues for the data and the calls that tell you what is happening.</p></div>
-  </section>
-
-  <!-- 06 SCOPES -->
-  <section id="scopes">
-    <div class="s-head"><div class="s-kanji">割</div><div class="s-titles"><span class="s-no">06 · wari</span><h2>Scope mapping</h2><span class="s-yomi">わり · roles to grammar scopes</span></div></div>
-    <p class="lede">To re-implement Okibi for any grammar — TextMate, Tree-sitter, LSP semantic tokens, an editor's own scheme — map these grammar scopes onto the nine roles. The role is the contract; the exact scope names vary by tool.</p>
-    <table class="scopes">
-      <thead><tr><th style="width:200px">Role · colour</th><th>Common scopes (TextMate · Tree-sitter)</th><th style="width:150px">Note</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><span class="role"><i style="background:var(--n11)"></i>variable → n11</span></td>
-          <td class="sc">variable · variable.other · variable.parameter · <em>@variable @parameter @variable.builtin</em></td>
-          <td class="note">Foreground. The default — not a colour.</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--call)"></i>call → sora</span></td>
-          <td class="sc">entity.name.function · meta.function-call · support.function · <em>@function @function.call @function.method @function.macro</em></td>
-          <td class="note">Functions, methods, macros — defs and calls alike.</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--str)"></i>string → wakaba</span></td>
-          <td class="sc">string · string.quoted · string.template · constant.character · <em>@string @string.escape @character</em></td>
-          <td class="note">All literal text. Escapes one step brighter.</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--num)"></i>number → kurenai</span></td>
-          <td class="sc">constant.numeric · constant.language (true/false/null) · support.constant · <em>@number @boolean @constant @constant.builtin</em></td>
-          <td class="note">Numbers, booleans, null, enum members, ALL_CAPS consts.</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--prop)"></i>member → pale sky</span></td>
-          <td class="sc">variable.other.property · variable.other.member · meta.object-literal.key · entity.name.tag.attribute · <em>@property @field @attribute</em></td>
-          <td class="note">Property access, struct fields, object keys, HTML/JSX attrs.</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--type)"></i>type → ash</span></td>
-          <td class="sc">entity.name.type · entity.name.class · support.type · storage.type.generic · <em>@type @type.builtin @constructor @namespace</em></td>
-          <td class="note">Types, classes, structs, enums, traits, generics.</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--kw)"></i>keyword → suzu</span></td>
-          <td class="sc">keyword · keyword.control · storage.type (fn/let/const) · storage.modifier · keyword.operator.word · <em>@keyword @keyword.* @storage</em></td>
-          <td class="note">All keywords, storage, modifiers, word-operators (and/or/in).</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--n8)"></i>comment → n8</span></td>
-          <td class="sc">comment · comment.block · comment.line · punctuation.definition.comment · <em>@comment @comment.documentation</em></td>
-          <td class="note">Italic. Doc-comments may lift to n9.</td>
-        </tr>
-        <tr>
-          <td><span class="role"><i style="background:var(--n7)"></i>punctuation → n7</span></td>
-          <td class="sc">punctuation · meta.brace · punctuation.separator · punctuation.terminator · <em>@punctuation.* @bracket @delimiter</em></td>
-          <td class="note">Symbol operators sit one step up at n10.</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="callout"><span class="ci">割</span><p><b>Heuristics, where scopes fall short.</b> A faithful Okibi needs only a few rules beyond raw scopes: an identifier <i>followed by</i> <code>(</code> is a call; an identifier <i>after</i> <code>.</code> is a member; an identifier <i>before</i> <code>:</code> in a declaration is a field; PascalCase and known primitives are types; ALL_CAPS is a constant. These keep the model consistent across languages whose grammars disagree.</p></div>
-  </section>
-
-  <!-- 07 DIAGNOSTICS -->
-  <section id="diagnostics">
-    <div class="s-head"><div class="s-kanji">注</div><div class="s-titles"><span class="s-no">07 · chū</span><h2>Diagnostics</h2><span class="s-yomi">ちゅう · caution &amp; correction</span></div></div>
-    <p class="lede">Editor diagnostics reuse the state colours and lean on <b>underline style</b> to separate severity from spell-check. Real problems get a saturated wavy line; advisories recede to dotted, so the eye triages by weight.</p>
-    <div class="demo">
-      <div class="demo-head"><span class="dt"></span><span class="fn">resolve.rs</span><span class="lg">diagnostics</span></div>
-      <div class="demo-body">
-        <div class="demo-gutter"><div class="g">1</div><div class="g">2</div><div class="g">3</div><div class="g">4</div><div class="g">5</div></div>
-<div class="demo-code"><span class="t-var">node</span><span class="t-pn">.</span><span class="t-prop" style="text-decoration:wavy underline var(--err);text-underline-offset:3px;">embre</span><span class="t-pn">;</span>          <span class="t-cm" style="color:var(--err)">✕ unknown field — did you mean `ember`?</span>
-<span class="t-kw">let</span> <span class="t-var" style="text-decoration:wavy underline var(--warn);text-underline-offset:3px;">unused</span> <span class="t-op">=</span> <span class="t-call">load</span><span class="t-pn">();</span>   <span class="t-cm" style="color:var(--warn)">▲ unused variable</span>
-<span class="t-kw">return</span> <span class="t-call" style="text-decoration:wavy underline var(--info);text-underline-offset:3px;">blend</span><span class="t-pn">(</span>a<span class="t-pn">,</span> b<span class="t-pn">);</span> <span class="t-cm" style="color:var(--info)">ⓘ inferred type: Color</span>
-<span class="t-kw">let</span> <span class="t-var" style="text-decoration:dotted underline var(--n8);text-underline-offset:3px;">tmp</span> <span class="t-op">=</span> <span class="t-var">x</span><span class="t-pn">;</span>        <span class="t-cm">• hint: inline this temporary</span>
-<span class="t-cm">// the </span><span class="t-cm" style="text-decoration:dotted underline var(--spell);text-decoration-thickness:2px;text-underline-offset:3px;">vermillion</span><span class="t-cm"> ember   spelling: “vermilion”</span></div>
-      </div>
-    </div>
-    <table class="tbl" style="margin-top:22px">
-      <thead><tr><th class="sw"></th><th>Severity</th><th>Colour</th><th>Underline</th><th>When</th></tr></thead>
-      <tbody>
-        <tr><td class="sw"><i style="background:var(--err)"></i></td><td class="tk">error</td><td class="ro">ake red</td><td class="ro">wavy, saturated</td><td class="ro">Will not compile / run</td></tr>
-        <tr><td class="sw"><i style="background:var(--warn)"></i></td><td class="tk">warning</td><td class="ro">yamabuki gold</td><td class="ro">wavy, saturated</td><td class="ro">Compiles, but suspect</td></tr>
-        <tr><td class="sw"><i style="background:var(--info)"></i></td><td class="tk">info</td><td class="ro">sora blue</td><td class="ro">wavy, calmer</td><td class="ro">Inlay / inferred facts</td></tr>
-        <tr><td class="sw"><i style="background:var(--n8)"></i></td><td class="tk">hint</td><td class="ro">n8 grey</td><td class="ro">dotted, thin</td><td class="ro">Optional refactor</td></tr>
-        <tr><td class="sw"><i style="background:var(--spell)"></i></td><td class="tk">spelling</td><td class="ro">teal</td><td class="ro">dotted, thick</td><td class="ro">Natural-language only</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- 08 BUILDING -->
-  <section id="building">
-    <div class="s-head"><div class="s-kanji">作</div><div class="s-titles"><span class="s-no">08 · saku</span><h2>Building with Okibi</h2><span class="s-yomi">さく · across every surface</span></div></div>
-    <p class="lede">The same system carries any surface — a web app, a native window, a terminal UI. The medium changes the resolution of colour available, never the rules. Map the ground to the spine, spend the ember once, and let the meaning hues do the rest.</p>
-
-    <h3>Universal rules</h3>
-    <div class="rules">
-      <div class="rule do"><h4>◇ do</h4><ul>
-        <li>Build every surface, border and label from the spine (n0–n11).</li>
-        <li>Reserve the ember for focus and the single primary action per view.</li>
-        <li>Keep one hue = one meaning across chrome and code.</li>
-        <li>Step elevation by lightness (n2 → n3 → n4), not by drop shadows alone.</li>
-        <li>Hold text contrast at ≥ 4.5:1 for body, ≥ 3:1 for large / dim labels.</li>
-      </ul></div>
-      <div class="rule dont"><h4>◇ don't</h4><ul>
-        <li>Tint large fills with accent colour — accents are for marks, not areas.</li>
-        <li>Use more than one ember moment in a single view.</li>
-        <li>Introduce a hue that isn't already in the system.</li>
-        <li>Make types or keywords loud — they recede, always.</li>
-        <li>Rely on colour alone for state; pair it with icon, weight, or shape.</li>
-      </ul></div>
-    </div>
-
-    <h3 style="margin-top:46px">Per surface</h3>
-    <div class="surfaces">
-      <div class="surf">
-        <div class="surf-head"><span class="sk">網</span><h4>Web &amp; application UI</h4><span class="tag">full OKLCH</span></div>
-        <div class="surf-body">
-          <p>Full colour fidelity — author the tokens directly as CSS custom properties. Body on n2, raised cards on n3–n4, borders on n6. Primary buttons take the ember fill with <code>ember-fg</code> text; secondary actions are n4 with an n6 border. Links use the call (sora) hue, never the ember. Selection and focus rings use <code>ember-soft</code> / <code>ember-line</code>.</p>
-          <div class="map"><span>page → n0</span><span>surface → n2</span><span>card → n3/n4</span><span>border → n6</span><span>primary → ember</span><span>link → call</span></div>
-        </div>
-      </div>
-      <div class="surf">
-        <div class="surf-head"><span class="sk">窓</span><h4>Desktop &amp; native</h4><span class="tag">window chrome</span></div>
-        <div class="surf-body">
-          <p>Title bar and sidebars on n1; content on n2. Use the spine for the whole window chrome so the app sits inside the OS quietly. The active tab / focused pane gets a thin ember edge (a 2px inset border), not a fill. Window-control and traffic-light affordances may borrow the state colours (error/warn/success) but keep them small.</p>
-          <div class="map"><span>titlebar → n1</span><span>sidebar → n1</span><span>content → n2</span><span>active edge → ember</span><span>git state → success/warn</span></div>
-        </div>
-      </div>
-      <div class="surf">
-        <div class="surf-head"><span class="sk">端</span><h4>TUI &amp; terminal apps</h4><span class="tag">truecolor</span></div>
-        <div class="surf-body">
-          <p>If the terminal supports 24-bit colour, use the hex values directly — the model maps cleanly. Panel backgrounds on n1/n2, borders on n6, dim chrome text on n8–n9. Selected rows use <code>ember-soft</code>; the focused pane border uses the ember. Status/mode lines stay on the spine with a single ember marker — resist the urge to paint the whole bar.</p>
-          <div class="map"><span>panel → n1</span><span>border → n6</span><span>dim → n8</span><span>selection → ember-soft</span><span>focus border → ember</span></div>
-        </div>
-      </div>
-      <div class="surf">
-        <div class="surf-head"><span class="sk">色</span><h4>16-colour terminals</h4><span class="tag">ANSI reduction</span></div>
-        <div class="surf-body">
-          <p>For the classic ANSI palette, reduce the system faithfully: the eight base slots take the meaning hues, brights lift toward the spine top. Okibi has no magenta by design — map it to the ember so the one warm accent survives. This reduction is for shells and legacy tools; prefer truecolor where available.</p>
-          <div class="ansi">
-            <div class="c"><div class="sw" style="background:#111315"></div><div class="lb">0 black</div></div>
-            <div class="c"><div class="sw" style="background:#f85052"></div><div class="lb">1 red</div></div>
-            <div class="c"><div class="sw" style="background:#89cf8e"></div><div class="lb">2 green</div></div>
-            <div class="c"><div class="sw" style="background:#e6af2b"></div><div class="lb">3 yellow</div></div>
-            <div class="c"><div class="sw" style="background:#6daff7"></div><div class="lb">4 blue</div></div>
-            <div class="c"><div class="sw" style="background:#ff794d"></div><div class="lb">5 mag→ember</div></div>
-            <div class="c"><div class="sw" style="background:#67acb0"></div><div class="lb">6 cyan</div></div>
-            <div class="c"><div class="sw" style="background:#bbbec1"></div><div class="lb">7 white</div></div>
-            <div class="c"><div class="sw" style="background:#505356"></div><div class="lb">8 br black</div></div>
-            <div class="c"><div class="sw" style="background:#f85052"></div><div class="lb">9 br red</div></div>
-            <div class="c"><div class="sw" style="background:#89cf8e"></div><div class="lb">10 br grn</div></div>
-            <div class="c"><div class="sw" style="background:#e6af2b"></div><div class="lb">11 br yel</div></div>
-            <div class="c"><div class="sw" style="background:#6daff7"></div><div class="lb">12 br blue</div></div>
-            <div class="c"><div class="sw" style="background:#ff9470"></div><div class="lb">13 br mag</div></div>
-            <div class="c"><div class="sw" style="background:#67acb0"></div><div class="lb">14 br cyan</div></div>
-            <div class="c"><div class="sw" style="background:#e1e3e5"></div><div class="lb">15 br wht</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout"><span class="ci">作</span><p><b>One test for any surface:</b> squint at it. You should see a calm charcoal (or paper) field, the text legible in near-monochrome, and — if you've spent it well — exactly one warm spark where the work is happening. If you see a constellation of colours competing, spend less.</p></div>
-  </section>
-
-  <footer>
-    <span class="fl">燠火 · 一つの背骨、一つの燠、注意こそ予算</span>
-    <span class="fr">© 2026 Kai Evans · <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="license noopener">CC BY-NC 4.0</a></span>
   </footer>
+
 </div>
 
 <script>
-(function(){var root=document.documentElement;var btns=document.querySelectorAll('.themeswitch button');
-  function apply(mode){root.setAttribute('data-theme',mode);btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===mode?'true':'false');});try{localStorage.setItem('okibi-theme',mode);}catch(e){}}
+(function(){
+  var root=document.documentElement;
+  var btns=document.querySelectorAll('.themeswitch button');
+  function apply(m){root.setAttribute('data-theme',m);btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===m?'true':'false');});try{localStorage.setItem('okibi-theme',m);}catch(e){}}
   btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.set);});});
-  var saved;try{saved=localStorage.getItem('okibi-theme');}catch(e){}apply(saved==='light'?'light':'dark');
-  // smooth-scroll the toc
-  document.querySelectorAll('.toc a').forEach(function(a){a.addEventListener('click',function(e){
-    var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-24,behavior:'smooth'});}
-  });});
+  var s;try{s=localStorage.getItem('okibi-theme');}catch(e){}apply(s==='light'?'light':'dark');
+
+  var pane=document.getElementById('dpane');
+  var caps={
+    survey:['構','<b>Survey — the whole file at rest.</b> Near-monochrome; definitions bold, escape keywords lifted. This is what your code looks like all day.'],
+    focus:['流','<b>Focus — the block you\u2019re in gains identity.</b> Every value is tinted by how far away it lives; <b>bold</b> means it reaches in from outside the function. Gold is reserved for this/self.'],
+    edit:['異','<b>Edit — risk appears where you type.</b> A dashed underline marks writes that escape the block; cyan marks the await boundary. Local bookkeeping stays silent.']
+  };
+  var pbtns=document.querySelectorAll('#demo .seg button');
+  function setPh(p){
+    pane.className='dpane m-'+p;
+    pbtns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ph===p?'true':'false');});
+    document.getElementById('dph').textContent=caps[p][0];
+    document.getElementById('dcap').innerHTML=caps[p][1];
+  }
+  pbtns.forEach(function(b){b.addEventListener('click',function(){setPh(b.dataset.ph);});});
+  setPh('focus');
 })();
 </script>
 </body>

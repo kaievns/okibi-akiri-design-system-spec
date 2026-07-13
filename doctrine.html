@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okibi 燠火 — Doctrine</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{font-size:15.5px;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 32px;}
+  .topnav{display:flex;align-items:center;gap:4px;padding:20px 0;flex-wrap:wrap;}
+  a.home{display:flex;align-items:center;gap:10px;margin-right:auto;}
+  a.home:hover{text-decoration:none;}
+  .topnav .seal{width:32px;height:32px;border-radius:4px;background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-weight:700;font-size:17px;transform:rotate(-3deg);}
+  .topnav .nm{font-family:var(--mincho);font-weight:700;font-size:15px;color:var(--n11);}
+  .topnav a.lnk{font-family:var(--mono);font-size:11.5px;color:var(--n9);padding:8px 11px;border-radius:4px;line-height:1;}
+  .topnav a.lnk:hover{color:var(--n11);background:var(--n3);text-decoration:none;}
+  .topnav a.lnk.on{color:var(--n11);background:var(--ember-soft);box-shadow:inset 0 -2px 0 var(--ember);border-radius:0;}
+  main{padding:0 0 100px;}
+  header.top{padding:88px 0 44px;position:relative;}
+  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule-signature);}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+  h1{font-family:var(--mincho);font-weight:700;font-size:46px;line-height:1.05;margin:14px 0 0;color:var(--n11);max-width:640px;}
+  .sub{margin-top:18px;font-size:16px;max-width:620px;color:var(--n10);}
+  .sub b{color:var(--n11);}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--n9);border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:var(--n2);line-height:1;display:inline-block;white-space:nowrap;}
+  .meta b{color:var(--n11);}
+
+  section{padding:56px 0 0;}
+  .s-no{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;color:var(--ember);text-transform:uppercase;}
+  h2{font-family:var(--mincho);font-weight:700;font-size:26px;margin:8px 0 10px;color:var(--n11);}
+  .lede{font-size:15px;color:var(--n9);max-width:640px;margin:0 0 24px;}
+
+  .conv{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+  .cv{border:1px solid var(--line);border-radius:7px;padding:18px 20px;background:var(--n2);}
+  .cv .ck{font-family:var(--mincho);font-size:22px;color:var(--ember);line-height:1;}
+  .cv h4{font-family:var(--mincho);font-size:16px;font-weight:700;color:var(--n11);margin:10px 0 6px;}
+  .cv p{font-size:13px;line-height:1.5;color:var(--n9);}
+
+  .map{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+  .mp{border:1px solid var(--line);border-radius:7px;padding:18px 20px;background:var(--n2);display:flex;flex-direction:column;gap:6px;}
+  .mp:hover{border-color:var(--n8);}
+  .mp .t{font-size:14px;font-weight:600;color:var(--n11);display:flex;align-items:center;gap:9px;}
+  .mp .t .k{font-family:var(--mincho);color:var(--ember);}
+  .mp p{font-size:12.5px;line-height:1.5;color:var(--n9);flex:1;}
+  .mp a{font-family:var(--mono);font-size:11px;}
+  .mp.soon{opacity:.55;}
+  .mp.soon .t::after{content:"queued";margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--n7);text-transform:uppercase;font-weight:600;}
+
+  footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer .fl{font-family:var(--mincho);font-size:14px;color:var(--n9);}
+  footer .fr{font-family:var(--mono);font-size:10.5px;color:var(--n8);letter-spacing:.1em;}
+
+  .themeswitch{display:flex;margin-left:14px;background:color-mix(in srgb,var(--n4) 90%,transparent);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;backdrop-filter:blur(8px);box-shadow:var(--shadow-float);}
+  .themeswitch button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--n8);background:transparent;border:0;cursor:pointer;padding:8px 13px;border-radius:999px;display:flex;align-items:center;gap:6px;transition:.2s;line-height:1;}
+  .themeswitch button[aria-pressed="true"]{color:var(--ember-fg);background:var(--ember);}
+</style>
+</head>
+<body class="okibi-ground">
+
+
+<div class="wrap">
+  <nav class="topnav" data-screen-label="Top nav">
+    <a class="home" href="index.html"><span class="seal">燠</span><span class="nm">Okibi</span></a>
+    <a class="lnk on" href="doctrine.html">Doctrine</a>
+    <a class="lnk" href="foundations.html">Foundations</a>
+    <a class="lnk" href="code.html">Code</a>
+    <a class="lnk" href="markdown.html">Markdown</a>
+    <a class="lnk" href="tools.html">Tools</a>
+    <a class="lnk" href="for-llms.html">For LLMs</a>
+    <div class="themeswitch" role="group" aria-label="Color mode">
+      <button type="button" data-set="dark" aria-pressed="true"><span>◐</span>Okibi</button>
+      <button type="button" data-set="light" aria-pressed="false"><span>◑</span>Akari</button>
+    </div>
+  </nav>
+  <main>
+    <header class="top" data-screen-label="Hero">
+      <div class="kicker">燠火 — banked embers · a design language</div>
+      <h1>One spine, one ember, and a fixed budget of attention</h1>
+      <p class="sub">Okibi is a complete design language for screens you stare at for hours: <b>a theme is an attention-allocation policy.</b> This site is its source of truth — the doctrine, the exact tokens, the code-highlighting system, and ready-made artifacts — written so that both people and LLMs can build with it directly.</p>
+      <div class="meta-row">
+        <span class="meta">Grounds · <b>Okibi dark / Akari light</b></span>
+        <span class="meta">Tokens · <b>oklch, v1.8</b></span>
+        <span class="meta">Scope · <b>web · docs · apps · editors · terminals</b></span>
+      </div>
+    </header>
+
+    <section data-screen-label="Convictions">
+      <div class="s-no">01 · shin</div>
+      <h2>Six convictions, settled</h2>
+      <p class="lede">Every rule on this site derives from these. If a decision isn't covered, derive it from here — don't invent sideways.</p>
+      <div class="conv">
+        <div class="cv"><div class="ck">予算</div><h4>Conserve salience</h4><p>Total emphasis is fixed. Every element lit dims every other. Under ~15% of any view carries colour at rest.</p></div>
+        <div class="cv"><div class="ck">明</div><h4>Luminance leads, hue is rationed</h4><p>Hierarchy rides lightness and weight. Hue marks a few nominal categories, kept muted.</p></div>
+        <div class="cv"><div class="ck">燠</div><h4>One ember, kept sacred</h4><p>The single warm accent means "here / act" — cursor, focus, primary action. Never a token, never a link, never decoration.</p></div>
+        <div class="cv"><div class="ck">静</div><h4>Calm over clever</h4><p>Near-monochrome, low saturation, muted ground. Calm-at-rest is a hard requirement, not a preference.</p></div>
+        <div class="cv"><div class="ck">恒</div><h4>The rule is constant</h4><p>Predictability is the contract. Transitions are cuts; state changes fire on intentional boundaries, never on drift.</p></div>
+        <div class="cv"><div class="ck">重</div><h4>Redundant where it counts</h4><p>Anything that must be told apart carries a second channel beyond hue — shape, weight, underline style.</p></div>
+      </div>
+      <figure class="spec" style="margin:16px 0 0;border:1px solid var(--line);border-radius:7px;background:var(--n1);overflow:hidden;"><iframe src="guidelines/diagram-budget.html" style="display:block;width:100%;border:0;background:var(--n0);height:216px" loading="lazy" title="The salience budget"></iframe><figcaption style="display:flex;align-items:baseline;gap:10px;padding:9px 15px;border-top:1px solid var(--line);"><b style="font-size:12.5px;color:var(--n11);font-weight:600;">The budget, drawn</b><span style="font-size:11.5px;color:var(--n8);">what a healthy view spends at rest — if it drifts brighter, remove colour; never balance by adding more</span></figcaption></figure>
+    </section>
+
+    <section data-screen-label="Map">
+      <div class="s-no">02 · zu</div>
+      <h2>The site</h2>
+      <p class="lede">Everything is live. The examples and the experiment run the same tokens this site documents.</p>
+      <div class="map">
+        <div class="mp"><div class="t"><span class="k">基</span>Foundations</div><p>The 12-step spine, the ember, pigments, identity tints, type, surfaces, motifs — with the laws that settle arguments.</p><a href="foundations.html">open →</a></div>
+        <div class="mp"><div class="t"><span class="k">符</span>Code</div><p>The dynamic three-band highlighting system: rationale, the capability ladder, terminals — with the full algorithm one link away.</p><a href="code.html">open →</a></div>
+        <div class="mp"><div class="t"><span class="k">書</span>Markdown</div><p>The prose register: sigils are furniture, weight-led headings, the yamabuki highlight — every element in one specimen.</p><a href="markdown.html">open →</a></div>
+        <div class="mp"><div class="t"><span class="k">具</span>Tools</div><p>Token browser with click-to-copy hex for both grounds, and every generated artifact: VS Code themes, Obsidian snippet, web CSS, terminal scheme.</p><a href="tools.html">open →</a></div>
+        <div class="mp"><div class="t"><span class="k">機</span>For LLMs</div><p>llms.txt + one concatenated llm-context.md — point a model at a single URL and it has the whole system, machine-readable.</p><a href="for-llms.html">open →</a></div>
+        <div class="mp"><div class="t"><span class="k">型</span>Examples</div><p>Three complete pages embodying the system — a spec document, the editor workbench with the depth model live, and the 1920×1080 deck grammar.</p><a href="ui_kits/document/index.html">open →</a></div>
+      </div>
+    </section>
+
+    <footer>
+      <span class="fl">燠火 · 一つの背骨、一つの燠</span>
+      <span class="fr">OKIBI · V1.8 · SOURCE OF TRUTH</span>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){var root=document.documentElement;var btns=document.querySelectorAll('.themeswitch button');
+  function frTheme(fr,m){if(fr.src.indexOf('color-spine-light')>-1)return 'light';if(fr.src.indexOf('color-spine-dark')>-1)return 'dark';return m;}
+  function apply(m){root.setAttribute('data-theme',m);btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===m?'true':'false');});document.querySelectorAll('iframe').forEach(function(fr){try{if(fr.contentDocument)fr.contentDocument.documentElement.setAttribute('data-theme',frTheme(fr,m));}catch(e){}});try{localStorage.setItem('okibi-theme',m);}catch(e){}}
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.set);});});
+  document.querySelectorAll('iframe').forEach(function(fr){fr.addEventListener('load',function(){var m=root.getAttribute('data-theme')||'dark';try{if(fr.contentDocument)fr.contentDocument.documentElement.setAttribute('data-theme',frTheme(fr,m));}catch(e){}});});
+  var s;try{s=localStorage.getItem('okibi-theme');}catch(e){}apply(s==='light'?'light':'dark');
+})();
+</script>
+</body>
+</html>

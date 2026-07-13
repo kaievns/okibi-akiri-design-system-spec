@@ -1,0 +1,11 @@
+# Okibi 燠火 — design language
+> One charcoal spine, one ember, a fixed attention budget. A complete design system for web, documents, applications, editors and terminals, plus a dynamic (intent-driven) code-highlighting system.
+
+## Docs
+- [Complete machine context](llm-context.md): everything — doctrine, specs, resolved tokens — in one file. Read this.
+
+## Optional
+- [Landing](index.html) · [Doctrine](doctrine.html): human-oriented site
+- [Dynamic highlighting spec](spec/dynamic-highlighting.md)
+- [Static fallback + markdown](spec/static-fallback.md)
+- [Token JSON](exports/okibi.tokens.json)

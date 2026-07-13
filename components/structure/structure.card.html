@@ -1,0 +1,46 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Structure" subtitle="Kicker · SectionHead · Callout · Seal · MetaPill · ThemeSwitch" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+body{margin:0;padding:16px 18px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--n8);margin:0 0 9px;}
+.crow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+.crow+.lbl{margin-top:14px;}
+
+.kick{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);}
+.shead{display:flex;align-items:stretch;gap:18px;}
+.skanji{position:relative;font-family:var(--mincho);font-weight:800;font-size:44px;line-height:1;padding-left:16px;display:flex;align-items:center;}
+.skanji::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:4px;border-radius:2px;background:var(--ember);}
+.st{display:flex;flex-direction:column;justify-content:center;gap:4px;}
+.sno{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.26em;color:var(--ember);text-transform:uppercase;}
+.sh2{font-family:var(--mincho);font-weight:700;font-size:21px;}
+.syomi{font-family:var(--mincho);font-size:12.5px;color:var(--n8);letter-spacing:.18em;}
+.callout{border:1px solid var(--ember-line);background:var(--ember-soft);border-radius:7px;padding:13px 16px;display:flex;gap:12px;font-size:13px;color:var(--n10);max-width:420px;}
+.callout .ci{font-family:var(--mincho);font-size:20px;color:var(--ember);line-height:1;}
+.seal{width:52px;height:52px;border-radius:6px;background:var(--ember);color:var(--ember-fg);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mincho);font-weight:700;font-size:28px;box-shadow:0 10px 30px -10px var(--ember-line);transform:rotate(-3deg);}
+.meta{font-family:var(--mono);font-size:11px;color:var(--n9);border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:var(--n2);line-height:1;display:inline-block;}
+.meta b{color:var(--n11);}
+.tsw{display:inline-flex;background:color-mix(in srgb,var(--n4) 90%,transparent);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;box-shadow:var(--shadow-float);}
+.tsw button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--n8);background:transparent;border:0;padding:8px 13px;border-radius:999px;display:flex;align-items:center;gap:6px;line-height:1;}
+.tsw button.on{color:var(--ember-fg);background:var(--ember);}
+
+</style>
+</head>
+<body>
+<div class="crow" style="gap:26px;align-items:center">
+<div class="shead"><div class="skanji">構</div><div class="st"><span class="sno">02 · kō</span><span class="sh2">The architecture</span><span class="syomi">こう · one progression</span></div></div>
+<span class="seal">燠</span>
+</div>
+<div class="crow" style="margin-top:16px;align-items:flex-start">
+<div class="callout"><span class="ci">論</span><span><b style="color:var(--n11)">The reframe:</b> emphasis must follow the work — the palette is the floor.</span></div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<span class="kick">The implementation thesis</span>
+<div class="crow"><span class="meta">Status · <b>guiding doctrine</b></span><span class="meta">Palette · <b>built fresh</b></span></div>
+<div class="tsw"><button class="on">◐ Okibi</button><button>◑ Akari</button></div>
+</div>
+</div>
+</body>
+</html>

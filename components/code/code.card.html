@@ -1,0 +1,39 @@
+<!-- @dsCard group="Components" viewport="700x250" name="Code" subtitle="CodePane — chromed code block" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+body{margin:0;padding:16px 18px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--n8);margin:0 0 9px;}
+.crow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+.crow+.lbl{margin-top:14px;}
+
+.pane{background:var(--n2);border:1px solid var(--line);border-radius:7px;overflow:hidden;}
+.pane-head{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--n1);border-bottom:1px solid var(--line);}
+.pane-head .dt{width:9px;height:9px;border-radius:2px;background:var(--call);}
+.pane-head .fn{font-family:var(--mono);font-size:12px;color:var(--n10);}
+.pane-head .lng{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--n8);}
+.pane-body{display:flex;font:400 13px/1.85 var(--mono);}
+.gutter{flex:0 0 auto;padding:12px 0;text-align:right;color:var(--n7);font-weight:500;user-select:none;}
+.gutter div{padding:0 11px 0 18px;}
+.codebox{flex:1;padding:12px 16px;white-space:pre;color:var(--n11);}
+.k{color:var(--syn-keyword)}.c{color:var(--syn-call)}.t{color:var(--syn-type)}.s{color:var(--syn-string)}.n{color:var(--syn-builtin)}.m{color:var(--syn-member)}.o{color:var(--syn-operator)}.p{color:var(--syn-punct)}.x{color:var(--syn-comment)}
+
+</style>
+</head>
+<body>
+<div class="pane">
+<div class="pane-head"><span class="dt"></span><span class="fn">theme.ts</span><span class="lng">typescript</span></div>
+<div class="pane-body">
+<div class="gutter"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></div>
+<div class="codebox"><span class="x">// resolve highlight scopes to colours</span>
+<span class="k">export class</span> <span class="t">Theme</span> <span class="p">{</span>
+  <span class="c">resolve</span><span class="p">(</span>scope<span class="p">:</span> <span class="t">Scope</span><span class="p">):</span> <span class="t">Color</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="m">slots</span><span class="p">.</span><span class="c">get</span><span class="p">(</span>scope<span class="p">)</span> <span class="o">??</span> <span class="n">DEFAULT</span><span class="p">;</span>
+<span class="p">}}</span></div>
+</div>
+</div>
+</body>
+</html>

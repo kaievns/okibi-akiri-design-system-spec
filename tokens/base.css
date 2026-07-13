@@ -1,0 +1,41 @@
+/* OKIBI — base resets. Body ground, prose defaults, links, selection. */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  background-color: var(--n0);
+  color: var(--n11);
+  font-family: var(--gothic);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* the document ground: one ember glow, fixed — never flat black, never patterned */
+.okibi-ground {
+  background-color: var(--n0);
+  background-image: var(--glow-ember);
+  background-attachment: fixed;
+}
+
+p { margin: 0; color: var(--n10); text-wrap: pretty; }
+b, strong { color: var(--n11); font-weight: 600; }
+em { color: var(--n11); }
+
+/* links are sora — the ember is never a link */
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--n11); text-decoration: underline; text-underline-offset: 3px; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  color: var(--n11);
+  background: color-mix(in srgb, var(--n11) 9%, transparent);
+  padding: 1px 6px;
+  border-radius:3px;
+}
+
+::selection { background: var(--ember-soft); color: var(--n11); }
+
+:focus-visible { outline: none; border-color: var(--ember); box-shadow: var(--ring); }

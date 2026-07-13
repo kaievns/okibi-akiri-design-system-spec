@@ -1,0 +1,28 @@
+<!-- @dsCard group="Brand" viewport="700x190" name="Seal + section title-card" subtitle="判 hanko mark · kanji head with ember bar" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;padding:14px 16px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+.row{display:flex;align-items:center;gap:34px;}
+.seal{width:58px;height:58px;border-radius:6px;background:var(--ember);color:var(--ember-fg);display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-weight:700;font-size:31px;box-shadow:0 10px 30px -10px var(--ember-line);transform:rotate(-3deg);}
+.shead{display:flex;align-items:stretch;gap:18px;}
+.skanji{position:relative;font-family:var(--mincho);font-weight:800;font-size:46px;line-height:1;padding-left:16px;display:flex;align-items:center;}
+.skanji::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:4px;border-radius:2px;background:var(--ember);}
+.st{display:flex;flex-direction:column;justify-content:center;gap:4px;}
+.sno{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.28em;color:var(--ember);text-transform:uppercase;}
+.sh2{font-family:var(--mincho);font-weight:700;font-size:22px;}
+.syomi{font-family:var(--mincho);font-size:12.5px;color:var(--n8);letter-spacing:.18em;}
+</style>
+</head>
+<body>
+<div class="row">
+<span class="seal">燠</span>
+<div class="shead"><div class="skanji">墨</div><div class="st"><span class="sno">01 · sumi</span><span class="sh2">The neutral spine</span><span class="syomi">すみ · charcoal &amp; ash</span></div></div>
+</div>
+<div class="lbl" style="margin-top:16px">seal: ember square · radius 11 · rotate -3° — title-card: kanji + 4px ember bar + mono kicker + mincho title + yomi</div>
+</body>
+</html>

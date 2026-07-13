@@ -1,0 +1,120 @@
+<!-- @dsCard group="Document" viewport="1080x900" name="Markdown register" subtitle="Every standard element in context — prose is content, sigils are furniture" -->
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;padding:18px;background:var(--n0);font-family:var(--gothic);color:var(--n11);}
+  .lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--n8);}
+  .page{max-width:920px;margin:0 auto;background:var(--n2);border:1px solid var(--line);border-radius:7px;overflow:hidden;}
+  .page-head{display:flex;align-items:center;gap:10px;padding:10px 18px;background:var(--n1);border-bottom:1px solid var(--line);}
+  .page-head .dt{width:9px;height:9px;border-radius:2px;background:var(--str);}
+  .page-head .fn{font-family:var(--mono);font-size:12px;color:var(--n10);}
+  .page-head .lng{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--n8);}
+  .md{font-family:var(--mono);font-size:13px;line-height:1.95;padding:18px 26px 26px;white-space:pre-wrap;color:var(--n10);}
+
+  .g{color:var(--n7);}                                        /* sigils · urls · pipes · fences */
+  .h{color:var(--n11);font-weight:700;}
+  .h1{font-size:1.45em;line-height:1.6;} .h2{font-size:1.25em;line-height:1.7;} .h3{font-size:1.1em;} .h4{font-size:1em;}
+  .b{color:var(--n11);font-weight:700;}
+  .i{color:var(--n11);font-style:italic;}
+  .st{color:var(--n8);text-decoration:line-through;}
+  .cd{color:var(--syn-member);background:color-mix(in srgb,var(--n11) 9%,transparent);border-radius:2px;padding:0 5px;}
+  .lk{color:var(--call);} .wl{color:var(--call);}
+  .tg{color:var(--kw);}
+  .hlt{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--n11);padding:0 3px;border-radius:2px;}
+  .q{color:var(--n9);}
+  .nt{color:var(--info);font-weight:600;}
+  .okc{color:var(--ok);} .done{color:var(--n8);text-decoration:line-through;}
+  .th{color:var(--n11);font-weight:600;}
+  .fnote{color:var(--call);}
+
+  /* fenced code — band 1 */
+  .k{color:var(--syn-keyword);} .c{color:var(--syn-call);} .cD{color:var(--syn-call);font-weight:700;}
+  .s{color:var(--syn-string);} .n{color:var(--syn-number);} .nE{color:var(--syn-number-engaged);}
+  .bt{color:var(--syn-builtin);} .m{color:var(--syn-member);} .t{color:var(--syn-type);}
+  .o{color:var(--syn-operator);} .p{color:var(--syn-punct);} .x{color:var(--syn-comment);font-style:italic;}
+  .fl{color:var(--flow-fg);font-weight:700;}
+
+  /* frontmatter — data format */
+  .fmk{color:var(--syn-member);} .fms{color:var(--syn-string);} .fmn{color:var(--syn-number-engaged);} .fmb{color:var(--syn-builtin);}
+
+  .cap{max-width:920px;margin:10px auto 0;display:flex;flex-wrap:wrap;gap:6px 16px;}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="page-head"><span class="dt"></span><span class="fn">field-notes.md</span><span class="lng">markdown · editor view</span></div>
+  <div class="md"><span class="g">---</span>
+<span class="fmk">title</span><span class="g">:</span> <span class="fms">"Okibi — field notes"</span>
+<span class="fmk">tags</span><span class="g">:</span> <span class="g">[</span><span class="fms">okibi</span><span class="g">,</span> <span class="fms">theme</span><span class="g">]</span>
+<span class="fmk">rev</span><span class="g">:</span> <span class="fmn">1.7</span>
+<span class="fmk">draft</span><span class="g">:</span> <span class="fmb">false</span>
+<span class="g">---</span>
+
+<span class="g">#</span> <span class="h h1">Field notes 燠火</span>
+A theme is an <span class="b">**attention budget**</span> — every mark spends it. This page shows <span class="i">*every standard element*</span> in the register: the sigils recede, the writing carries. The old draft is <span class="st">~~struck through~~</span>, identifiers sit in <span class="g">`</span><span class="cd">inline code</span><span class="g">`</span>, sources link out to <span class="g">[</span><span class="lk">the thesis</span><span class="g">](https://…)</span> or across the vault via <span class="g">[[</span><span class="wl">dynamic highlighting</span><span class="g">]]</span>, and the one warm mark in prose is a <span class="g">==</span><span class="hlt">yamabuki highlight</span><span class="g">==</span>. Tagged <span class="tg">#okibi</span>.
+
+<span class="g">##</span> <span class="h h2">Why calm wins</span>
+Luminance leads and hue is rationed<span class="fnote">[^1]</span>. Under fifteen percent of any view carries colour at rest — so the little that does still means something.
+
+<span class="g">&gt;</span> <span class="q">Colour is earned, never decorative. The floor cost of looking must stay low —</span>
+<span class="g">&gt;</span> <span class="q">a screen you stare at for hours has no business shouting.</span>
+
+<span class="g">&gt; [!</span><span class="nt">note</span><span class="g">]</span> <span class="b">Callouts stay quiet too</span>
+<span class="g">&gt;</span> <span class="q">The type glyph takes the info hue; the body stays prose. No filled banners.</span>
+
+<span class="g">###</span> <span class="h h3">Lists, in every flavour</span>
+<span class="g">-</span> sigils are furniture — <span class="cd">--n7</span> ghosts
+<span class="g">-</span> content is what you see
+  <span class="g">-</span> nesting just indents; no new colours
+<span class="g">1.</span> ordered markers recede the same way
+<span class="g">2.</span> numbers here are prose, not data
+<span class="g">- [</span><span class="okc">x</span><span class="g">]</span> <span class="done">port the resting register</span>
+<span class="g">- [ ]</span> dial dwell values in a real editor
+
+<span class="g">####</span> <span class="h h4">Reference table</span>
+<span class="g">|</span> <span class="th">token</span>  <span class="g">|</span> <span class="th">role</span>          <span class="g">|</span> <span class="th">hue</span> <span class="g">|</span>
+<span class="g">| ------ | ------------- | ---:|</span>
+<span class="g">|</span> ember  <span class="g">|</span> focus · action <span class="g">|</span>  38 <span class="g">|</span>
+<span class="g">|</span> sora   <span class="g">|</span> links · calls  <span class="g">|</span> 252 <span class="g">|</span>
+<span class="g">|</span> wakaba <span class="g">|</span> strings        <span class="g">|</span> 146 <span class="g">|</span>
+
+<span class="g">##</span> <span class="h h2">Code, fenced</span>
+Code blocks carry the full band-1 register — note the literal <span class="cd">1</span> resting receded in code, while JSON numbers below take clay, because there the values <span class="i">*are*</span> the content.
+
+<span class="g">```ts</span>
+<span class="x">// the resting register: calls carry, keywords recede</span>
+<span class="k">export async function</span> <span class="cD">resolve</span><span class="p">(</span>name<span class="p">:</span> <span class="t">string</span><span class="p">,</span> scale <span class="o">=</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> theme <span class="o">=</span> registry<span class="p">.</span><span class="c">get</span><span class="p">(</span>name<span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span>theme<span class="p">.</span><span class="m">dirty</span> <span class="o">===</span> <span class="bt">true</span><span class="p">)</span> <span class="fl">throw</span> <span class="k">new</span> <span class="t">Error</span><span class="p">(</span><span class="s">"stale: "</span> <span class="o">+</span> name<span class="p">);</span>
+  <span class="fl">return</span> theme<span class="p">;</span>
+<span class="p">}</span>
+<span class="g">```</span>
+
+<span class="g">```json</span>
+<span class="p">{</span> <span class="m">"ground"</span><span class="p">:</span> <span class="s">"okibi"</span><span class="p">,</span> <span class="m">"rev"</span><span class="p">:</span> <span class="nE">1.7</span><span class="p">,</span> <span class="m">"banked"</span><span class="p">:</span> <span class="bt">true</span><span class="p">,</span> <span class="m">"hues"</span><span class="p">:</span> <span class="p">[</span><span class="nE">38</span><span class="p">,</span> <span class="nE">252</span><span class="p">,</span> <span class="nE">146</span><span class="p">]</span> <span class="p">}</span>
+<span class="g">```</span>
+
+Images embed as text until rendered: <span class="g">![</span>the seal<span class="g">](assets/seal.png)</span>
+
+<span class="g">---</span>
+
+<span class="g">[^1]:</span> <span class="q">Hierarchy rides lightness and weight; hue marks a few nominal categories.</span></div>
+</div>
+
+<div class="cap">
+  <span class="lbl">sigils · urls · pipes → n7</span>
+  <span class="lbl">headings → weight + size, never hue</span>
+  <span class="lbl">links · footnotes → sora</span>
+  <span class="lbl">inline code → steel chip</span>
+  <span class="lbl">==highlight== → yamabuki wash</span>
+  <span class="lbl">tasks → ok tick + struck n8</span>
+  <span class="lbl">frontmatter &amp; json → data (clay numbers)</span>
+  <span class="lbl">code numbers → receded at rest</span>
+</div>
+
+</body>
+</html>
